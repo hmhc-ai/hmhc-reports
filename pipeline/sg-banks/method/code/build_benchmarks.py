@@ -234,7 +234,7 @@ def build():
                     glob[r["year"]] = float(r["value"])
                 except ValueError:
                     continue
-        e += ["| WealthHub | US$tn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |", "|---|---:|---:|---:|---:|---:|---:|"]
+        e += ["| WealthHub | Non-res US$tn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |", "|---|---:|---:|---:|---:|---:|---:|"]
         for hub, ys in sorted(hubs.items()):
             def g(y):
                 a, b = ys.get(str(y)), ys.get(str(y - 1))
@@ -251,12 +251,16 @@ def build():
             c5 = ("n/r" if None in (glob.get("2025"), glob.get("2020")) or not glob.get("2020")
                   else f"{((glob['2025'] / glob['2020']) ** 0.2 - 1) * 100:.1f}%")
             e.append(f"| *Global — all centres* | {'n/r' if lvl is None else f'{lvl:.1f}'} | {c5} | {gg(2025)} | {gg(2024)} | {gg(2023)} | {gg(2022)} |")
-        e += ["", "*Single source family: BCG Global Wealth Report booking-centre series (cross-border wealth stock per hub, US$tn as printed). "
-              "Levels are BCG-rounded to US$0.1tn, so the derived YoY columns can differ from BCG's own stated growth rates — read the 5y trend, "
-              "not single-year cells. UK basis is UK-mainland from 2022 (earlier vintages not comparable → `n/r`); UAE included as a flow competitor "
-              "only (outside the bank peer set). The Global row is BCG's printed world total — the share denominator: Singapore = 12.9% of "
-              "global cross-border wealth in 2023 (1.7/13.2) rising to 13.4% in 2025 (2.1/15.7). Regulator series (MAS/SFC/SBA), in their own "
-              "currencies, live in `data/flows.csv` as separate measures and are never mixed into this comparison.*"]
+        e += ["", "*Definition — cross-border (non-resident) wealth: **financial** wealth booked in a centre by clients who are not residents "
+              "of that country. Each hub's own residents' onshore wealth is excluded — which is why the United States shows only US$1.6tn here: "
+              "that is foreign clients' money booked in the US (top source region: Central & South America), not Americans' wealth. Real assets, "
+              "including directly held real estate, are outside the measure — BCG's 2026 report puts global financial wealth at ~US$333tn and total "
+              "net wealth incl. real assets at ~US$550tn, so the US$15.7tn cross-border pool is ≈5% of world financial wealth. Single source family: "
+              "BCG Global Wealth Report booking-centre series (US$tn as printed; levels rounded to 0.1tn, so derived YoY cells can differ from BCG's "
+              "stated growth rates — read the 5y trend, not single-year cells). UK basis is UK-mainland from 2022 (earlier vintages not comparable → "
+              "`n/r`); UAE included as a flow competitor only (outside the bank peer set). The Global row is BCG's printed world total — the share "
+              "denominator: Singapore = 12.9% of global cross-border wealth in 2023 (1.7/13.2) rising to 13.4% in 2025 (2.1/15.7). Regulator series "
+              "(MAS/SFC/SBA), in their own currencies, live in `data/flows.csv` as separate measures and are never mixed into this comparison.*"]
     e += [""]
     return "\n".join(e).rstrip() + "\n"
 

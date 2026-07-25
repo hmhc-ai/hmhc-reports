@@ -17,7 +17,7 @@
 - `reports/sg-banks/assets/nim-vs-sora.svg` — **generated 2026-07-22** by `method/code/build_charts.py` (group NIM ×3 vs 3M SORA FY-avg + effective Fed funds FY-avg, FY2016–25 + 2026 latest); byte-reproducible from the ledger, CI-verified.
 - `meta/health.md` + `meta/health.json` — **live** (Build-Health): 5/6 questions answered (Q2 flows pending) · 95.7% ledger fill · 57.3% dual-verified · retriever scorecard 93.2% cross-model agreement.
 - `meta/gaps.md` + `meta/gaps.json` — **live** (Build-Gaps): P1 8 `n/r` rows · P2a 46-row 1Q26 verification block · P2b 119 single-px · P2c 70 single-cl · P4 flows pending (peers landed 2026-07-24).
-- `reports/sg-banks/meta.json` — `last_updated` 2026-07-25, `current_version` `2026.07.25-r2`, title "Analysis of Singapore Banks"; pipeline lineage current.
+- `reports/sg-banks/meta.json` — `last_updated` 2026-07-25, `current_version` `2026.07.25-r3`, title "Analysis of Singapore Banks"; pipeline lineage current.
 
 ## Standing analytical decisions
 
@@ -37,6 +37,8 @@
 - **OCBC 2016–2018 CASA** — filled 2026-07-16 from OCBC FY-results presentations (Tier-1, GPT-5.5 non-Claude pass, computer-verified): 51.1 / 49.2 / 46.4. Currently `single-px` pending a second retriever pass. **OCBC AUM 2016–2017** — still `n/d` (not disclosed in that vintage of results decks).
 
 ## Changelog
+
+- **2026-07-25 (v2026.07.25-r3 — flows definition hardened)** — Prompted by an author review question ("how can US wealth be so low?"): the flows table column is now **Non-res US$tn** and both footnotes (Table 6 + Conclusions Q2) state the measure precisely — cross-border wealth = **financial** wealth booked by **non-residents** only; each hub's own residents' onshore wealth and real assets (incl. directly held real estate) are excluded (the US's US$1.6tn is foreign clients' money booked in the US, vs ~US$150tn+ total US household wealth). Scale cross-reference added from BCG 2026: global financial wealth ~US$333tn, total net wealth incl. real assets ~US$550tn → the US$15.7tn cross-border pool ≈5% of world financial wealth. Emitted by `build_benchmarks.py` (deterministic); no data or score changes.
 
 - **2026-07-25 (v2026.07.25-r2 — Q2 answered; all six questions closed; thesis 65 → 70)** — Write-Conclusions pass on the merged flows data (closed-book by Claude CwClFable5; non-Claude rerun remains advisable). **Conclusions Q2 [+]** with the flows mini-table (Singapore first) and the BCG-rounding caveat; **Table 6** gains the flows block including a *Global — all centres* row added to `build_benchmarks.py` so the share-of-global claim (12.9% → 13.4%) is grounded in displayed data. **Thesis 65 → 70**: the external attraction test passed — capital is genuinely moving to Singapore, not just growing with markets — while the valuation premium (Q6) remains the drag and the OR gap (Q5) remains the priced-in acceleration to watch. First version in which **every frame question is answered**. `meta.json` → `2026.07.25-r2`; health regenerated (6/6).
 
