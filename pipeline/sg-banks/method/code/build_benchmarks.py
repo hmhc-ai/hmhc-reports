@@ -237,8 +237,11 @@ def build():
             c5 = ("n/r" if None in (ys.get("2025"), ys.get("2020")) or not ys.get("2020")
                   else f"{((ys['2025'] / ys['2020']) ** 0.2 - 1) * 100:.1f}%")
             e.append(f"| {hub} | {'n/r' if lvl is None else f'{lvl:.1f}'} | {c5} | {g(2025)} | {g(2024)} | {g(2023)} | {g(2022)} |")
-    else:
-        e += ["**Pending** — `data/flows.csv` not yet fetched (module `ai/fetch-flows.md` is written; run is cost-gated)."]
+        e += ["", "*Single source family: BCG Global Wealth Report booking-centre series (cross-border wealth stock per hub, US$tn as printed). "
+              "Levels are BCG-rounded to US$0.1tn, so the derived YoY columns can differ from BCG's own stated growth rates — read the 5y trend, "
+              "not single-year cells. UK basis is UK-mainland from 2022 (earlier vintages not comparable → `n/r`); UAE included as a flow competitor "
+              "only (outside the bank peer set). Regulator series (MAS/SFC/SBA), in their own currencies, live in `data/flows.csv` as separate "
+              "measures and are never mixed into this comparison.*"]
     e += [""]
     return "\n".join(e).rstrip() + "\n"
 

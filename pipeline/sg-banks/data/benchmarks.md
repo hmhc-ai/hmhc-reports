@@ -1,6 +1,6 @@
 # SG Banks — Benchmarks (generated artifact)
 
-*Artifact: `pipeline/sg-banks/data/benchmarks.md` — sole output of `pipeline/sg-banks/method/code/build_benchmarks.py`. Inputs: reconciled `data/ledger.csv` (SG banks), `data/peers.csv`. Rerun the script to regenerate; same inputs in, same output out.*
+*Artifact: `pipeline/sg-banks/data/benchmarks.md` — sole output of `pipeline/sg-banks/method/code/build_benchmarks.py`. Inputs: reconciled `data/ledger.csv` (SG banks), `data/peers.csv`, `data/flows.csv`. Rerun the script to regenerate; same inputs in, same output out.*
 
 ## Monetization (Frame Q5)
 
@@ -46,4 +46,13 @@ Four indexes vs HSBC = 100; req %/yr = required outperformance, (premium ratio)^
 
 ## Wealth-hub capital flows (Frame Q2)
 
-**Pending** — `data/flows.csv` not yet fetched (module `ai/fetch-flows.md` is written; run is cost-gated).
+| WealthHub | US$tn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |
+|---|---:|---:|---:|---:|---:|---:|
+| Hong Kong | 2.9 | 6.7% | +7.4 | +12.5 | +9.1 | -4.3 |
+| Singapore | 2.1 | 11.8% | +10.5 | +11.8 | +13.3 | +0.0 |
+| Switzerland | 2.9 | 3.9% | +7.4 | +3.8 | +8.3 | -4.0 |
+| UAE | 0.7 | n/r | +3.0 | +16.7 | +20.0 | n/r |
+| United Kingdom | 1.0 | n/r | +0.0 | +11.1 | +0.0 | n/r |
+| United States | 1.6 | 12.2% | +6.7 | +15.4 | +18.2 | +0.0 |
+
+*Single source family: BCG Global Wealth Report booking-centre series (cross-border wealth stock per hub, US$tn as printed). Levels are BCG-rounded to US$0.1tn, so the derived YoY columns can differ from BCG's own stated growth rates — read the 5y trend, not single-year cells. UK basis is UK-mainland from 2022 (earlier vintages not comparable → `n/r`); UAE included as a flow competitor only (outside the bank peer set). Regulator series (MAS/SFC/SBA), in their own currencies, live in `data/flows.csv` as separate measures and are never mixed into this comparison.*

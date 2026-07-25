@@ -3,7 +3,7 @@
   "last_updated": "2026-07-25",
   "completeness": {
     "questions_total": 6,
-    "questions_answered": 5,
+    "questions_answered": 6,
     "questions": [
       {
         "id": "Q1",
@@ -14,7 +14,7 @@
       {
         "id": "Q2",
         "topic": "Wealth-hub capital flows",
-        "status": "pending",
+        "status": "answered",
         "depends_on": "fetch-flows"
       },
       {
@@ -79,6 +79,6 @@
     "ledger_latest_stamp": "20260720",
     "signals_last_run": "2026-07-20",
     "peers_fetched": true,
-    "flows_fetched": false
+    "flows_fetched": true
   }
 }
