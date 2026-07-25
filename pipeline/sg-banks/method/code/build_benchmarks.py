@@ -222,10 +222,16 @@ def build():
     if FLOWS.exists():
         rows = list(csv.DictReader(open(FLOWS, newline="", encoding="utf-8")))
         hubs = {}
+        glob = {}
         for r in rows:
             if r.get("measure") == "CrossBorderWealth":
                 try:
                     hubs.setdefault(r["hub"], {})[r["year"]] = float(r["value"])
+                except ValueError:
+                    continue
+            elif r.get("measure") == "CrossBorderWealthTotal":
+                try:
+                    glob[r["year"]] = float(r["value"])
                 except ValueError:
                     continue
         e += ["| WealthHub | US$tn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |", "|---|---:|---:|---:|---:|---:|---:|"]
@@ -237,11 +243,20 @@ def build():
             c5 = ("n/r" if None in (ys.get("2025"), ys.get("2020")) or not ys.get("2020")
                   else f"{((ys['2025'] / ys['2020']) ** 0.2 - 1) * 100:.1f}%")
             e.append(f"| {hub} | {'n/r' if lvl is None else f'{lvl:.1f}'} | {c5} | {g(2025)} | {g(2024)} | {g(2023)} | {g(2022)} |")
+        if glob:
+            def gg(y):
+                a, b = glob.get(str(y)), glob.get(str(y - 1))
+                return "n/r" if None in (a, b) else f"{(a / b - 1) * 100:+.1f}"
+            lvl = glob.get("2025")
+            c5 = ("n/r" if None in (glob.get("2025"), glob.get("2020")) or not glob.get("2020")
+                  else f"{((glob['2025'] / glob['2020']) ** 0.2 - 1) * 100:.1f}%")
+            e.append(f"| *Global — all centres* | {'n/r' if lvl is None else f'{lvl:.1f}'} | {c5} | {gg(2025)} | {gg(2024)} | {gg(2023)} | {gg(2022)} |")
         e += ["", "*Single source family: BCG Global Wealth Report booking-centre series (cross-border wealth stock per hub, US$tn as printed). "
               "Levels are BCG-rounded to US$0.1tn, so the derived YoY columns can differ from BCG's own stated growth rates — read the 5y trend, "
               "not single-year cells. UK basis is UK-mainland from 2022 (earlier vintages not comparable → `n/r`); UAE included as a flow competitor "
-              "only (outside the bank peer set). Regulator series (MAS/SFC/SBA), in their own currencies, live in `data/flows.csv` as separate "
-              "measures and are never mixed into this comparison.*"]
+              "only (outside the bank peer set). The Global row is BCG's printed world total — the share denominator: Singapore = 12.9% of "
+              "global cross-border wealth in 2023 (1.7/13.2) rising to 13.4% in 2025 (2.1/15.7). Regulator series (MAS/SFC/SBA), in their own "
+              "currencies, live in `data/flows.csv` as separate measures and are never mixed into this comparison.*"]
     e += [""]
     return "\n".join(e).rstrip() + "\n"
 
