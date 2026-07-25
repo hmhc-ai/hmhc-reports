@@ -234,6 +234,11 @@ def build():
                     glob[r["year"]] = float(r["value"])
                 except ValueError:
                     continue
+            elif r.get("measure") in ("GlobalFinancialWealth", "GlobalNetWealth"):
+                try:
+                    glob[r["measure"]] = float(r["value"])
+                except ValueError:
+                    continue
         e += ["| WealthHub | Non-res US$tn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |", "|---|---:|---:|---:|---:|---:|---:|"]
         for hub, ys in sorted(hubs.items()):
             def g(y):
@@ -251,6 +256,12 @@ def build():
             c5 = ("n/r" if None in (glob.get("2025"), glob.get("2020")) or not glob.get("2020")
                   else f"{((glob['2025'] / glob['2020']) ** 0.2 - 1) * 100:.1f}%")
             e.append(f"| *Global — all centres* | {'n/r' if lvl is None else f'{lvl:.1f}'} | {c5} | {gg(2025)} | {gg(2024)} | {gg(2023)} | {gg(2022)} |")
+        fin, net, pool = glob.get("GlobalFinancialWealth"), glob.get("GlobalNetWealth"), glob.get("2025")
+        if None not in (fin, net, pool):
+            e += ["", f"**Key stats (2025):** global net wealth incl. real assets **US${net:.0f}tn** · global financial wealth **US${fin:.0f}tn** · "
+                  f"cross-border (\"offshore\") pool **US${pool:.1f}tn = {pool / fin * 100:.1f}% of financial wealth** ({pool / net * 100:.1f}% of net wealth) — "
+                  "the mobile slice the hubs compete for. The share moves slowly; policy and convenience shifts show up first as reallocation "
+                  "between hubs (the columns above), not expansion of the pool."]
         e += ["", "*Definition — cross-border (non-resident) wealth: **financial** wealth booked in a centre by clients who are not residents "
               "of that country. Each hub's own residents' onshore wealth is excluded — which is why the United States shows only US$1.6tn here: "
               "that is foreign clients' money booked in the US (top source region: Central & South America), not Americans' wealth. Real assets, "
