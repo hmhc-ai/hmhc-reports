@@ -20,9 +20,7 @@ errors = []
 
 # Declared future outputs of modules that are written but not yet run
 # (fetch runs are cost-gated). Remove entries here once the data lands.
-PENDING_OUTPUTS = {
-    "pipeline/sg-banks/data/flows.csv",     # fetch-flows
-}
+PENDING_OUTPUTS = set()  # all declared module outputs currently exist
 
 def check(path_str, where):
     if path_str in PENDING_OUTPUTS:

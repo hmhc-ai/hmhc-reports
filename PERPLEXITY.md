@@ -3,32 +3,15 @@
 > **How to use this file (for the human):** tell Perplexity — *"Read `PERPLEXITY.md` in `hmhc-ai/hmhc-reports` and execute it."* Nothing else needed. Claude maintains this file: it queues one job at a time from the gap list (`pipeline/sg-banks/meta/gaps.md`) and rotates it when done.
 > **Authorization note:** a job being queued here **is** the author's cost-gate confirmation (UPDATE.md Step 2b) for that one run — the author queues jobs by asking Claude to update this card.
 
-## Status: **JOB QUEUED — Job #3: fetch-flows (wealth-hub capital flows, Frame Q2)**
+## Status: **NO JOB QUEUED — do nothing**
 
----
-
-## Job #3 — fetch-flows (wealth-hub capital flows, Frame Q2)
-
-**Objective.** Fill `pipeline/sg-banks/data/flows.csv`: cross-border wealth / AUM stocks per hub in USD, FY2020–FY2025, so the report can answer whether Singapore is gaining, holding, or losing share versus other wealth hubs — the external test of the thesis's primary driver.
-
-**Instructions — read and follow, in order:**
-1. `AGENTS.md` § Perplexity working agreement (the rules you operate under).
-2. `pipeline/sg-banks/guides/frame.md` — Q2 and its answer format.
-3. **`pipeline/sg-banks/method/ai/fetch-flows.md` — the SOP for this job.** Hubs (Singapore · Hong Kong · Switzerland · US international · UAE/Gulf · UK), Tier-1 regulator sources preferred, the **single-source-family rule for share comparisons** (never mix a regulator number for one hub with a consultant number for another in the same comparison row), USD as sourced, honest `n/r`/`n/d`. Follow it exactly — a complete-looking grid from mixed sources is the failure mode.
-
-**Deliverable.** One file only: `pipeline/sg-banks/data/flows.csv` — schema `hub, measure, year, unit, value, source, comment, version`. Provenance stamp per row: `YYYYMMDD-NNN Px<Model>` — name the model you actually run on (prefer a **non-Claude** model for cross-model independence).
-
-**Git workflow.**
-- Branch: `perplexity/fetch-flows` (branched from `main`).
-- Commit trailers per `AGENTS.md` § Commit attribution.
-- Open a pull request titled **"Perplexity: fetch-flows — wealth-hub capital flows (Q2)"**. In the description: source family used for the share series, vintage per hub, every `n/r`/`n/d` and why, and any questions.
-- **Do not merge.** Claude reviews, runs the build modules, and merges.
-
-**Do not touch anything else** — no edits to `method/`, `guides/`, `reports/`, `UPDATE.md`, the registry, workflows, or this file.
+There is currently no authorized job. If you were sent here, stop and report back that the job card is empty.
 
 ---
 
 ## Completed jobs
+
+- **Job #3 — fetch-flows** (wealth-hub capital flows, Frame Q2) — **done 2026-07-25**, delivered in PR #34 (`perplexity/fetch-flows`, 67 rows; BCG booking-centre series as the single share family, regulator series MAS/SFC/SBA as separate never-mixed measures in their own currencies; honest `n/r` on ambiguous UK/UAE early vintages). Reviewed and merged by Claude; Q2 flows table live in `build_benchmarks.py`. Ran on a Claude-family model again (`PxClOpus4.8`) — independence caveat noted in the PR by the runner itself.
 
 - **Job #2 — fetch-peers delta** (NII · NIM · SharePrice · RBC in, CBA out) — **done 2026-07-24**, delivered in PR #30 (`perplexity/fetch-peers-delta`, peers.csv now 100 rows, 10 banks × 10 metrics, stamps `20260724-002 PxClOpus4.8`). Reviewed against independent search anchors (JPM/BofA/UBS/HSBC NII exact) and the ledger's SG rows (NII/NIM exact); merged by Claude; Q5 NII/OR split + Q6 price column live in `build_benchmarks.py`.
 

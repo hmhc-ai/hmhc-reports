@@ -4,12 +4,12 @@
 
 ## Completeness — how much of the frame is answered
 
-- Key questions: **5 of 6 fully answered**
+- Key questions: **6 of 6 fully answered**
 
 | Q | Topic | Status | Depends on |
 |---|---|---|---|
 | Q1 | Deposits & Wealth AUM trend | answered | ledger |
-| Q2 | Wealth-hub capital flows | pending | fetch-flows |
+| Q2 | Wealth-hub capital flows | answered | fetch-flows |
 | Q3 | NII & Other Revenue trend | answered | ledger |
 | Q4 | NIM volatility & cyclicality | answered | ledger + chart |
 | Q5 | Monetization score vs peers | answered | fetch-peers + build-benchmarks |
@@ -33,4 +33,4 @@
 
 - Ledger latest retrieval stamp: 20260720
 - Signals last run: 2026-07-20
-- Peer data fetched: yes · Flows data fetched: no (fetch-flows pending)
+- Peer data fetched: yes · Flows data fetched: yes

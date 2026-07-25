@@ -9,7 +9,7 @@
 | P2b | FY-history single-px cells | 119 rows | fetch-ledger (verify) | medium |
 | P2c | Other single-cl cells | 70 rows | fetch-ledger (verify) | low |
 | P3 | Reporting calendar — next results supersede the interim block | ~46 rows | fetch-ledger + fetch-signals | dated |
-| P4 | Pending module outputs | 1 datasets | fetch-flows · fetch-peers | high |
+| P4 | Pending module outputs | 0 datasets | fetch-flows · fetch-peers | high |
 
 ## P1 — never retrieved (`n/r`)
 
@@ -52,4 +52,4 @@ when 1H26/2Q26 results land, the 1Q2026 interim block (~46 rows) is superseded �
 
 ## P4 — pending module outputs
 
-- fetch-flows → data/flows.csv
+none — all module outputs present

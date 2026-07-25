@@ -121,10 +121,8 @@
   },
   "p4_pending_module_outputs": {
     "priority": 1,
-    "items": [
-      "fetch-flows \u2192 data/flows.csv"
-    ],
-    "count": 1,
+    "items": [],
+    "count": 0,
     "note": "modules written and cost-gated; queue via PERPLEXITY.md"
   }
 }
