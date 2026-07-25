@@ -70,9 +70,19 @@ The instruction files are themselves living documents: the AI reviews and refine
 
    *Levels and CASA % as of FY25. 5y-CAGR = FY2020→FY2025; each FYxx % = that FY's YoY growth. **Client Assets = customer deposits + wealth AUM** (renamed from "Capital Base" to avoid collision with regulatory total capital) — included to test how consistent the AUM/deposit/client-asset definitions are: AUM definitions differ per bank (DBS "Wealth Management AUM"; OCBC group wealth incl. Bank of Singapore + Great Eastern; UOB narrower, reclassified 1-Jan-2023), so client-asset *levels* are not cross-comparable — read within-bank trends. Secondary (1Q26): DBS deposits reached S$630bn with a record S$492bn AUM (+17% YoY cc, +S$10bn net new money); UOB added +S$1bn net new money. Sources: Tables 1–2; 1Q2026 attraction table; Signals — DBS 2026-04-30, UOB 2026-05-07.*
 
-2. **Wealth-hub capital flows, last 5 years** — Pending new research module — not answerable from current data.
+2. **[+] Wealth-hub capital flows, last 5 years** — Singapore is winning share: its cross-border wealth grew from US$1.2tn to US$2.1tn over 2020–25 — an **11.8% 5y-CAGR, the fastest of the big three hubs** (Hong Kong 6.7%, Switzerland 3.9%) — lifting its share of the global cross-border pool from 12.9% (2023) to 13.4% (2025). The external test of the thesis's primary driver passes: capital is genuinely moving to Singapore, not just growing with markets. Nuances: Hong Kong remains larger (US$2.9tn) and added more absolute dollars in 2024–25, and the UAE is the fastest-growing small competitor.
 
-   *Module ready: `ai/fetch-flows.md` — run pending (non-Claude fetch, e.g. Perplexity Computer; cost-gated). Format per frame Q2: `WealthHub: US$tn, 5y-CAGR %, FY25 %, FY24 %, FY23 %, FY22 %`.*
+   | WealthHub | US$tn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |
+   |---|---:|---:|---:|---:|---:|---:|
+   | Singapore | 2.1 | 11.8% | +10.5 | +11.8 | +13.3 | +0.0 |
+   | Hong Kong | 2.9 | 6.7% | +7.4 | +12.5 | +9.1 | −4.3 |
+   | Switzerland | 2.9 | 3.9% | +7.4 | +3.8 | +8.3 | −4.0 |
+   | United States | 1.6 | 12.2% | +6.7 | +15.4 | +18.2 | +0.0 |
+   | United Kingdom | 1.0 | n/r | +0.0 | +11.1 | +0.0 | n/r |
+   | UAE | 0.7 | n/r | +3.0 | +16.7 | +20.0 | n/r |
+   | *Global — all centres* | 15.7 | n/r | +9.0 | +9.1 | n/r | n/r |
+
+   *Single source family: BCG Global Wealth Report booking-centre series, US$tn as printed (rounded to 0.1tn — derived YoY cells can differ from BCG's stated growth rates; read the 5y trend, not single years). UK is UK-mainland basis from 2022, earlier vintages non-comparable (`n/r`); UAE is a flow competitor outside the bank peer set. Fetched 2026-07-25 (independent retriever, `PxClOpus4.8`); regulator series (MAS/SFC/SBA) kept as separate never-mixed measures in `data/flows.csv`. Sources: Table 6 (flows block); `data/flows.csv`.*
 
 3. **[+] Trend in NII and Other Revenue** — Both engines compounded high-single-digit over five years, but the yearly columns show the rate cycle plainly: NII surged +25–31% in FY22–23 and stalled or fell in FY25, with Other Revenue picking up the slack at DBS and OCBC but not UOB.
 
@@ -127,9 +137,9 @@ The instruction files are themselves living documents: the AI reviews and refine
 
    *Four indexes vs HSBC = 100; req = required outperformance, (premium)^(1/5) − 1 per year over a 5-year convergence horizon. Px = local per-share price, all dates 2026 — the staleness marker (HSBC/StanChart quoted in GBX pence on their London listings while both report in USD). Caveats per Table 6: AUM-definition differences drive much of the P/CA spread; CMB is A-share-basis. Sources: Table 6; Table 4; 1Q2026 valuation table.*
 
-**Thesis score: 65/100.** The primary driver is intact and verified: deposits, wealth AUM and the combined client-asset base compound mid-single-digit-plus at every bank with FY24–25 growth above the 5-year trend at DBS and OCBC (Q1), and the fee engine currently offsets heavy NIM cyclicality at two of three banks (Q3, Q4). But the peer benchmarks cut both ways, and the NII/OR split sharpens where the tension sits: the SG banks already out-earn HSBC on NII per deposit (110–122) — the gap is non-NII monetization (OR_vDep 56–73), the very flywheel the thesis needs to see spin up — worth +13–26% of revenue at mere index-bank parity, so it is also the quantified upside (Q5) — while DBS and OCBC carry premia that demand roughly +9–12% annual outperformance on the client-assets and revenue lenses for five years (Q6), a high bar the earnings lens (P/E 112/105) only partly relieves. UOB is priced near parity; RBC shows the market pays the same premium wherever the wealth-flywheel model works. The score stays at 65: an expensive entry priced for a non-NII acceleration that the data does not yet show; the cross-hub flows test (Q2) remains the open pillar. Decision rule: capital-attraction momentum is **positive** — no stall or reversal — so the kill signal is not triggered.
+**Thesis score: 70/100.** All six questions are now answered, and the primary driver is verified twice over: internally, deposits, wealth AUM and the combined client-asset base compound mid-single-digit-plus at every bank with FY24–25 growth above trend at DBS and OCBC (Q1); externally, Singapore is the fastest-growing major wealth hub — 11.8%/yr cross-border wealth growth 2020–25, taking global share from 12.9% to 13.4% (Q2). Monetization is where the tension sits: the SG banks out-earn HSBC on NII per deposit (110–122) but lag on non-NII monetization (OR_vDep 56–73) — worth +13–26% of revenue at mere index-bank parity, so the gap is also the quantified upside (Q5) — and the fee engine currently offsets heavy NIM cyclicality at two of three banks (Q3, Q4). Valuation remains the drag: DBS and OCBC carry premia demanding roughly +9–12% annual outperformance on the client-assets and revenue lenses for five years (Q6), a high bar the earnings lens (P/E 112/105) only partly relieves; UOB is priced near parity; RBC shows the market pays the same premium wherever the wealth-flywheel model works. The score moves 65 → 70: the last open pillar (Q2) resolved **in favour** of the thesis — attraction is real and share-winning — while the price of entry still assumes a non-NII acceleration the income data does not yet show. Decision rule: capital-attraction momentum is **positive** on both the internal and external measure — the kill signal is not triggered.
 
-*Scope: questions from `guides/frame.md` (6 questions, formats per its internal notes, 2026-07-24); grounded in report.md (incl. Table 6) + data/signals.md (v2026.07.25). Closed-book run by Claude (CwClFable5) — the SOP-recommended non-Claude rerun remains advisable. Not investment advice.*
+*Scope: questions from `guides/frame.md` (6 questions, formats per its internal notes, 2026-07-24); grounded in report.md (incl. Table 6) + data/signals.md (v2026.07.25-r2). Closed-book run by Claude (CwClFable5) — the SOP-recommended non-Claude rerun remains advisable. Not investment advice.*
 <!-- conclusions:end -->
 
 ---
@@ -371,6 +381,20 @@ Four indexes vs HSBC = 100; req %/yr = required outperformance, (premium ratio)^
 | Standard Chartered | GBX 2100.00 (2026-07-03) | 56 | -11.0% | 54 | -11.5% | 69 | -7.1% | 71 | -6.7% |
 | China Merchants Bank | RMB 37.73 (2026-07-06) | 33 | -19.7% | 55 | -11.2% | 38 | -17.4% | 43 | -15.7% |
 | RBC | C$ 293.67 (2026-07-23) | 126 | +4.8% | 120 | +3.7% | 121 | +4.0% | 167 | +10.8% |
+
+Wealth-hub capital flows (Frame Q2) — cross-border wealth stock per hub:
+
+| WealthHub | US$tn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |
+|---|---:|---:|---:|---:|---:|---:|
+| Hong Kong | 2.9 | 6.7% | +7.4 | +12.5 | +9.1 | -4.3 |
+| Singapore | 2.1 | 11.8% | +10.5 | +11.8 | +13.3 | +0.0 |
+| Switzerland | 2.9 | 3.9% | +7.4 | +3.8 | +8.3 | -4.0 |
+| UAE | 0.7 | n/r | +3.0 | +16.7 | +20.0 | n/r |
+| United Kingdom | 1.0 | n/r | +0.0 | +11.1 | +0.0 | n/r |
+| United States | 1.6 | 12.2% | +6.7 | +15.4 | +18.2 | +0.0 |
+| *Global — all centres* | 15.7 | n/r | +9.0 | +9.1 | n/r | n/r |
+
+*Single source family: BCG Global Wealth Report booking-centre series (cross-border wealth stock per hub, US$tn as printed). Levels are BCG-rounded to US$0.1tn, so the derived YoY columns can differ from BCG's own stated growth rates — read the 5y trend, not single-year cells. UK basis is UK-mainland from 2022 (earlier vintages not comparable → `n/r`); UAE included as a flow competitor only (outside the bank peer set). The Global row is BCG's printed world total — the share denominator: Singapore = 12.9% of global cross-border wealth in 2023 (1.7/13.2) rising to 13.4% in 2025 (2.1/15.7). Regulator series (MAS/SFC/SBA), in their own currencies, live in `data/flows.csv` as separate measures and are never mixed into this comparison.*
 
 *Definitions: client assets (CA) = customer deposits + wealth AUM (renamed from "Capital Base" 2026-07-25; broader than the wealth-industry usage, which can exclude ordinary deposits) · OR = Other Revenue = total revenue − NII · NII_vDep = NII ÷ customer deposits · OR_vDep = OR ÷ deposits · OR_vCA = OR ÷ CA · total_vCA = total revenue ÷ CA · P/CA = market cap ÷ CA · P/Rev = market cap ÷ total revenue · P/E = market cap ÷ net profit · P/B = market cap ÷ book equity. Levels (lc bn) are each bank's local reporting currency, never FX-converted; ratio columns are within-bank, so currencies cancel. SG-bank fundamentals from the reconciled ledger (market cap = the Px column's dated price × FY25 shares); peer fundamentals from Tier-1 filings — latest full FY per bank (RBC's FY ends 31 Oct 2025; CBA was replaced by RBC 2026-07-24: all four Australian majors divested their wealth arms, so no Australian bank discloses comparable wealth AUM — see `guides/frame.md`) — with dated market prices, fetched 2026-07-24 by an independent retriever (Perplexity harness, stamps `PxClOpus4.8`) — `pipeline/sg-banks/data/peers.csv`. Caveats: AUM definitions differ per bank (largest driver of the vCA and P/CA spread — e.g. UBS invested assets US$4.75tn dwarf its deposits); China Merchants Bank market cap is A-share-basis; Standard Chartered market cap converted GBP→USD to match its USD reporting; HSBC/StanChart prices quoted in GBX (pence) on their London listings while both report in USD. Tables generated deterministically by `method/code/build_benchmarks.py` from `ledger.csv` + `peers.csv` (CI-verified).*
 
