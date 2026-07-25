@@ -23,7 +23,7 @@ Singapore · Hong Kong · Switzerland · United States (international/booking-ce
 ## Output — `data/flows.csv`
 
 One row per hub-year-measure: `hub, measure, year, unit, value, source, comment, version`.
-- `measure`: e.g. `CrossBorderWealth` (booking-centre stock, the share basis) · `TotalAUM` (regulator series). Keep measures separate; never blend.
+- `measure`: e.g. `CrossBorderWealth` (booking-centre stock, the share basis) · `TotalAUM` (regulator series) · `CrossBorderWealthTotal` (the printed world total — share denominator) · `GlobalFinancialWealth` and `GlobalNetWealth` (context denominators for the offshore-share key stat, same source family). Keep measures separate; never blend.
 - `unit`: `US$tn` (as sourced; note original currency if converted by the source).
 - `version`: provenance stamp `YYYYMMDD-NNN <Harness><Model>` (e.g. `PxGPT5.6`), per the ledger convention.
 - Mark `n/r` / `n/d` honestly; a complete-looking grid from mixed sources is the failure mode.
