@@ -32,6 +32,8 @@ pipeline/     How each report is made. Not published.
 
 reports.json  Master index of all series (the site's landing-page feed).
 PERPLEXITY.md Job card for the external fetch runner (see AGENTS.md).
+IDEAS.md      Author ↔ Claude improvement brainstorm — nothing in it is
+              authorized for implementation until explicitly approved.
 ```
 
 ## Pipeline
