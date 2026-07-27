@@ -33,6 +33,8 @@ jobs:
         run: python3 pipeline/sg-banks/method/code/build_gaps.py --check
       - name: Report Table 6 region synced from benchmarks
         run: python3 pipeline/sg-banks/method/code/build_report_tables.py --check
+      - name: Council scorecard reproducible from sheets
+        run: python3 pipeline/sg-banks/method/code/build_conclusions.py --check
       - name: Site builds from current content
         run: pip install markdown && python3 .github/site/build_site.py
 

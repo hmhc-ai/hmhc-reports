@@ -34,6 +34,8 @@ Every **`fetch-` module is EXPENSIVE** (live web retrieval, token/time-intensive
 | Build-Gaps | `method/code/build-gaps.md` (spec) + `method/code/build_gaps.py` (executable) | `meta/gaps.md` + `meta/gaps.json` | cheap | any data change |
 | Build-Report | `method/ai/build-report.md` | `reports/sg-banks/report.md` | cheap | Build-Tables, Frame, Fetch-Signals, Style |
 | Build-Report-Tables | `method/code/build-report-tables.md` (spec) + `method/code/build_report_tables.py` (executable) | benchmarks-marked region of `reports/sg-banks/report.md` | cheap | Build-Benchmarks |
+| Write-Scores | `method/ai/write-scores.md` | `data/scores/<member>.json` (one per council member, blind) | cheap per member; author authorizes the roster | Build-Report (current body) |
+| Build-Conclusions | `method/code/build-conclusions.md` (spec) + `method/code/build_conclusions.py` (executable) | `data/scorecard.md` (stage 1; report wiring awaits frame approval) | cheap | Write-Scores |
 | Write-Conclusions | `method/ai/write-conclusions.md` | Conclusions section of `report.md` (in place, between markers) | cheap | Build-Report, Frame |
 | Publish | (this controller) | `reports/sg-banks/meta.json` | cheap | Write-Conclusions |
 
