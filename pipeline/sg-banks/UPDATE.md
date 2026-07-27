@@ -36,10 +36,10 @@ Every **`fetch-` module is EXPENSIVE** (live web retrieval, token/time-intensive
 | Build-Report-Tables | `method/code/build-report-tables.md` (spec) + `method/code/build_report_tables.py` (executable) | benchmarks-marked region of `reports/sg-banks/report.md` | cheap | Build-Benchmarks |
 | Write-Scores | `method/ai/write-scores.md` | `data/scores/<member>.json` (one per council member, blind) | cheap per member; author authorizes the roster | Build-Report (current body) |
 | Build-Conclusions | `method/code/build-conclusions.md` (spec) + `method/code/build_conclusions.py` (executable) | `data/scorecard.md` (stage 1; report wiring awaits frame approval) | cheap | Write-Scores |
-| Write-Conclusions | `method/ai/write-conclusions.md` | Conclusions section of `report.md` (in place, between markers) | cheap | Build-Report, Frame |
+| Write-Conclusions | RETIRED 2026-07-27 — replaced by Write-Scores + Build-Conclusions (`method/ai/write-conclusions.md` kept for history) |  |  |  |
 | Publish | (this controller) | `reports/sg-banks/meta.json` | cheap | Write-Conclusions |
 
-Model per module: all Fetch-* → non-Claude search-grounded (Perplexity Computer / GPT-class, by design for independence); Reconcile → human + Claude; Build-Tables/Build-Charts/Build-Benchmarks/Build-Health/Build-Gaps → deterministic scripts (no model); Build-Report → Claude; Write-Conclusions → non-Claude (closed-book).
+Model per module: all Fetch-* → non-Claude search-grounded (Perplexity Computer / GPT-class, by design for independence); Reconcile → human + Claude; Build-Tables/Build-Charts/Build-Benchmarks/Build-Health/Build-Gaps → deterministic scripts (no model); Build-Report → Claude; Write-Scores → the council roster (latest knowledge-work frontier model per major lab, blind); Build-Conclusions → deterministic script (no model).
 
 ---
 
@@ -68,13 +68,13 @@ Run it **only** on an explicit "yes". On "no" or anything ambiguous, **skip that
 
 - **Guide revised (Frame/Style):** human edit — AI may propose wording, human approves; write to `guides/frame.md` / `guides/style.md`; then rerun downstream (Frame ⇒ Build-Report ⇒ Write-Conclusions; Style ⇒ Build-Report/Write-Conclusions presentation).
 - **Modules named (and confirmed where expensive):** run in dependency order (Fetch-Ledger ‖ Fetch-Signals → Reconcile → Build-Tables → Build-Report), honoring current Frame & Style. Refreshing any module forces rerun of everything downstream of it.
-- **"none":** run the **LITE path** only — rerun **Write-Conclusions** (`method/ai/write-conclusions.md`, closed-book; rewrites the Conclusions section of `report.md` in place) and apply **Style** (`guides/style.md`). Never touches `data/`. **The lite path is the default and never invokes an expensive module.**
+- **"none":** run the **LITE path** only — rerun the **council** (Write-Scores per `method/ai/write-scores.md` for the authorized roster, then `method/code/build_conclusions.py` to reassemble the Conclusions scorecard) and apply **Style** (`guides/style.md`). Writes only `data/scores/` + `data/scorecard.md` + the Conclusions markers. **The lite path is the default and never invokes an expensive module.**
 
 Always finish with **Publish** (Step 5).
 
 ## Step 4 — Gates before publishing (all must pass)
 - **Build-Report:** arithmetic tie-outs pass; every **Frame** question is addressed in the report.
-- **Write-Conclusions:** every Frame key question answered (or explicitly marked "pending new research module" where the data does not exist — currently Q2 and the peer-indexed parts of Q5/Q6), each answer cited; thesis score 0–100 with rationale; closed-book (its self-checks).
+- **Council:** every authorized member's sheet present and valid (Write-Scores self-checks); `build_conclusions.py --check` green (scorecard + report Conclusions in sync); every Frame question answered in Supporting Data or explicitly marked pending.
 - Every refreshed module's output exists and is committed.
 
 ## Step 5 — Publish (one command + PR)

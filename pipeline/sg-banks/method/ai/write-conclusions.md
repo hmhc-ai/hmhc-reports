@@ -1,3 +1,6 @@
+> ## RETIRED 2026-07-27
+> Replaced by the blind council: **`write-scores.md`** (per-member scoring sheets) + **`code/build_conclusions.py`** (deterministic scorecard assembly into the Conclusions markers). Kept for history; do not run.
+
 # sg-banks — Write-Conclusions SOP (answers to the Key Questions + thesis score)
 
 **Module:** Write-Conclusions · **Inputs:** `guides/frame.md` (thesis + key questions) **+** `reports/sg-banks/report.md` (excluding its own Conclusions section) **+** `pipeline/sg-banks/data/signals.md` (if present) · **Output:** the **Conclusions** section of `reports/sg-banks/report.md` (between markers) · **Depends on:** Build-Report, Frame

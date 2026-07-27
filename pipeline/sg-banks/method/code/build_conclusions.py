@@ -9,9 +9,11 @@ insight lives upstream in the blind sheets; this step only validates,
 sorts, and formats. With no sheets present it emits a deterministic
 "no council run yet" placeholder.
 
-Stage note: output goes to data/scorecard.md only. Wiring the scorecard
-into the report's Conclusions section awaits the author's approval of the
-frame restructure (see method/ai/write-scores.md and IDEAS/registry).
+Stage 2 (author-approved 2026-07-27): besides data/scorecard.md, the
+scorecard is injected into reports/sg-banks/report.md between the
+<!-- conclusions:start --> / <!-- conclusions:end --> markers — the
+Conclusions section is now fully deterministic. With no sheets present
+both targets carry a "no council run yet" placeholder.
 
 Usage:  python3 pipeline/sg-banks/method/code/build_conclusions.py [--check]
 Spec:   pipeline/sg-banks/method/code/build-conclusions.md
@@ -23,6 +25,8 @@ ROOT = Path(__file__).resolve().parents[2]
 SCORES = ROOT / "data" / "scores"
 HEALTH = ROOT / "meta" / "health.json"
 OUT = ROOT / "data" / "scorecard.md"
+REPORT = ROOT.parents[1] / "reports" / "sg-banks" / "report.md"
+CSTART, CEND = "<!-- conclusions:start -->", "<!-- conclusions:end -->"
 
 CRIT = ["critical", "high", "medium", "low"]
 
@@ -74,21 +78,13 @@ def fmt_perf(v: int) -> str:
     return f"+{v}" if v > 0 else str(v)
 
 
-def build() -> str:
-    qs = questions()
-    sheets = load_sheets()
-    e = ["# SG Banks — Council scorecard (generated artifact)", "",
-         "*Artifact: `pipeline/sg-banks/data/scorecard.md` — sole output of `pipeline/sg-banks/method/code/build_conclusions.py`, "
-         "aggregating the blind council sheets in `data/scores/` (see `method/ai/write-scores.md` for the protocol and rubric). "
-         "Performance = alignment with the thesis, −5…+5. Criticality = how decisive the question is for the thesis. "
-         "Range shows council disagreement — it is a signal, not noise.*", ""]
-    if not sheets:
-        e += ["**No council run yet** — no sheets in `data/scores/`. The scorecard populates when Write-Scores runs.", ""]
-        return "\n".join(e)
-
-    e += [f"Council of {len(sheets)}: " + " · ".join(f"`{s['member']}`" for s in sheets)
-          + f" — scored against report v{sheets[0]['report_version']}.", "",
-          "| Q | Topic | Perf (median) | Range | Criticality (consensus) |", "|---|---|---:|---:|---|"]
+def core(sheets, qs, member_h: str) -> list:
+    """The scorecard body (matrix + member blocks), heading level parameterized."""
+    e = [f"Council of {len(sheets)}: " + " · ".join(f"`{s['member']}`" for s in sheets)
+         + ". Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol "
+         "`method/ai/write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how "
+         "decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.", ""]
+    e += ["| Q | Topic | Perf (median) | Range | Criticality (consensus) |", "|---|---|---:|---:|---|"]
     for qid, topic in qs:
         vals = [next(a for a in s["answers"] if a["q"] == qid)["performance"] for s in sheets]
         crits = [next(a for a in s["answers"] if a["q"] == qid)["criticality"] for s in sheets]
@@ -104,23 +100,54 @@ def build() -> str:
     e += [f"| — | **Thesis overall** | **{tmed_s}** | {fmt_perf(min(tvals))}…{fmt_perf(max(tvals))} | — |", ""]
 
     for s in sheets:
-        e += [f"## {s['member']} — {s['harness']} ({s['model']}), {s['date']}", ""]
+        e += [f"{member_h} {s['member']} — {s['harness']} ({s['model']}) · {s['date']} · scored v{s['report_version']}", ""]
         for a in s["answers"]:
             e.append(f"- **{a['q']}** · {fmt_perf(a['performance'])} · {a['criticality']} — {a['comment']}")
         e.append(f"- **Thesis** · {fmt_perf(s['thesis']['performance'])} — {s['thesis']['comment']}")
         e.append("")
-    return "\n".join(e).rstrip() + "\n"
+    return e
+
+
+def build() -> tuple:
+    qs = questions()
+    sheets = load_sheets()
+    art = ["# SG Banks — Council scorecard (generated artifact)", "",
+           "*Artifact: `pipeline/sg-banks/data/scorecard.md` — sole output of `pipeline/sg-banks/method/code/build_conclusions.py`, "
+           "aggregating the blind council sheets in `data/scores/` (see `method/ai/write-scores.md` for the protocol and rubric).*", ""]
+    if not sheets:
+        placeholder = ["**No council run yet** — no sheets in `data/scores/`. The scorecard populates when Write-Scores runs.", ""]
+        rep = ["## Conclusions — Council Scorecard", ""] + placeholder
+        return "\n".join(art + placeholder), "\n".join(rep).rstrip()
+    body = core(sheets, qs, "##")
+    rep = ["## Conclusions — Council Scorecard", ""] + core(sheets, qs, "###") + [
+        "*The council scores the frame's questions; the full frame-format answers are in Supporting Data below. "
+        "Assembled deterministically by `method/code/build_conclusions.py`. Not investment advice.*"]
+    return ("\n".join(art + body).rstrip() + "\n",
+            "\n".join(rep).rstrip())
+
+
+def report_region(rendered: str) -> tuple:
+    rep = REPORT.read_text(encoding="utf-8")
+    if CSTART not in rep or CEND not in rep:
+        sys.exit(f"MARKERS MISSING: {CSTART} / {CEND} not found in {REPORT}")
+    pre, rest = rep.split(CSTART, 1)
+    cur, post = rest.split(CEND, 1)
+    new = pre + CSTART + "\n" + rendered + "\n" + CEND + post
+    return rep, new
 
 
 if __name__ == "__main__":
-    content = build()
+    scorecard, rendered = build()
+    rep_old, rep_new = report_region(rendered)
     if "--check" in sys.argv:
-        if OUT.exists() and OUT.read_text(encoding="utf-8") == content:
-            print("CHECK OK: scorecard.md reproducible from council sheets")
-        elif not OUT.exists():
-            sys.exit("CHECK FAIL: data/scorecard.md missing — run build_conclusions.py")
+        ok_art = OUT.exists() and OUT.read_text(encoding="utf-8") == scorecard
+        ok_rep = rep_old == rep_new
+        if ok_art and ok_rep:
+            print("CHECK OK: scorecard.md + report Conclusions reproducible from council sheets")
         else:
-            sys.exit("CHECK FAIL: committed scorecard.md differs from generated output")
+            sys.exit("CHECK FAIL: " + ("scorecard.md stale; " if not ok_art else "")
+                     + ("report Conclusions region stale" if not ok_rep else "") + " — run build_conclusions.py")
     else:
-        OUT.write_text(content, encoding="utf-8")
-        print(f"wrote {OUT}")
+        OUT.write_text(scorecard, encoding="utf-8")
+        REPORT.write_text(rep_new, encoding="utf-8")
+        print(f"wrote {OUT} and synced report Conclusions region")
