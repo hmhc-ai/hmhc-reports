@@ -350,6 +350,7 @@ The instruction files are themselves living documents: the AI reviews and refine
 
 ### Table 6 — Peer benchmarks: monetization and valuation indices (index bank HSBC = 100)
 
+<!-- benchmarks:start -->
 Levels in each bank's local reporting currency (bn, never FX-converted); the four ratio columns are within-bank, indexed to HSBC = 100, so currencies cancel. OR = Other Revenue = total revenue − NII.
 
 | Bank | NII (lc bn) | OR (lc bn) | NII_vDep | OR_vDep | OR_vCA | total_vCA | Top Other-Revenue (% of total revenue) |
@@ -369,6 +370,8 @@ Levels in each bank's local reporting currency (bn, never FX-converted); the fou
 
 *Implied SG Other-Revenue uplift at index-bank parity (OR_vDep gap × deposits — under the thesis, under-monetization of an already-attracted base is optionality): DBS +S$3.0bn (+13% of revenue) · OCBC +S$2.6bn (+18% of revenue) · UOB +S$3.5bn (+26% of revenue).*
 
+*NII_vDep = NII ÷ customer deposits · OR_vDep = OR ÷ customer deposits · OR_vCA = OR ÷ client assets · total_vCA = total revenue ÷ client assets (CA = customer deposits + wealth AUM) — AUM definitions differ per bank; read the vDep and vCA lenses together.*
+
 Four indexes vs HSBC = 100; req %/yr = required outperformance, (premium ratio)^(1/5) − 1 per year (5-yr convergence). Px = local per-share price with its as-of date — the staleness marker. P/CA = price ÷ client assets.
 
 | Bank | Px (as-of) | P/CA | req %/yr | P/Rev | req %/yr | P/E | req %/yr | P/B | req %/yr |
@@ -383,6 +386,8 @@ Four indexes vs HSBC = 100; req %/yr = required outperformance, (premium ratio)^
 | Standard Chartered | GBX 2100.00 (2026-07-03) | 56 | -11.0% | 54 | -11.5% | 69 | -7.1% | 71 | -6.7% |
 | China Merchants Bank | RMB 37.73 (2026-07-06) | 33 | -19.7% | 55 | -11.2% | 38 | -17.4% | 43 | -15.7% |
 | RBC | C$ 293.67 (2026-07-23) | 126 | +4.8% | 120 | +3.7% | 121 | +4.0% | 167 | +10.8% |
+
+*P/CA = market cap ÷ client assets (customer deposits + wealth AUM) · P/Rev = market cap ÷ total revenue · P/E = market cap ÷ net profit · P/B = market cap ÷ book equity. SG market cap = current dated price × FY25 shares outstanding, from the ledger.*
 
 Wealth-hub capital flows (Frame Q2) — cross-border wealth stock per hub:
 
@@ -399,8 +404,9 @@ Wealth-hub capital flows (Frame Q2) — cross-border wealth stock per hub:
 **Key stats (2025):** global net wealth incl. real assets **US$550tn** · global financial wealth **US$333tn** · cross-border ("offshore") pool **US$15.7tn = 4.7% of financial wealth** (2.9% of net wealth) — the mobile slice the hubs compete for. The share moves slowly; policy and convenience shifts show up first as reallocation between hubs (the columns above), not expansion of the pool.
 
 *Definition — cross-border (non-resident) wealth: **financial** wealth booked in a centre by clients who are not residents of that country. Each hub's own residents' onshore wealth is excluded — which is why the United States shows only US$1.6tn here: that is foreign clients' money booked in the US (top source region: Central & South America), not Americans' wealth. Real assets, including directly held real estate, are outside the measure — BCG's 2026 report puts global financial wealth at ~US$333tn and total net wealth incl. real assets at ~US$550tn, so the US$15.7tn cross-border pool is ≈5% of world financial wealth. Single source family: BCG Global Wealth Report booking-centre series (US$tn as printed; levels rounded to 0.1tn, so derived YoY cells can differ from BCG's stated growth rates — read the 5y trend, not single-year cells). UK basis is UK-mainland from 2022 (earlier vintages not comparable → `n/r`); UAE included as a flow competitor only (outside the bank peer set). The Global row is BCG's printed world total — the share denominator: Singapore = 12.9% of global cross-border wealth in 2023 (1.7/13.2) rising to 13.4% in 2025 (2.1/15.7). Regulator series (MAS/SFC/SBA), in their own currencies, live in `data/flows.csv` as separate measures and are never mixed into this comparison.*
+<!-- benchmarks:end -->
 
-*Definitions: client assets (CA) = customer deposits + wealth AUM (renamed from "Capital Base" 2026-07-25; broader than the wealth-industry usage, which can exclude ordinary deposits) · OR = Other Revenue = total revenue − NII · NII_vDep = NII ÷ customer deposits · OR_vDep = OR ÷ deposits · OR_vCA = OR ÷ CA · total_vCA = total revenue ÷ CA · P/CA = market cap ÷ CA · P/Rev = market cap ÷ total revenue · P/E = market cap ÷ net profit · P/B = market cap ÷ book equity. Levels (lc bn) are each bank's local reporting currency, never FX-converted; ratio columns are within-bank, so currencies cancel. SG-bank fundamentals from the reconciled ledger (market cap = the Px column's dated price × FY25 shares); peer fundamentals from Tier-1 filings — latest full FY per bank (RBC's FY ends 31 Oct 2025; CBA was replaced by RBC 2026-07-24: all four Australian majors divested their wealth arms, so no Australian bank discloses comparable wealth AUM — see `guides/frame.md`) — with dated market prices, fetched 2026-07-24 by an independent retriever (Perplexity harness, stamps `PxClOpus4.8`) — `pipeline/sg-banks/data/peers.csv`. Caveats: AUM definitions differ per bank (largest driver of the vCA and P/CA spread — e.g. UBS invested assets US$4.75tn dwarf its deposits); China Merchants Bank market cap is A-share-basis; Standard Chartered market cap converted GBP→USD to match its USD reporting; HSBC/StanChart prices quoted in GBX (pence) on their London listings while both report in USD. Tables generated deterministically by `method/code/build_benchmarks.py` from `ledger.csv` + `peers.csv` (CI-verified).*
+*Provenance & caveats (metric definitions are in the block footnotes above): client assets (CA) = customer deposits + wealth AUM — renamed from "Capital Base" 2026-07-25, and broader than the wealth-industry usage, which can exclude ordinary deposits. SG-bank fundamentals from the reconciled ledger (market cap = the Px column's dated price × FY25 shares); peer fundamentals from Tier-1 filings — latest full FY per bank (RBC's FY ends 31 Oct 2025; CBA was replaced by RBC 2026-07-24: all four Australian majors divested their wealth arms, so no Australian bank discloses comparable wealth AUM — see `guides/frame.md`) — with dated market prices, fetched by an independent retriever (Perplexity harness, stamps `PxClOpus4.8`) — `pipeline/sg-banks/data/peers.csv`. Caveats: AUM definitions differ per bank (largest driver of the vCA and P/CA spread — e.g. UBS invested assets US$4.75tn dwarf its deposits); China Merchants Bank market cap is A-share-basis; Standard Chartered market cap converted GBP→USD to match its USD reporting; HSBC/StanChart prices quoted in GBX (pence) on their London listings while both report in USD. The block above is synced verbatim from `data/benchmarks.md` by `method/code/build_report_tables.py` (CI-verified).*
 
 ---
 

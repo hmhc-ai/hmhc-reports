@@ -33,6 +33,7 @@ Every **`fetch-` module is EXPENSIVE** (live web retrieval, token/time-intensive
 | Build-Health | `method/code/build-health.md` (spec) + `method/code/build_health.py` (executable) | `meta/health.md` + `meta/health.json` | cheap | any data change |
 | Build-Gaps | `method/code/build-gaps.md` (spec) + `method/code/build_gaps.py` (executable) | `meta/gaps.md` + `meta/gaps.json` | cheap | any data change |
 | Build-Report | `method/ai/build-report.md` | `reports/sg-banks/report.md` | cheap | Build-Tables, Frame, Fetch-Signals, Style |
+| Build-Report-Tables | `method/code/build-report-tables.md` (spec) + `method/code/build_report_tables.py` (executable) | benchmarks-marked region of `reports/sg-banks/report.md` | cheap | Build-Benchmarks |
 | Write-Conclusions | `method/ai/write-conclusions.md` | Conclusions section of `report.md` (in place, between markers) | cheap | Build-Report, Frame |
 | Publish | (this controller) | `reports/sg-banks/meta.json` | cheap | Write-Conclusions |
 
@@ -74,11 +75,11 @@ Always finish with **Publish** (Step 5).
 - **Write-Conclusions:** every Frame key question answered (or explicitly marked "pending new research module" where the data does not exist — currently Q2 and the peer-indexed parts of Q5/Q6), each answer cited; thesis score 0–100 with rationale; closed-book (its self-checks).
 - Every refreshed module's output exists and is committed.
 
-## Step 5 — Publish (version, meta, commit, tag)
-- **Version scheme:** `YYYY.MM.DD` of the publish date; a same-day re-release appends `-r2`, `-r3`, … (e.g. `2026.07.20-r2`). The tag `sg-banks-v<version>` is created on `main` **after the PR merges** (tag automation via GitHub Actions is planned; until then create it manually from the merge commit).
-- **Bump:** data/scan/tables changed ⇒ **minor**; only Conclusions/Style/presentation ⇒ **patch**; a Frame change that alters the report ⇒ minor.
-- Update `reports/sg-banks/meta.json` (`last_updated`, `current_version`, `pipeline.ref` = new tag). Commit; `git tag sg-banks-v<version>`; push.
-- **Commit trailers:** every commit carries the `Generated-by:` / `Co-Authored-By:` attribution trailers per `AGENTS.md` § Commit attribution (harness+model code matching the ledger stamps).
+## Step 5 — Publish (one command + PR)
+- **Run `python3 method/code/publish.py --desc "<one-sentence release note>" [--changelog "<rich changelog entry>"]`.** It computes the next version (`YYYY.MM.DD`, `-rN` for same-day re-releases), updates `reports/sg-banks/meta.json` (`current_version`, `last_updated`, `refresh_note`), inserts the changelog entry at the top of the registry, appends the release row to `meta/history.csv` (version, date, thesis score, health metrics — the score/quality time series), and runs every CI gate. `--dry-run` previews.
+- **Narrative convention:** the registry changelog is the **canonical release history**; `refresh_note` carries only the current release's note plus a pointer; commit messages and PR bodies stay terse and defer to the changelog.
+- **Only a change to the published report warrants a version bump** — pipeline/meta/site-only changes ship without one (and skip publish.py).
+- Commit (trailers per `AGENTS.md` § Commit attribution), open the PR, merge on green CI. The tag `sg-banks-v<version>` is **auto-created on `main` by the tag-version GitHub Action** when `meta.json`'s version changes — never tag manually.
 
 ## Step 6 — Report back
 State: the assessment, which guides/modules changed, whether any expensive module was run (and that it was explicitly confirmed), gates passed, new version + tag.
