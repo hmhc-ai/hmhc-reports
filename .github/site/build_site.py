@@ -149,7 +149,7 @@ def build_dashboard_page(slug: str, meta: dict) -> None:
     body = (
         f'<p class="crumbs"><a href="../index.html">Reports</a> / <a href="index.html">{html.escape(meta["title"])}</a> / Dashboard</p>'
         f'<h1>Workflow dashboard</h1>'
-        f'<p class="meta-line">Pipeline health for <strong>{html.escape(slug)}</strong> at version {html.escape(str(h.get("version", "?")))} '
+        f'<p class="meta-line">Pipeline health for <strong>{html.escape(slug)}</strong> at version {html.escape(meta["current_version"])} '
         f'— generated from <code>meta/health.json</code> and <code>meta/gaps.json</code>, themselves CI-verified pipeline outputs.</p>'
         + tiles + qtable + gtable)
     (OUT / slug / "dashboard.html").write_text(page(f'{meta["title"]} — dashboard', body, "../", "dashboard"), encoding="utf-8")

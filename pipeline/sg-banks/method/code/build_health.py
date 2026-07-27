@@ -93,8 +93,6 @@ if sig.exists():
     signals_asof = m.group(1) if m else "unknown"
 
 health = {
-    "version": meta.get("current_version"),
-    "last_updated": meta.get("last_updated"),
     "completeness": {
         "questions_total": len(QUESTIONS),
         "questions_answered": answered,
@@ -136,7 +134,7 @@ def md():
     c, f, g, fr = health["completeness"], health["confidence"], health["gates"], health["freshness"]
     e = ["# SG Banks — Pipeline Health (generated artifact)", "",
          f"*Artifact: `pipeline/sg-banks/meta/health.md` (+ `health.json`, the machine-readable mirror) — sole output of "
-         f"`pipeline/sg-banks/method/code/build_health.py`. Report version {health['version']}, last updated {health['last_updated']}.*", "",
+         f"`pipeline/sg-banks/method/code/build_health.py`. Report version and dates live in `reports/sg-banks/meta.json` — deliberately not embedded here, so version bumps never invalidate this artifact.*", "",
          "## Completeness — how much of the frame is answered", "",
          f"- Key questions: **{c['questions_answered']} of {c['questions_total']} fully answered**",
          ""]
