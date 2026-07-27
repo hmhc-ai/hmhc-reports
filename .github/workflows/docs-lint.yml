@@ -5,6 +5,9 @@ name: Docs consistency lint
 #     relative markdown link must exist on disk;
 #  2. data/tables.md must be exactly reproducible from the reconciled
 #     ledger by the deterministic Build-Tables script.
+# A separate job guards the site/design session's write scope: PRs from
+# site/* branches may only touch the site module (see site_scope_guard.py
+# and AGENTS.md § Golden rules).
 
 on:
   pull_request:
@@ -30,3 +33,13 @@ jobs:
         run: python3 pipeline/sg-banks/method/code/build_gaps.py --check
       - name: Site builds from current content
         run: pip install markdown && python3 .github/site/build_site.py
+
+  site-scope:
+    if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'site/')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Changed files stay within the site module
+        run: python3 .github/scripts/site_scope_guard.py
