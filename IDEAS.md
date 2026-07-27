@@ -26,4 +26,16 @@
 
 ---
 
+## Idea 2 — Council seat packets: author-run lab-native scoring sessions (status: brainstorm)
+
+**Author's seed (2026-07-27):** run each council model independently in its own lab's app — Perplexity's Model Council proved not useful, or worse, deceptive for this (every requested seat self-reported Claude Opus 5 at run time; see `PERPLEXITY.md` Completed Job #4).
+
+**The idea:** Claude prepares one self-contained **seat packet** per open seat (GPT · Grok · Gemini) — a single paste-able block containing the blind protocol, the rubric verbatim, `frame.md`, and the report body with the Conclusions region stripped, ending with the exact JSON schema to fill in and an instruction to print the model's runtime self-identification. The author pastes a packet into the lab's own app (ChatGPT / Grok / Gemini), pastes the JSON reply back to Claude, and Claude validates it against the SOP self-checks, stamps it, and commits it as `data/scores/<member>.json`.
+
+**Why lab-native:** satisfies `write-scores.md` § Member identity & admissibility (verifiable identity, no routers, one seat per lab) with the author as the isolation guarantee — each app session sees only its packet, never another member's output.
+
+**Open questions to brainstorm:** packet size vs app context/paste limits (report body is long — may need the packet as an attached file where apps allow it) · how the author confirms "latest knowledge-work model" in each app's model picker at run time · timing — seats should score **after** the pending frame v3 rewording lands, so every member scores the final wording once · whether a packet generator belongs in `method/code/` (deterministic: strip markers, concatenate, emit) or stays a manual Claude step for now.
+
+---
+
 *Add new ideas below with a number, a date-stamped author's seed, and status: brainstorm → refined → graduated / dropped.*
