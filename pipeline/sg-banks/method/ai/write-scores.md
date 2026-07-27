@@ -2,7 +2,14 @@
 
 **Module:** Write-Scores · **Inputs:** `guides/frame.md` + the report body **excluding its Conclusions section** · **Output:** one answer sheet `data/scores/<member>.json` per council member · **Depends on:** Build-Report (a current report body)
 **Run on:** each council member independently — the **latest knowledge-work / business-analysis frontier model of each major frontier lab** (author's standing roster principle, 2026-07-27: Claude · GPT · Grok · Gemini when platform access allows). The `member`/`model` fields record the model that **actually ran, printed at run time** — never an assumed or configured name. One sheet per member per report version.
-**Changelog:** 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval).
+**Changelog:** 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval). · 2026-07-27b — member identity & admissibility rules added after the Model Council incident (PERPLEXITY.md Completed Job #4).
+
+## Member identity & admissibility (hard rules)
+
+1. **Verifiable identity only.** A sheet is admissible only when the member's model identity is verifiable: the session runs in the **lab's own harness** (ChatGPT, Grok, Gemini, Claude apps/CLIs) or on an **API call pinned to an explicit model ID**. The member must print its runtime self-identification, and it must agree with the harness's claim — any mismatch makes the sheet inadmissible.
+2. **No multi-model routers.** Sheets produced through router features that relabel or substitute models (e.g. Perplexity **Model Council**) are inadmissible as member sheets, regardless of what the seat was labelled — in the 2026-07-27 run, seats labelled GPT/Gemini/Kimi all self-reported Claude Opus 5. Such outputs may be kept as **advisory review context only** and are never committed to `data/scores/`.
+3. **One seat per lab.** The roster holds one member per frontier lab; a second sheet from a lab already seated is rejected (with an unweighted median, a same-lab pair would carry every aggregate). A newer model from the same lab **replaces** that lab's sheet, never joins it.
+4. Because inadmissible outputs are never committed, every committed sheet asserts `blind: true` honestly — a non-blind or identity-unverified run stops at rule 1/2 and is reported, not schema-flagged.
 
 ## Blind protocol (hard rules)
 

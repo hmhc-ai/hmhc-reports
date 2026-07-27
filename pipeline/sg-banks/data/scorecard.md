@@ -14,7 +14,7 @@ Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body on
 | Q6 | Relative valuation vs peers | -2 | unanimous | high |
 | — | **Thesis overall** | **+2** | +2…+2 | — |
 
-## CwClFable5 — Claude Code (Claude Fable 5 (claude-fable-5)) · 2026-07-27 · scored v2026.07.27
+## CwClFable5 — Claude Code (Claude Fable 5 (claude-fable-5)) · 2026-07-27 · scored v2026.07.27-r2
 
 - **Q1** · +4 · critical — Deposits, wealth AUM and client assets compound mid-single-digit-plus at all three banks with FY24-25 growth above the 5-year trend at DBS and OCBC - the primary driver is intact and accelerating.
 - **Q2** · +4 · high — Singapore's cross-border wealth grew 11.8%/yr over 2020-25, fastest of the big three hubs, lifting its share of the global offshore pool from 12.9% to 13.4% - the external attraction test passes, with Hong Kong still larger in absolute terms.

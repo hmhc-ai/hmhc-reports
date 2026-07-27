@@ -1,7 +1,7 @@
 {
   "slug": "sg-banks",
   "title": "Analysis of Singapore Banks",
-  "subtitle": "DBS · OCBC · UOB — income engines, deposits, NIM, valuation (FY2016–2026)",
+  "subtitle": "DBS \u00b7 OCBC \u00b7 UOB \u2014 income engines, deposits, NIM, valuation (FY2016\u20132026)",
   "summary": "A reconciled, source-graded view of Singapore's three major banks as a regional wealth hub.",
   "status": "published",
   "first_published": "2026-07-16",
@@ -18,7 +18,7 @@
     "deposits",
     "1Q2026"
   ],
-  "conclusions_status": "Conclusions = blind council scorecard (per question: performance -5..+5, criticality, one-sentence comment per member; aggregate matrix + per-member blocks), generated deterministically by build_conclusions.py from data/scores/*.json between the conclusions markers; the 0-100 thesis score is retired. Roster (author, 2026-07-27): Claude + GPT + Grok (+ Gemini when platform access allows) - Claude sheet live (CwClFable5, thesis +2), external sheets queued as PERPLEXITY.md Job #4. Full frame-format answers live in the report Supporting Data section",
+  "conclusions_status": "Conclusions = blind council scorecard (per question: performance -5..+5, criticality, one-sentence comment per member; aggregate matrix + per-member blocks), generated deterministically by build_conclusions.py from data/scores/*.json between the conclusions markers; the 0-100 thesis score is retired. Roster (author, 2026-07-27): one seat per lab - Anthropic seat live (CwClFable5, thesis +2); GPT/Grok/Gemini seats open, to be filled by author-run sessions in each lab's own harness (Perplexity Model Council ruled inadmissible - see PERPLEXITY.md Completed Job #4). Full frame-format answers live in the report Supporting Data section",
   "pipeline": {
     "architecture_updated": "2026-07-21",
     "content_refreshed": "2026-07-20",
@@ -105,7 +105,7 @@
       "write_scores": {
         "method": "pipeline/sg-banks/method/ai/write-scores.md",
         "output": "pipeline/sg-banks/data/scores/<member>.json",
-        "status": "live - roster: Claude (sheet live, CwClFable5) + GPT + Grok queued via PERPLEXITY.md Job #4; Gemini pending platform access"
+        "status": "live - one seat per lab: Anthropic sheet live (CwClFable5); GPT/Grok/Gemini seats open via author-run lab-native sessions (Model Council inadmissible, PERPLEXITY.md Job #4)"
       },
       "build_conclusions_council": {
         "method": "pipeline/sg-banks/method/code/build-conclusions.md",
