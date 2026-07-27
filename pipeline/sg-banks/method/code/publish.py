@@ -36,7 +36,7 @@ REPORT = REPO / "reports" / "sg-banks" / "report.md"
 GATES = [
     [sys.executable, str(REPO / ".github" / "scripts" / "docs_lint.py")],
     *[[sys.executable, str(ROOT / "method" / "code" / f"build_{m}.py"), "--check"]
-      for m in ("tables", "charts", "benchmarks", "health", "gaps", "report_tables")],
+      for m in ("tables", "charts", "benchmarks", "health", "gaps", "report_tables", "conclusions")],
 ]
 
 
