@@ -28,3 +28,5 @@ jobs:
         run: python3 pipeline/sg-banks/method/code/build_health.py --check
       - name: Gaps worklist reproducible from inputs
         run: python3 pipeline/sg-banks/method/code/build_gaps.py --check
+      - name: Site builds from current content
+        run: pip install markdown && python3 .github/site/build_site.py
