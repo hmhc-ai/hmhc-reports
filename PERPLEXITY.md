@@ -3,9 +3,29 @@
 > **How to use this file (for the human):** tell Perplexity — *"Read `PERPLEXITY.md` in `hmhc-ai/hmhc-reports` and execute it."* Nothing else needed. Claude maintains this file: it queues one job at a time from the gap list (`pipeline/sg-banks/meta/gaps.md`) and rotates it when done.
 > **Authorization note:** a job being queued here **is** the author's cost-gate confirmation (UPDATE.md Step 2b) for that one run — the author queues jobs by asking Claude to update this card.
 
-## Status: **NO JOB QUEUED — do nothing**
+## Status: **JOB QUEUED — Job #4: write-scores (council scoring × 2 members: GPT + Grok)**
 
-There is currently no authorized job. If you were sent here, stop and report back that the job card is empty.
+---
+
+## Job #4 — write-scores (blind council scoring, Conclusions scorecard)
+
+**Objective.** Produce **two independent blind answer sheets** scoring the report's key questions — one from a **GPT-class model** and one from a **Grok-class model** (run each separately; never show one member the other's output). This is a scoring job, not a fetch: **no web search**.
+
+**Roster principle (author, 2026-07-27):** the latest knowledge-work / business-analysis frontier model of each major lab. Record the model that **actually ran, printed at run time** — the `member` code and `model` field must name it exactly (e.g. `PxGPT5.6-Sol` / `PxGrok4.5` only if that is truly what ran).
+
+**Instructions — read and follow, in order:**
+1. `AGENTS.md` § Perplexity working agreement.
+2. **`pipeline/sg-banks/method/ai/write-scores.md` — the SOP.** Follow the blind protocol exactly: each member sees ONLY `guides/frame.md` and `reports/sg-banks/report.md` **with everything between `<!-- conclusions:start -->` and `<!-- conclusions:end -->` removed**. Pass the rubric verbatim; add no commentary or hints. Per question: `performance` integer −5…+5 · `criticality` from `critical/high/medium/low` · one-sentence comment; plus the `thesis` line.
+
+**Deliverables.** Exactly two files, schema per the SOP: `pipeline/sg-banks/data/scores/<member>.json` for each member (`<member>` = the harness+model code, e.g. `PxGPT5.6-Sol.json`, `PxGrok4.5.json`). `report_version` = the `current_version` in `reports/sg-banks/meta.json` at run time. Validate against the SOP self-checks before opening the PR (`python3 pipeline/sg-banks/method/code/build_conclusions.py --check` will run in CI and rejects malformed sheets — note: CI failing on "scorecard stale" is EXPECTED, since regeneration is Claude's downstream step; a sheet-validation error is not).
+
+**Git workflow.**
+- Branch: `perplexity/write-scores` (from `main`).
+- Commit trailers per `AGENTS.md` § Commit attribution — name each model that actually ran.
+- Open a pull request titled **"Perplexity: write-scores — council sheets (GPT + Grok)"**. In the description: which models ran, and confirmation the blind protocol held (Conclusions stripped, members isolated).
+- **Do not merge.** Claude validates, rebuilds the scorecard, and merges.
+
+**Do not touch anything else** — only the two new files under `data/scores/`.
 
 ---
 

@@ -6,7 +6,7 @@
   "status": "published",
   "first_published": "2026-07-16",
   "last_updated": "2026-07-27",
-  "current_version": "2026.07.27",
+  "current_version": "2026.07.27-r2",
   "tags": [
     "singapore",
     "banks",
@@ -18,11 +18,11 @@
     "deposits",
     "1Q2026"
   ],
-  "conclusions_status": "in report.md (Conclusions section, between conclusions markers); ALL 6 key questions answered for the first time - Q2 [+] Singapore fastest-growing major wealth hub (cross-border wealth 11.8% 5y-CAGR, global share 12.9% -> 13.4%); Q5 NII_vDep 110-122 vs OR_vDep 56-73 (gap = quantified upside +13-26% of revenue at parity); Q6 DBS/OCBC premia demand +9-12%/yr, UOB parity; thesis score 70/100 (up from 65: Q2 resolved in favour); updated 2026-07-25 closed-book by Claude (CwClFable5) — non-Claude cross-model rerun still advisable",
+  "conclusions_status": "Conclusions = blind council scorecard (per question: performance -5..+5, criticality, one-sentence comment per member; aggregate matrix + per-member blocks), generated deterministically by build_conclusions.py from data/scores/*.json between the conclusions markers; the 0-100 thesis score is retired. Roster (author, 2026-07-27): Claude + GPT + Grok (+ Gemini when platform access allows) - Claude sheet live (CwClFable5, thesis +2), external sheets queued as PERPLEXITY.md Job #4. Full frame-format answers live in the report Supporting Data section",
   "pipeline": {
     "architecture_updated": "2026-07-21",
     "content_refreshed": "2026-07-20",
-    "refresh_note": "2026.07.27: Workflow streamlining: Table 6 region now machine-synced from benchmarks.md (markers + build_report_tables.py, CI-checked); release bookkeeping automated by publish.py with meta/history.csv score time series; health artifacts no longer embed the version; registry slimmed to decisions/provenance/changelog. Full release history: pipeline/sg-banks/index.md (Changelog).",
+    "refresh_note": "2026.07.27-r2: Council architecture live (author-approved): Conclusions is now the blind council scorecard (generated deterministically from data/scores/ sheets); Key Data restructured as Supporting Data with the frame-format answers by question; the 0-100 thesis score is retired; Claude sheet live, GPT + Grok sheets queued as PERPLEXITY.md Job #4. Full release history: pipeline/sg-banks/index.md (Changelog).",
     "guides": {
       "frame": {
         "path": "pipeline/sg-banks/guides/frame.md",
@@ -100,7 +100,17 @@
       },
       "write_conclusions": {
         "method": "pipeline/sg-banks/method/ai/write-conclusions.md",
-        "output": "reports/sg-banks/report.md (Conclusions section)"
+        "status": "RETIRED 2026-07-27, replaced by write_scores + build_conclusions_council"
+      },
+      "write_scores": {
+        "method": "pipeline/sg-banks/method/ai/write-scores.md",
+        "output": "pipeline/sg-banks/data/scores/<member>.json",
+        "status": "live - roster: Claude (sheet live, CwClFable5) + GPT + Grok queued via PERPLEXITY.md Job #4; Gemini pending platform access"
+      },
+      "build_conclusions_council": {
+        "method": "pipeline/sg-banks/method/code/build-conclusions.md",
+        "executable": "pipeline/sg-banks/method/code/build_conclusions.py",
+        "output": "pipeline/sg-banks/data/scorecard.md + report Conclusions markers"
       }
     },
     "control": {

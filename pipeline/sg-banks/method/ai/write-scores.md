@@ -1,7 +1,7 @@
 # Write-Scores — Module SOP: blind council scoring (SG Banks · Conclusions)
 
 **Module:** Write-Scores · **Inputs:** `guides/frame.md` + the report body **excluding its Conclusions section** · **Output:** one answer sheet `data/scores/<member>.json` per council member · **Depends on:** Build-Report (a current report body)
-**Run on:** each council member independently — diverse frontier models across harnesses (e.g. `CwClFable5` via Claude Code, non-Claude members via the Perplexity harness). One sheet per member per report version.
+**Run on:** each council member independently — the **latest knowledge-work / business-analysis frontier model of each major frontier lab** (author's standing roster principle, 2026-07-27: Claude · GPT · Grok · Gemini when platform access allows). The `member`/`model` fields record the model that **actually ran, printed at run time** — never an assumed or configured name. One sheet per member per report version.
 **Changelog:** 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval).
 
 ## Blind protocol (hard rules)

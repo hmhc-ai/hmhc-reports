@@ -9,8 +9,10 @@ six hand-edits per release:
      and refresh_note = THIS release's note + a pointer to the registry
      (the registry changelog is the canonical history — see UPDATE.md);
   3. inserts a changelog entry at the top of pipeline/sg-banks/index.md;
-  4. appends a row to meta/history.csv (version, date, thesis score,
-     questions answered, fill/confidence metrics from meta/health.json);
+  4. appends a row to meta/history.csv (version, date, per-member council
+     thesis scores, questions answered, fill/confidence metrics) AND the
+     full council sheets to meta/history_scores.jsonl (one JSON line per
+     member per published version - per-member score tracking over time);
   5. runs every CI gate (docs lint + all --check modules) and fails loudly
      if any gate fails.
 
@@ -48,7 +50,18 @@ def next_version(current: str, today: str) -> str:
     return f"{today}-r{n + 1}"
 
 
-def thesis_score() -> str:
+SCORES = ROOT / "data" / "scores"
+HISTORY_SCORES = ROOT / "meta" / "history_scores.jsonl"
+
+
+def council_sheets() -> list:
+    return [json.loads(f.read_text(encoding="utf-8")) for f in sorted(SCORES.glob("*.json"))] if SCORES.is_dir() else []
+
+
+def thesis_score(sheets: list) -> str:
+    """Per-member thesis performance, compact (the author tracks members, not medians)."""
+    if sheets:
+        return "|".join(f"{s['member']}:{s['thesis']['performance']:+d}" for s in sheets)
     m = re.search(r"Thesis score: (\d+)/100", REPORT.read_text(encoding="utf-8"))
     return m.group(1) if m else "n/d"
 
@@ -67,7 +80,8 @@ def main() -> int:
 
     h = json.loads(HEALTH.read_text(encoding="utf-8"))
     comp, conf = h.get("completeness", {}), h.get("confidence", {})
-    row = [ver, date_iso, thesis_score(),
+    sheets = council_sheets()
+    row = [ver, date_iso, thesis_score(sheets),
            comp.get("questions_answered"), comp.get("questions_total"),
            comp.get("ledger_filled_pct"), conf.get("dual_verified_pct_of_filled"),
            conf.get("retriever_scorecard", {}).get("agreement_pct")]
@@ -96,6 +110,10 @@ def main() -> int:
             w.writerow(["version", "date", "thesis_score", "questions_answered", "questions_total",
                         "ledger_filled_pct", "dual_verified_pct_of_filled", "cross_model_agreement_pct"])
         w.writerow(row)
+
+    with open(HISTORY_SCORES, "a", encoding="utf-8") as f:
+        for s in sheets:
+            f.write(json.dumps({"published_version": ver, "published_date": date_iso, **s}, ensure_ascii=False) + "\n")
 
     for gate in GATES:
         r = subprocess.run(gate)
