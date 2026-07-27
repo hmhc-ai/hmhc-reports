@@ -1,0 +1,17 @@
+{
+  "member": "PxClOpus5",
+  "harness": "Perplexity Computer",
+  "model": "Claude Opus 5 (claude-opus-5)",
+  "date": "2026-07-27",
+  "report_version": "2026.07.27-r2",
+  "blind": true,
+  "answers": [
+    {"q": "Q1", "performance": 4, "criticality": "critical", "comment": "Deposits compound 5.6-6.3% and wealth AUM 7.3-13.1% over five years with FY25 acceleration at DBS and OCBC (+8.6/+14.6 and +9.6/+14.7) plus a record S$492bn DBS AUM in 1Q26, though UOB's AUM growth has decelerated to +5.8% and every AUM cell is flagged single-retriever with non-comparable definitions."},
+    {"q": "Q2", "performance": 4, "criticality": "critical", "comment": "Singapore's cross-border stock grew at an 11.8% 5y CAGR versus Hong Kong 6.7% and Switzerland 3.9%, lifting its share of the global offshore pool from 12.9% to 13.4%, although its US$2.1tn base still trails both rivals and yearly growth is easing (+13.3 to +11.8 to +10.5)."},
+    {"q": "Q3", "performance": 2, "criticality": "high", "comment": "Five-year NII CAGRs near 9% and OR CAGRs of 5.5-8.8% are solid, but FY25 shows NII rolling over at all three (+0.5 / -6.2 / -3.3) with only DBS and OCBC offsetting through other revenue, and 1Q26 NII is down 4-5% YoY across the group."},
+    {"q": "Q4", "performance": 2, "criticality": "medium", "comment": "A 53-74bp trough-to-peak NIM swing against a roughly 5pp Fed move shows the deposit franchises heavily damp the rate cycle, supporting the thesis that rates are noise around the attracted base, even though the current downleg (1Q26 NIMs 1.89/1.76/1.82, all lower YoY) drags near-term income."},
+    {"q": "Q5", "performance": 0, "criticality": "high", "comment": "The SG banks out-earn HSBC on rate-driven NII_vDep (122/110/113) but materially under-monetize non-NII (OR_vDep 73/68/56, OR_vCA 70-75) versus JPMorgan, Bank of America, RBC and UBS, which the report frames as S$2.6-3.5bn of optionality but which equally evidences that monetization has not automatically followed attraction."},
+    {"q": "Q6", "performance": -2, "criticality": "high", "comment": "DBS and OCBC trade at 175/157 on P/CA and 175/172 on P/Rev versus HSBC, requiring roughly 9-12% per year of extra denominator growth for five years against actual client-asset growth of 5.6-11.8%, and both sit +96% and +84% above their own 10-year average P/B, so much of the attraction story is already in the price while UOB (P/CA 106, P/B 83) is not."}
+  ],
+  "thesis": {"performance": 2, "comment": "The critical capital-attraction leg passes clearly - Singapore is gaining share of a slow-growing offshore pool and all three banks keep compounding deposits and AUM - but monetization is currently rate-impaired and structurally below peers on fee income, and the DBS/OCBC premium already demands roughly 10%+ annual outperformance, leaving the thesis directionally right and only partly investable at today's prices."}
+}
