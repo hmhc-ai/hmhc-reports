@@ -43,17 +43,18 @@ This report is produced by a documented, AI-run workflow with human governance, 
 <!-- conclusions:start -->
 ## Conclusions — Council Scorecard
 
-Council of 2: `CwClFable5` · `GkGrok4`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the factor is for the thesis. Disagreement ranges are shown deliberately — they are a signal.
+Council of 2 — scores shown **per member**, in column order: `CwClFable5` · `GkGrok4`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the factor is for the thesis · factor coverage = whether these factors suffice to judge the thesis, 0–100 (low = the frame is missing material factors). No averaging: disagreement is shown deliberately — it is a signal.
 
-| Factor | Topic | Perf (median) | Range | Criticality (consensus) |
-|---|---|---:|---:|---|
-| Q1 | Client-asset growth | +4 | unanimous | critical |
-| Q2 | Wealth-hub capital flows | +4.5 | +4…+5 | critical (critical / high) |
-| Q3 | Income engines: NII & Other Revenue | +2 | unanimous | high (high / medium) |
-| Q4 | NIM cyclicality & rate sensitivity | +0.5 | 0…+1 | medium |
-| Q5 | Client-asset monetization vs peers | +1 | -1…+3 | high |
-| Q6 | Valuation premium vs peers | -1.5 | -2…-1 | high |
-| — | **Thesis overall** | **+2** | +2…+2 | — |
+| Factor | Topic | Performance | Criticality |
+|---|---|---|---|
+| Q1 | Client-asset growth | +4 · +4 | critical · critical |
+| Q2 | Wealth-hub capital flows | +4 · +5 | high · critical |
+| Q3 | Income engines: NII & Other Revenue | +2 · +2 | medium · high |
+| Q4 | NIM cyclicality & rate sensitivity | 0 · +1 | medium · medium |
+| Q5 | Client-asset monetization vs peers | -1 · +3 | high · high |
+| Q6 | Valuation premium vs peers | -2 · -1 | high · high |
+| — | **Thesis overall** | **+2 · +2** | — |
+| — | **Factor coverage** (0–100) | 75 · n/d | — |
 
 ### CwClFable5 — Claude Code (Claude Fable 5 (claude-fable-5)) · 2026-07-29 · scored v2026.07.29-r2
 
@@ -64,6 +65,7 @@ Council of 2: `CwClFable5` · `GkGrok4`. Each member scored **blind** (frame + r
 - **Q5** · -1 · high — The SG banks out-earn HSBC on NII per deposit (110-122) but lag badly on non-NII monetization (OR_vDep 56-73 vs US peers 140-181), so the monetization half of the thesis is not yet demonstrated - though closing that gap to parity is worth +13-26% of revenue, which is the upside case.
 - **Q6** · -2 · high — DBS and OCBC trade at 157-175 on P/CA and P/Rev versus HSBC = 100, requiring +9-12% annual outperformance for five years - much of the attraction story is already in the price, with UOB the near-parity exception.
 - **Thesis** · +2 — Capital attraction is verified internally and externally and monetization is adequate but not yet superior, so the thesis's driver holds while the entry price already assumes the non-NII acceleration the income data does not yet show.
+- **Factor coverage** · 75/100 — The six factors cover attraction, monetization and price well, but nothing scores the durability of the income engine (credit quality, capital headroom) or where the next decade of growth comes from - enough to form an opinion, not enough to hold it with confidence.
 
 ### GkGrok4 — Grok app (lab-native session) (Grok 4) · 2026-07-29 · scored v2026.07.29-r2
 

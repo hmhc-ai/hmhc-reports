@@ -2,7 +2,7 @@
 
 **Module:** Write-Scores · **Inputs:** the Frame section of `HUMAN.md` (the `frame:start`/`frame:end` region — never § Style) + the report body **excluding its Conclusions section** · **Output:** one answer sheet `data/scores/<member>.json` per council member · **Depends on:** Build-Report (a current report body)
 **Run on:** each council member independently — the **latest knowledge-work / business-analysis frontier model of each major frontier lab** (author's standing roster principle, 2026-07-27: Claude · GPT · Grok · Gemini when platform access allows). The `member`/`model` fields record the model that **actually ran, printed at run time** — never an assumed or configured name. One sheet per member per report version.
-**Changelog:** 2026-07-29 — frame v3: questions become **Key Factors** (short names, ids Q1…Q6 retained); optional `suggested_factors` added to the sheet schema (author-approved). · 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval). · 2026-07-27b — member identity & admissibility rules added after the Model Council incident (PERPLEXITY.md Completed Job #4).
+**Changelog:** 2026-07-29b — scorecard drops median/range for per-member score arrays (2-4 member councils don't need aggregates); new required `factor_coverage` 0-100 line (are these factors enough to judge the thesis). · 2026-07-29 — frame v3: questions become **Key Factors** (short names, ids Q1…Q6 retained); optional `suggested_factors` added to the sheet schema (author-approved). · 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval). · 2026-07-27b — member identity & admissibility rules added after the Model Council incident (PERPLEXITY.md Completed Job #4).
 
 ## Member identity & admissibility (hard rules)
 
@@ -28,6 +28,8 @@ For each key factor in the Frame, give:
 
 Also give a **`thesis`** line: `performance` −5 … +5 and one sentence on the thesis as a whole, weighing the factors by your own criticality judgements.
 
+Also give a **`factor_coverage`** line — integer **0 … 100** plus one sentence: to what extent the analyzed factors, *taken together*, are sufficient to form an opinion on the thesis. 100 = these factors cover what matters for this call; a low score means material aspects of the thesis are not captured by any factor (name them in `suggested_factors`).
+
 Optionally, give **`suggested_factors`** — up to **3** factors you believe are missing from the frame and material to the thesis: each a `name` (short) + `rationale` (one sentence, grounded in the supplied material). Suggestions are displayed in the scorecard; adopting one is the author's decision.
 
 ## Output — `data/scores/<member>.json`
@@ -47,6 +49,7 @@ Optionally, give **`suggested_factors`** — up to **3** factors you believe are
     {"q": "Q2", "performance": 3, "criticality": "high", "comment": "…"}
   ],
   "thesis": {"performance": 2, "comment": "…"},
+  "factor_coverage": {"score": 80, "comment": "…"},
   "suggested_factors": [
     {"name": "…", "rationale": "…"}
   ]
@@ -56,7 +59,7 @@ Optionally, give **`suggested_factors`** — up to **3** factors you believe are
 ## Self-checks (all must pass)
 
 1. Every frame factor present exactly once; ids match the frame's numbering (`Q1`…`Q6` — the historical ids are kept for score-history continuity; display names live in the frame).
-2. Every `performance` an integer in [−5, +5]; every `criticality` from the validated list; every comment ≤ 1 sentence. `suggested_factors` is optional: at most 3 entries, each with a `name` and a one-sentence `rationale`.
+2. Every `performance` an integer in [−5, +5]; every `criticality` from the validated list; every comment ≤ 1 sentence. `factor_coverage.score` an integer in [0, 100] with a one-sentence comment. `suggested_factors` is optional: at most 3 entries, each with a `name` and a one-sentence `rationale`.
 3. `report_version` matches the registry (`reports/index.json`) version of the body scored.
 4. The prior Conclusions were **not** in the member's context (`blind: true` asserts this).
 

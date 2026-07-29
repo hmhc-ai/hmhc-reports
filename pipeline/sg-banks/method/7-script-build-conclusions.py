@@ -2,9 +2,11 @@
 """Build-Conclusions — deterministic council scorecard assembly.
 
 Aggregates the blind council answer sheets (data/scores/<member>.json,
-Write-Scores outputs) into data/scorecard.md: an aggregate matrix per frame
-question (median performance, range as the disagreement marker, criticality
-consensus) followed by one compact block per member. No AI in the assembly:
+Write-Scores outputs) into data/scorecard.md: a per-member score table
+(performance and criticality arrays per factor, one entry per member in
+roster order — no medians or averaging with a 2-4 member council) plus the
+thesis-overall and factor-coverage rows, followed by one compact block per
+member and any council-suggested factors. No AI in the assembly:
 insight lives upstream in the blind sheets; this step only validates,
 sorts, and formats. With no sheets present it emits a deterministic
 "no council run yet" placeholder.
@@ -18,7 +20,7 @@ both targets carry a "no council run yet" placeholder.
 Usage:  python3 pipeline/sg-banks/method/7-script-build-conclusions.py [--check]
 Spec:   pipeline/sg-banks/method/7-script-build-conclusions.md
 """
-import json, statistics, sys
+import json, sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,6 +73,10 @@ def validate(s: dict, name: str) -> list:
         errs.append("blind must be true")
     if s.get("member") != Path(name).stem:
         errs.append(f"member '{s.get('member')}' must match filename '{Path(name).stem}'")
+    fc = s.get("factor_coverage")
+    if fc is not None:
+        if not (isinstance(fc, dict) and isinstance(fc.get("score"), int) and 0 <= fc["score"] <= 100 and fc.get("comment")):
+            errs.append("factor_coverage must be {score: integer 0-100, comment: one sentence}")
     sf = s.get("suggested_factors", [])
     if not isinstance(sf, list) or len(sf) > 3:
         errs.append("suggested_factors must be a list of at most 3 entries")
@@ -86,31 +92,35 @@ def fmt_perf(v: int) -> str:
 
 
 def core(sheets, qs, member_h: str) -> list:
-    """The scorecard body (matrix + member blocks), heading level parameterized."""
-    e = [f"Council of {len(sheets)}: " + " · ".join(f"`{s['member']}`" for s in sheets)
+    """The scorecard body (per-member score table + member blocks), heading level parameterized."""
+    e = [f"Council of {len(sheets)} — scores shown **per member**, in column order: "
+         + " · ".join(f"`{s['member']}`" for s in sheets)
          + ". Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol "
          "`method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how "
-         "decisive the factor is for the thesis. Disagreement ranges are shown deliberately — they are a signal.", ""]
-    e += ["| Factor | Topic | Perf (median) | Range | Criticality (consensus) |", "|---|---|---:|---:|---|"]
+         "decisive the factor is for the thesis · factor coverage = whether these factors suffice to judge "
+         "the thesis, 0–100 (low = the frame is missing material factors). No averaging: disagreement is "
+         "shown deliberately — it is a signal.", ""]
+    e += ["| Factor | Topic | Performance | Criticality |", "|---|---|---|---|"]
     for qid, topic in qs:
         vals = [next(a for a in s["answers"] if a["q"] == qid)["performance"] for s in sheets]
         crits = [next(a for a in s["answers"] if a["q"] == qid)["criticality"] for s in sheets]
-        med = statistics.median(vals)
-        med_s = fmt_perf(int(med)) if float(med).is_integer() else f"{med:+.1f}"
-        rng = f"{fmt_perf(min(vals))}…{fmt_perf(max(vals))}" if min(vals) != max(vals) else "unanimous"
-        cmode = max(CRIT, key=lambda c: (crits.count(c), -CRIT.index(c)))
-        cs = cmode + ("" if all(c == cmode for c in crits) else f" ({' / '.join(sorted(set(crits), key=CRIT.index))})")
-        e.append(f"| {qid} | {topic} | {med_s} | {rng} | {cs} |")
+        e.append(f"| {qid} | {topic} | " + " · ".join(fmt_perf(v) for v in vals)
+                 + " | " + " · ".join(crits) + " |")
     tvals = [s["thesis"]["performance"] for s in sheets]
-    tmed = statistics.median(tvals)
-    tmed_s = fmt_perf(int(tmed)) if float(tmed).is_integer() else f"{tmed:+.1f}"
-    e += [f"| — | **Thesis overall** | **{tmed_s}** | {fmt_perf(min(tvals))}…{fmt_perf(max(tvals))} | — |", ""]
+    e.append("| — | **Thesis overall** | **" + " · ".join(fmt_perf(v) for v in tvals) + "** | — |")
+    covs = [s.get("factor_coverage") for s in sheets]
+    e.append("| — | **Factor coverage** (0–100) | "
+             + " · ".join(str(c["score"]) if c else "n/d" for c in covs) + " | — |")
+    e.append("")
 
     for s in sheets:
         e += [f"{member_h} {s['member']} — {s['harness']} ({s['model']}) · {s['date']} · scored v{s['report_version']}", ""]
         for a in s["answers"]:
             e.append(f"- **{a['q']}** · {fmt_perf(a['performance'])} · {a['criticality']} — {a['comment']}")
         e.append(f"- **Thesis** · {fmt_perf(s['thesis']['performance'])} — {s['thesis']['comment']}")
+        if s.get("factor_coverage"):
+            fc = s["factor_coverage"]
+            e.append(f"- **Factor coverage** · {fc['score']}/100 — {fc['comment']}")
         e.append("")
     suggestions = [(s["member"], f) for s in sheets for f in s.get("suggested_factors", [])]
     if suggestions:
