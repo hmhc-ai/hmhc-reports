@@ -27,34 +27,23 @@
 
 ---
 
-## How this report was made
+## Key links
 
-This report is produced by a documented, AI-run workflow, fully version-controlled in a public GitHub repository: [hmhc-ai/hmhc-reports](https://github.com/hmhc-ai/hmhc-reports). **Instruction files** (`.md`) instruct the AI how to perform each task (similar to a standard operating procedure); **data files** are plain CSV and markdown (for example recent signals or insights). The general structure of the workflow is as follows:
+This report is produced by a documented, AI-run workflow with human governance, fully version-controlled in a public GitHub repository — the repo itself is the demonstration:
 
-- `guides/` — HUMAN-OWNED — the questions & rules the AI must follow
-  - [`frame.md`](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/guides/frame.md) — the key questions we are trying to answer from the analysis
-  - `style.md` — formatting & marking rules
-- `method/` — one instruction file per step; the verb is the category (`fetch-` web · `reconcile-` cross-check · `build-` assembly · `write-` insight)
-  - [`AGENTS.md`](https://github.com/hmhc-ai/hmhc-reports/blob/main/AGENTS.md) — the ground rules every AI agent reads before working in this repo
-  - [`UPDATE.md`](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/UPDATE.md) — intelligent instruction routing of user prompts
-  - `method/ai/` — steps performed by AI models
-    - `fetch-ledger.md` → [`data/ledger.csv`](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/data/ledger.csv) — multiple agents retrieve & compare data
-    - `fetch-signals.md` → [`data/signals.md`](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/data/signals.md) — dated, sourced qualitative signals
-    - `reconcile-ledger.md` → reconciled ledger columns — human + AI cross-check of the fetched data
-    - `write-conclusions.md` → Conclusions — closed-book answers to the key questions + thesis score
-    - `build-report.md` → [**`report.md`**](https://github.com/hmhc-ai/hmhc-reports/commits/main/reports/sg-banks/report.md) — assembling this publicized report
-  - `method/code/` — steps performed by deterministic programs, no AI (same input → same output, verified by automated checks)
-    - `build_tables.py` → `data/tables.md` — all table arithmetic, regenerated from the ledger
-    - `build_charts.py` → `assets/` charts — all figures drawn from the ledger
-
-The instruction files are themselves living documents: the AI reviews and refines them run over run — a continuous self-improvement cycle, with every revision version-controlled and traceable in the repository's history.
+- [**The repository**](https://github.com/hmhc-ai/hmhc-reports) — every instruction file, data file, and revision, in the open
+- [**How it's built**](https://github.com/hmhc-ai/hmhc-reports/blob/main/HOW-ITS-BUILT.md) — the agents, the 8-stage pipeline, and the provenance discipline, for non-technical readers
+- [**The author's charter**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/HUMAN.md) — the human-owned thesis, key questions, and style rules this report must answer to
+- [**The council protocol**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/method/7-ai-write-scores.md) — how the blind multi-model council scores the questions in the Conclusions below
+- [**Pipeline health**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/meta/health.md) — live completeness & data-confidence dashboard (CI-verified)
+- [**Decisions & release history**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/index.md) — standing analytical decisions and the full changelog
 
 ---
 
 <!-- conclusions:start -->
 ## Conclusions — Council Scorecard
 
-Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/ai/write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.
+Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.
 
 | Q | Topic | Perf (median) | Range | Criticality (consensus) |
 |---|---|---:|---:|---|
@@ -76,7 +65,7 @@ Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body on
 - **Q6** · -2 · high — DBS and OCBC trade at 157-175 on P/CA and P/Rev versus HSBC = 100, requiring +9-12% annual outperformance for five years - much of the attraction story is already in the price, with UOB the near-parity exception.
 - **Thesis** · +2 — Capital attraction is verified internally and externally and monetization is adequate but not yet superior, so the thesis's driver holds while the entry price already assumes the non-NII acceleration the income data does not yet show.
 
-*The council scores the frame's questions; the full frame-format answers are in Supporting Data below. Assembled deterministically by `method/code/build_conclusions.py`. Not investment advice.*
+*The council scores the frame's questions; the full frame-format answers are in Supporting Data below. Assembled deterministically by `method/7-script-build-conclusions.py`. Not investment advice.*
 <!-- conclusions:end -->
 
 ---
@@ -120,9 +109,9 @@ Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body on
 
 **B. Monetization — Q4: NIM volatility and cyclicality**
 
-![Group NIM vs 3M SORA and Fed funds](assets/nim-vs-sora.svg)
+![Group NIM vs 3M SORA and Fed funds](assets/sg-banks-nim-vs-sora.svg)
 
-*Chart generated deterministically from `data/ledger.csv` by `method/code/build_charts.py` (CI-verified). Intra-cycle swing ≈ 53–74bps trough-to-peak — large enough that NII alone cannot anchor income, which is why the fee/wealth offset (Q3) matters. NIM's amplitude is far smaller than the policy rates' (~5pp Fed swing → ~0.7pp NIM swing): deposit franchises damp the cycle. Sources: Table 5; 1Q2026 income table.*
+*Chart generated deterministically from `data/ledger.csv` by `method/5-script-build-charts.py` (CI-verified). Intra-cycle swing ≈ 53–74bps trough-to-peak — large enough that NII alone cannot anchor income, which is why the fee/wealth offset (Q3) matters. NIM's amplitude is far smaller than the policy rates' (~5pp Fed swing → ~0.7pp NIM swing): deposit franchises damp the cycle. Sources: Table 5; 1Q2026 income table.*
 
 **B. Monetization — Q5: monetization score vs benchmark peers** — answered by the monetization block of Table 6 below (NII/OR levels, the four HSBC = 100 indices, as-stated NIM context, and the implied OR-uplift line).
 
@@ -390,7 +379,7 @@ Wealth-hub capital flows (Frame Q2) — cross-border wealth stock per hub:
 *Definition — cross-border (non-resident) wealth: **financial** wealth booked in a centre by clients who are not residents of that country. Each hub's own residents' onshore wealth is excluded — which is why the United States shows only US$1.6tn here: that is foreign clients' money booked in the US (top source region: Central & South America), not Americans' wealth. Real assets, including directly held real estate, are outside the measure — BCG's 2026 report puts global financial wealth at ~US$333tn and total net wealth incl. real assets at ~US$550tn, so the US$15.7tn cross-border pool is ≈5% of world financial wealth. Single source family: BCG Global Wealth Report booking-centre series (US$tn as printed; levels rounded to 0.1tn, so derived YoY cells can differ from BCG's stated growth rates — read the 5y trend, not single-year cells). UK basis is UK-mainland from 2022 (earlier vintages not comparable → `n/r`); UAE included as a flow competitor only (outside the bank peer set). The Global row is BCG's printed world total — the share denominator: Singapore = 12.9% of global cross-border wealth in 2023 (1.7/13.2) rising to 13.4% in 2025 (2.1/15.7). Regulator series (MAS/SFC/SBA), in their own currencies, live in `data/flows.csv` as separate measures and are never mixed into this comparison.*
 <!-- benchmarks:end -->
 
-*Provenance & caveats (metric definitions are in the block footnotes above): client assets (CA) = customer deposits + wealth AUM — renamed from "Capital Base" 2026-07-25, and broader than the wealth-industry usage, which can exclude ordinary deposits. SG-bank fundamentals from the reconciled ledger (market cap = the Px column's dated price × FY25 shares); peer fundamentals from Tier-1 filings — latest full FY per bank (RBC's FY ends 31 Oct 2025; CBA was replaced by RBC 2026-07-24: all four Australian majors divested their wealth arms, so no Australian bank discloses comparable wealth AUM — see `guides/frame.md`) — with dated market prices, fetched by an independent retriever (Perplexity harness, stamps `PxClOpus4.8`) — `pipeline/sg-banks/data/peers.csv`. Caveats: AUM definitions differ per bank (largest driver of the vCA and P/CA spread — e.g. UBS invested assets US$4.75tn dwarf its deposits); China Merchants Bank market cap is A-share-basis; Standard Chartered market cap converted GBP→USD to match its USD reporting; HSBC/StanChart prices quoted in GBX (pence) on their London listings while both report in USD. The block above is synced verbatim from `data/benchmarks.md` by `method/code/build_report_tables.py` (CI-verified).*
+*Provenance & caveats (metric definitions are in the block footnotes above): client assets (CA) = customer deposits + wealth AUM — renamed from "Capital Base" 2026-07-25, and broader than the wealth-industry usage, which can exclude ordinary deposits. SG-bank fundamentals from the reconciled ledger (market cap = the Px column's dated price × FY25 shares); peer fundamentals from Tier-1 filings — latest full FY per bank (RBC's FY ends 31 Oct 2025; CBA was replaced by RBC 2026-07-24: all four Australian majors divested their wealth arms, so no Australian bank discloses comparable wealth AUM — see the frame in `pipeline/sg-banks/HUMAN.md`) — with dated market prices, fetched by an independent retriever (Perplexity harness, stamps `PxClOpus4.8`) — `pipeline/sg-banks/data/peers.csv`. Caveats: AUM definitions differ per bank (largest driver of the vCA and P/CA spread — e.g. UBS invested assets US$4.75tn dwarf its deposits); China Merchants Bank market cap is A-share-basis; Standard Chartered market cap converted GBP→USD to match its USD reporting; HSBC/StanChart prices quoted in GBX (pence) on their London listings while both report in USD. The block above is synced verbatim from `data/benchmarks.md` by `method/6-script-build-report-tables.py` (CI-verified).*
 
 ---
 

@@ -1,15 +1,15 @@
 # Build-Health — Module SOP: pipeline completeness & confidence metrics (SG Banks)
 
-> **Artifact:** `pipeline/sg-banks/method/code/build-health.md` — the specification for `build_health.py`; keep the two in sync.
+> **Artifact:** `pipeline/sg-banks/method/2-script-build-health.md` — the specification for `build_health.py`; keep the two in sync.
 > **Status:** Active — executed by the script, not by a model.
 
 ## Module contract
 
 | | |
 |---|---|
-| **Inputs** | `data/ledger.csv` · `data/signals.md` (as-of line) · `reports/sg-banks/meta.json` · presence of `data/peers.csv` / `data/flows.csv`. |
+| **Inputs** | `data/ledger.csv` · `data/signals.md` (as-of line) · `reports/index.json` · presence of `data/peers.csv` / `data/flows.csv`. |
 | **Sole output** | `data/health.md` (human-readable status print) **+** `data/health.json` (machine-readable mirror — the data feed for a future UI). The controlled two-file exception: same content, two consumers. |
-| **Executor** | **No model — a deterministic script:** `python3 pipeline/sg-banks/method/code/build_health.py`; `--check` verifies reproducibility (CI runs it on every PR). Derived only from file contents — no clocks, no git calls. |
+| **Executor** | **No model — a deterministic script:** `python3 pipeline/sg-banks/method/2-script-build-health.py`; `--check` verifies reproducibility (CI runs it on every PR). Derived only from file contents — no clocks, no git calls. |
 | **Position** | Runs after any module changes `data/` or the report; cheap, rerun freely. |
 
 ## What it measures

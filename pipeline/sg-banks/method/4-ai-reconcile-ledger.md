@@ -33,4 +33,4 @@ Prefer **restated** figures (trap B6 in `fetch-ledger.md`) and record the origin
 
 ## Hand-off
 
-The reconciled `data/ledger.csv` feeds **Build-Tables** (`method/code/build-tables.md`). Reconcile publishes nothing to `reports/`.
+The reconciled `data/ledger.csv` feeds **Build-Tables** (`method/5-script-build-tables.md`). Reconcile publishes nothing to `reports/`.

@@ -1,12 +1,12 @@
 # SGBanks — Project Registry (state)
 
-> This is the registry of **decisions and history**: standing analytical decisions, open questions, provenance notes, and the changelog. **Live status is never duplicated here** — current version and dates live in `reports/sg-banks/meta.json`, pipeline health in [`meta/health.md`](meta/health.md), and the work queue in [`meta/gaps.md`](meta/gaps.md) (all generated, CI-verified). **The pipeline itself — modules, method files, outputs, costs, and gates — is described once, in [`UPDATE.md`](UPDATE.md) (the single source of truth and the entrypoint for any change).** Repo layout is in the root `README.md`; agent rules and commit attribution in `AGENTS.md`.
+> This is the registry of **decisions and history**: standing analytical decisions, open questions, provenance notes, and the changelog. **Live status is never duplicated here** — current version and dates live in `reports/index.json`, pipeline health in [`meta/health.md`](meta/health.md), and the work queue in [`meta/gaps.md`](meta/gaps.md) (all generated, CI-verified). **The pipeline itself — modules, method files, outputs, costs, and gates — is described once, in [`UPDATE.md`](UPDATE.md) (the single source of truth and the entrypoint for any change).** Repo layout is in the root `README.md`; agent rules and commit attribution in `AGENTS.md`.
 
 ## Provenance notes (what the generated artifacts can't tell you)
 
-- `guides/` — human-owned (`frame.md`, `style.md`); current text is authoritative, approval history in `git log pipeline/sg-banks/guides/`.
-- `data/ledger.csv` — 582 data rows; per-row provenance stamps (`YYYYMMDD-NNN <Harness><Model>`); schema v0.2 in `method/ai/fetch-ledger.md` §1. The 49 Q1-2026 rows are `single-cl` (stamp `20260720-001 CwClOpus4.8`) pending non-Claude verification (gaps P2a).
-- **Reconcile** — done for the current ledger (incl. Q1-2026 tie-outs); rules in `method/ai/reconcile-ledger.md`.
+- `HUMAN.md` — human-owned (§ Frame + § Style; merged from `guides/frame.md` + `guides/style.md` 2026-07-29); current text is authoritative, approval history in `git log --follow pipeline/sg-banks/HUMAN.md`.
+- `data/ledger.csv` — 582 data rows; per-row provenance stamps (`YYYYMMDD-NNN <Harness><Model>`); schema v0.2 in `method/3-ai-fetch-ledger.md` §1. The 49 Q1-2026 rows are `single-cl` (stamp `20260720-001 CwClOpus4.8`) pending non-Claude verification (gaps P2a).
+- **Reconcile** — done for the current ledger (incl. Q1-2026 tie-outs); rules in `method/4-ai-reconcile-ledger.md`.
 - `data/signals.md` — Scan run 2026-07-20; transcribed from the evidence set by Claude Opus 4.8, not live-searched.
 - `data/peers.csv` · `data/flows.csv` — fetched by Perplexity (Jobs #1–#3, stamps `PxClOpus4.8` — Claude-family model; cross-model independence caveat stands until Perplexity's model is switched).
 - Everything else (tables, charts, benchmarks, report Table 6 region, health, gaps) is generated and CI-gated — its status IS its `--check` result.
@@ -15,7 +15,7 @@
 
 - **Asset-attraction proxy:** customer **deposits = primary** · **CASA % = quality overlay** · **wealth AUM = FY2019+ overlay** · **total assets = leverage only**.
 - **UOB profit:** reported (attributable) headline, core in footnote.
-- **Marking:** report tables carry numbers / `n/r` / `n/d` only; derived cells unmarked (per-table formula footnote); citations as bracketed `[n]` markers; no raw HTML in published files. (Formalized in `guides/style.md`.)
+- **Marking:** report tables carry numbers / `n/r` / `n/d` only; derived cells unmarked (per-table formula footnote); citations as bracketed `[n]` markers; no raw HTML in published files. (Formalized in `HUMAN.md` § Style.)
 
 ## Open questions (carry forward)
 
@@ -29,6 +29,8 @@
 - **OCBC 2016–2018 CASA** — filled 2026-07-16 from OCBC FY-results presentations (Tier-1, GPT-5.5 non-Claude pass, computer-verified): 51.1 / 49.2 / 46.4. Currently `single-px` pending a second retriever pass. **OCBC AUM 2016–2017** — still `n/d` (not disclosed in that vintage of results decks).
 
 ## Changelog
+
+- **2026-07-29 (restructure: 8-stage pipeline, flat folders, HUMAN.md, HOW-ITS-BUILT.md; author-approved)** — The repo now reads as the process. **(1) Eight canonical stages** (1 Frame · 2 Scope · 3 Fetch · 4 Reconcile · 5 Build · 6 Assemble · 7 Score · 8 Publish) with every module renamed `<stage>-<actor>-<name>` in a single flat `method/` — alphabetical order = pipeline order; `method/ai`+`method/code` folders retired; the retired write-conclusions SOP deleted (git history keeps it). **(2) Reports flattened:** `reports/sg-banks.md` (was `reports/sg-banks/report.md`), assets at `reports/assets/sg-banks-*.svg`, and `reports.json` + `meta.json` merged into `reports/index.json` (the modules map dropped — UPDATE.md is the single module registry; publish.py maintains one file). **(3) `HUMAN.md`** replaces `guides/` — frame + style merged verbatim into one human-owned file with `frame:start/end` markers so council packets extract the Frame only (path strings inside updated for the restructure; no wording changes). **(4) Report §2 = Key links** (six absolute links: repo · HOW-ITS-BUILT.md · HUMAN.md · council protocol · health · this registry), replacing the old "How this report was made" tree, whose narrative moved to the new root **`HOW-ITS-BUILT.md`** (roles, stages with a mermaid DAG, provenance discipline). AGENTS.md gains a § Roles org chart (Author · Architect · Runner · Council). All CI gates, docs lint, and the tag workflow updated to the new paths; report content otherwise unchanged (version bump deferred to the next content release).
 
 - **2026-07-29 (GitHub Pages retired — GitHub is the primary view; author-approved)** — The TEST site generator (`.github/site/` — `build_site.py`, spec, `style.css`), its deploy workflow (`pages.yml`), the site CI build step, and the `site/*` branch scope guard (`site_scope_guard.py` + `AGENTS.md` golden rule 5) are all removed; the comparison the test deployment existed for is decided. Reports are read as GitHub-rendered markdown in-repo (native outline menu for navigation); the styled mirror at `reports.hmhc.ai` (Replit) is maintained outside this repo. No report content, data, or version changes.
 

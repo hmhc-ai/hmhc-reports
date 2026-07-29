@@ -10,22 +10,22 @@ sorts, and formats. With no sheets present it emits a deterministic
 "no council run yet" placeholder.
 
 Stage 2 (author-approved 2026-07-27): besides data/scorecard.md, the
-scorecard is injected into reports/sg-banks/report.md between the
+scorecard is injected into reports/sg-banks.md between the
 <!-- conclusions:start --> / <!-- conclusions:end --> markers — the
 Conclusions section is now fully deterministic. With no sheets present
 both targets carry a "no council run yet" placeholder.
 
-Usage:  python3 pipeline/sg-banks/method/code/build_conclusions.py [--check]
-Spec:   pipeline/sg-banks/method/code/build-conclusions.md
+Usage:  python3 pipeline/sg-banks/method/7-script-build-conclusions.py [--check]
+Spec:   pipeline/sg-banks/method/7-script-build-conclusions.md
 """
 import json, statistics, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 SCORES = ROOT / "data" / "scores"
 HEALTH = ROOT / "meta" / "health.json"
 OUT = ROOT / "data" / "scorecard.md"
-REPORT = ROOT.parents[1] / "reports" / "sg-banks" / "report.md"
+REPORT = ROOT.parents[1] / "reports" / "sg-banks.md"
 CSTART, CEND = "<!-- conclusions:start -->", "<!-- conclusions:end -->"
 
 CRIT = ["critical", "high", "medium", "low"]
@@ -82,7 +82,7 @@ def core(sheets, qs, member_h: str) -> list:
     """The scorecard body (matrix + member blocks), heading level parameterized."""
     e = [f"Council of {len(sheets)}: " + " · ".join(f"`{s['member']}`" for s in sheets)
          + ". Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol "
-         "`method/ai/write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how "
+         "`method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how "
          "decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.", ""]
     e += ["| Q | Topic | Perf (median) | Range | Criticality (consensus) |", "|---|---|---:|---:|---|"]
     for qid, topic in qs:
@@ -112,8 +112,8 @@ def build() -> tuple:
     qs = questions()
     sheets = load_sheets()
     art = ["# SG Banks — Council scorecard (generated artifact)", "",
-           "*Artifact: `pipeline/sg-banks/data/scorecard.md` — sole output of `pipeline/sg-banks/method/code/build_conclusions.py`, "
-           "aggregating the blind council sheets in `data/scores/` (see `method/ai/write-scores.md` for the protocol and rubric).*", ""]
+           "*Artifact: `pipeline/sg-banks/data/scorecard.md` — sole output of `pipeline/sg-banks/method/7-script-build-conclusions.py`, "
+           "aggregating the blind council sheets in `data/scores/` (see `method/7-ai-write-scores.md` for the protocol and rubric).*", ""]
     if not sheets:
         placeholder = ["**No council run yet** — no sheets in `data/scores/`. The scorecard populates when Write-Scores runs.", ""]
         rep = ["## Conclusions — Council Scorecard", ""] + placeholder
@@ -121,7 +121,7 @@ def build() -> tuple:
     body = core(sheets, qs, "##")
     rep = ["## Conclusions — Council Scorecard", ""] + core(sheets, qs, "###") + [
         "*The council scores the frame's questions; the full frame-format answers are in Supporting Data below. "
-        "Assembled deterministically by `method/code/build_conclusions.py`. Not investment advice.*"]
+        "Assembled deterministically by `method/7-script-build-conclusions.py`. Not investment advice.*"]
     return ("\n".join(art + body).rstrip() + "\n",
             "\n".join(rep).rstrip())
 

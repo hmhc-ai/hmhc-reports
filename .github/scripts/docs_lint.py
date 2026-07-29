@@ -2,9 +2,9 @@
 """Docs consistency lint: referenced paths must exist.
 
 Checks three reference classes that have historically drifted:
-  1. meta.json pipeline lineage — every pipeline/... or reports/... path
-     mentioned in a string value must exist.
-  2. pipeline/<slug>/UPDATE.md — every method/*, guides/*, data/* token
+  1. reports/index.json (the merged registry) — every pipeline/... or
+     reports/... path mentioned in a string value must exist.
+  2. pipeline/<slug>/UPDATE.md — every method/*, data/*, meta/* token
      must exist relative to pipeline/<slug>/.
   3. All *.md files — relative markdown link targets [text](path) must
      exist (http(s), mailto and #anchors are skipped).
@@ -29,25 +29,25 @@ def check(path_str, where):
     if not p.exists():
         errors.append(f"{where}: missing path '{path_str}'")
 
-# 1. meta.json lineage paths
-for meta in ROOT.glob("reports/*/meta.json"):
-    def walk(x):
-        if isinstance(x, dict):
-            for v in x.values():
-                walk(v)
-        elif isinstance(x, list):
-            for v in x:
-                walk(v)
-        elif isinstance(x, str):
-            for m in re.findall(r"(?:pipeline|reports)/[A-Za-z0-9_./-]+", x):
-                check(m.rstrip("./"), str(meta.relative_to(ROOT)))
-    walk(json.loads(meta.read_text()))
+# 1. reports/index.json lineage paths
+reg = ROOT / "reports" / "index.json"
+def walk(x):
+    if isinstance(x, dict):
+        for v in x.values():
+            walk(v)
+    elif isinstance(x, list):
+        for v in x:
+            walk(v)
+    elif isinstance(x, str):
+        for m in re.findall(r"(?:pipeline|reports)/[A-Za-z0-9_./-]+", x):
+            check(m.rstrip("./"), "reports/index.json")
+walk(json.loads(reg.read_text()))
 
 # 2. UPDATE.md module/guide/data tokens
 for upd in ROOT.glob("pipeline/*/UPDATE.md"):
     base = upd.parent
     text = upd.read_text()
-    for m in re.findall(r"`((?:method(?:/(?:ai|code))?|guides|data|meta)/[A-Za-z0-9_.-]+\.(?:md|py|csv))`", text):
+    for m in re.findall(r"`((?:method|data|meta)/[A-Za-z0-9_.-]+\.(?:md|py|csv))`", text):
         if f"{base.relative_to(ROOT)}/{m}" in PENDING_OUTPUTS:
             continue
         if not (base / m).exists():

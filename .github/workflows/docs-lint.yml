@@ -19,16 +19,16 @@ jobs:
       - name: Referenced paths exist
         run: python3 .github/scripts/docs_lint.py
       - name: Tables reproducible from ledger
-        run: python3 pipeline/sg-banks/method/code/build_tables.py --check
+        run: python3 pipeline/sg-banks/method/5-script-build-tables.py --check
       - name: Charts reproducible from ledger
-        run: python3 pipeline/sg-banks/method/code/build_charts.py --check
+        run: python3 pipeline/sg-banks/method/5-script-build-charts.py --check
       - name: Benchmarks reproducible from inputs
-        run: python3 pipeline/sg-banks/method/code/build_benchmarks.py --check
+        run: python3 pipeline/sg-banks/method/5-script-build-benchmarks.py --check
       - name: Health metrics reproducible from inputs
-        run: python3 pipeline/sg-banks/method/code/build_health.py --check
+        run: python3 pipeline/sg-banks/method/2-script-build-health.py --check
       - name: Gaps worklist reproducible from inputs
-        run: python3 pipeline/sg-banks/method/code/build_gaps.py --check
+        run: python3 pipeline/sg-banks/method/2-script-build-gaps.py --check
       - name: Report Table 6 region synced from benchmarks
-        run: python3 pipeline/sg-banks/method/code/build_report_tables.py --check
+        run: python3 pipeline/sg-banks/method/6-script-build-report-tables.py --check
       - name: Council scorecard reproducible from sheets
-        run: python3 pipeline/sg-banks/method/code/build_conclusions.py --check
+        run: python3 pipeline/sg-banks/method/7-script-build-conclusions.py --check

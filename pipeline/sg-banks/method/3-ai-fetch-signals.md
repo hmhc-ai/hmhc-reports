@@ -3,7 +3,7 @@
 > ## ⚠ EXPENSIVE — opt-in only
 > Runs only via `UPDATE.md`'s ask-gate + Step 2b cost gate (explicit user confirmation — full rule there). Reached this file without that confirmation? **Stop and ask first.**
 
-**Module:** Fetch-Signals · **Input:** `guides/frame.md` · **Output:** `data/signals.md` · **Depends on:** Frame
+**Module:** Fetch-Signals · **Input:** `HUMAN.md (§ Frame)` · **Output:** `data/signals.md` · **Depends on:** Frame
 **Run on:** Orchestrator or **GPT-5.6** (search-heavy — **must** use live web/search; the opposite of the closed-book Exec Summary). Non-Claude keeps it independent of the Claude-built numeric work.
 
 ## Purpose
@@ -12,7 +12,7 @@ Gather **qualitative signals** about DBS, OCBC, and UOB from earnings and media 
 
 ## Step 0 — Read the Frame first
 
-Open `guides/frame.md`. The human's big questions define what matters. Ensure every Frame question has at least one signal per bank addressing it (or an explicit "no recent disclosure"). You may gather beyond the Frame, but the Frame themes are mandatory coverage.
+Open `HUMAN.md (§ Frame)`. The human's big questions define what matters. Ensure every Frame question has at least one signal per bank addressing it (or an explicit "no recent disclosure"). You may gather beyond the Frame, but the Frame themes are mandatory coverage.
 
 ## Recency policy (the point of this module)
 
@@ -103,4 +103,4 @@ Provenance stamp matches the ledger: `YYMMDD-NNN <Harness><Model>` (Perplexity +
 If any check fails, fix and re-verify before saving `data/signals.md`.
 
 ## Hand-off
-`data/signals.md` feeds **Build-Report** (`method/ai/build-report.md`) and **Write-Conclusions** downstream. Fetch-Signals itself publishes nothing to `reports/`.
+`data/signals.md` feeds **Build-Report** (`method/6-ai-build-report.md`) and **Write-Conclusions** downstream. Fetch-Signals itself publishes nothing to `reports/`.
