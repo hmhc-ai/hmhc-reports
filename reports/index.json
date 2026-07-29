@@ -11,8 +11,8 @@
       "summary": "A reconciled, source-graded view of Singapore's three major banks as a regional wealth hub.",
       "status": "published",
       "first_published": "2026-07-16",
-      "last_updated": "2026-07-27",
-      "current_version": "2026.07.27-r2",
+      "last_updated": "2026-07-29",
+      "current_version": "2026.07.29",
       "tags": [
         "singapore",
         "banks",
@@ -25,7 +25,7 @@
         "1Q2026"
       ],
       "conclusions_status": "Conclusions = blind council scorecard (per question: performance -5..+5, criticality, one-sentence comment per member; aggregate matrix + per-member blocks), generated deterministically by 7-script-build-conclusions.py from data/scores/*.json between the conclusions markers; the 0-100 thesis score is retired. Roster (author, 2026-07-27): one seat per lab - Anthropic seat live (CwClFable5, thesis +2); GPT/Grok/Gemini seats open, to be filled by author-run sessions in each lab's own harness (Perplexity Model Council ruled inadmissible - see PERPLEXITY.md Completed Job #4). Full frame-format answers live in the report Supporting Data section",
-      "refresh_note": "2026.07.27-r2: Council architecture live (author-approved): Conclusions is now the blind council scorecard (generated deterministically from data/scores/ sheets); Key Data restructured as Supporting Data with the frame-format answers by question; the 0-100 thesis score is retired; Claude sheet live, GPT + Grok sheets queued as PERPLEXITY.md Job #4. Full release history: pipeline/sg-banks/index.md (Changelog)."
+      "refresh_note": "2026.07.29: Repo restructure release: 8-stage pipeline, GitHub-primary view, Key links, HUMAN.md charter, and the new machine-oriented Appendix E (AI reference data) giving council members the full evidence base. Full release history: pipeline/sg-banks/index.md (Changelog)."
     }
   ]
 }

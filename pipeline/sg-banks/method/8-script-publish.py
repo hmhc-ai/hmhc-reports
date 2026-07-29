@@ -41,7 +41,8 @@ GATES = [
     *[[sys.executable, str(ROOT / "method" / m), "--check"]
       for m in ("2-script-build-health.py", "2-script-build-gaps.py", "5-script-build-tables.py",
                 "5-script-build-charts.py", "5-script-build-benchmarks.py",
-                "6-script-build-report-tables.py", "7-script-build-conclusions.py")],
+                "6-script-build-report-tables.py", "6-script-build-ai-notes.py",
+                "7-script-build-conclusions.py")],
 ]
 
 
@@ -123,7 +124,7 @@ def main() -> int:
         r = subprocess.run(gate)
         if r.returncode != 0:
             sys.exit(f"GATE FAILED: {' '.join(gate)} — fix before committing the release")
-    print(f"published bookkeeping for v{ver}: meta.json + registry changelog + history.csv; all gates pass.")
+    print(f"published bookkeeping for v{ver}: reports/index.json + registry changelog + history.csv; all gates pass.")
     print("Next: review the diff, commit with trailers, open the PR; the tag is auto-created on main after merge.")
     return 0
 

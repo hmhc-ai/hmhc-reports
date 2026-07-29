@@ -40,6 +40,7 @@ Every **`fetch-` module is EXPENSIVE** (live web retrieval, token/time-intensive
 | Build-Benchmarks | `method/5-script-build-benchmarks.md` (spec) + `method/5-script-build-benchmarks.py` | `data/benchmarks.md` | cheap | Reconcile (+ Fetch-Peers/Fetch-Flows when run) |
 | Build-Report | `method/6-ai-build-report.md` | `reports/sg-banks.md` (the body) | cheap | Build-Tables, Frame, Fetch-Signals, Style |
 | Build-Report-Tables | `method/6-script-build-report-tables.md` (spec) + `method/6-script-build-report-tables.py` | benchmarks-marked region of `reports/sg-banks.md` | cheap | Build-Benchmarks |
+| Build-AI-Notes | `method/6-script-build-ai-notes.md` (spec) + `method/6-script-build-ai-notes.py` | ai-notes-marked region of `reports/sg-banks.md` (Appendix E, machine-oriented evidence) | cheap | any data change |
 | Write-Scores | `method/7-ai-write-scores.md` | `data/scores/<member>.json` (one per council member, blind) | cheap per member; author authorizes the roster | Build-Report (current body) |
 | Build-Conclusions | `method/7-script-build-conclusions.md` (spec) + `method/7-script-build-conclusions.py` | `data/scorecard.md` + the report's Conclusions markers | cheap | Write-Scores |
 | Publish | `method/8-script-publish.md` (spec) + `method/8-script-publish.py` | version/changelog/history bookkeeping in `reports/index.json` + registry + `meta/` | cheap | all gates |

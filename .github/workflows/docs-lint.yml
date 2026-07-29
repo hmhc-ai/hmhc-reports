@@ -30,5 +30,7 @@ jobs:
         run: python3 pipeline/sg-banks/method/2-script-build-gaps.py --check
       - name: Report Table 6 region synced from benchmarks
         run: python3 pipeline/sg-banks/method/6-script-build-report-tables.py --check
+      - name: Report AI-notes region synced from data files
+        run: python3 pipeline/sg-banks/method/6-script-build-ai-notes.py --check
       - name: Council scorecard reproducible from sheets
         run: python3 pipeline/sg-banks/method/7-script-build-conclusions.py --check
