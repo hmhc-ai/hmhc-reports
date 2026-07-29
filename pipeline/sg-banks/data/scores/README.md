@@ -9,6 +9,6 @@ Admissibility (see the SOP § Member identity & admissibility): one seat per lab
 verifiable (lab-native harness or pinned API model ID); sheets from multi-model routers (e.g. Perplexity
 Model Council) are inadmissible — advisory context only, never committed here.
 
-Seated: `CwClFable5.json` (Anthropic seat, Claude Code). Open seats: GPT · Grok · Gemini — to be filled by
-author-run sessions in each lab's own harness (see `PERPLEXITY.md` Completed Job #4 for why Model Council
-could not fill them).
+Seated: `CwClFable5.json` (Anthropic seat, Claude Code) · `GkGrok4.json` (xAI seat, Grok app — author-run
+lab-native seat packet, 2026-07-29). Open seats: GPT · Gemini — to be filled the same way (see `PERPLEXITY.md`
+Completed Job #4 for why Model Council could not fill them).
