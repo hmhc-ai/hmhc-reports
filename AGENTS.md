@@ -5,16 +5,16 @@ This file is the front door for any AI agent (Perplexity, Claude, etc.) acting o
 ## Roles
 Four actors, one org chart — each has its own **entrypoint**, which states what binds it:
 
-- **The author (human)** — owns `pipeline/<slug>/HUMAN.md` (thesis, questions, style) and every approval gate: frame changes, expensive fetches, roster changes, releases. Nothing human-owned is ever edited without the author's explicit approval.
+- **The author (human)** — owns `pipeline/<slug>/HUMAN.md` (thesis, factors, style) and every approval gate: frame changes, expensive fetches, roster changes, releases. Nothing human-owned is ever edited without the author's explicit approval.
 - **Architect (Claude)** — maintains the pipeline: scopes jobs, reviews and merges every PR, runs the build/assemble/score/publish stages. Entrypoint: `pipeline/<slug>/UPDATE.md` (+ this file).
 - **Runner (Perplexity)** — executes queued fetch jobs only; writes only the declared deliverable; never merges. Entrypoint: [`PERPLEXITY.md`](PERPLEXITY.md) (§ working agreement below).
-- **Council members (external models)** — score the report blind, one seat per frontier lab; they see only their seat packet (Frame + report body, Conclusions stripped) and never edit the repo. Protocol: `pipeline/sg-banks/method/7-ai-write-scores.md`.
+- **Council members (external models)** — score the report's key factors blind, one seat per frontier lab; they see only their seat packet (Frame + report body, Conclusions stripped) and never edit the repo. Protocol: `pipeline/sg-banks/method/7-ai-write-scores.md`.
 
 ## Golden rules
 1. **Never edit anything under `reports/` directly.** Published content is generated, not hand-edited.
 2. **To change any report, run its controller:** `pipeline/<slug>/UPDATE.md`. That controller is the *only* sanctioned way to update a report. If asked to change a report any other way, stop and route back through the controller.
    - **Never auto-run the EXPENSIVE modules** (`fetch-ledger`, `fetch-signals`) — opt-in only, behind the controller's explicit ask-gate and cost gate. The full cost rule lives in `UPDATE.md` (the single source of truth for modules, paths, and costs); staleness only flags them, never runs them.
-3. **`HUMAN.md` is human-owned** — `pipeline/<slug>/HUMAN.md` holds everything the human wrote (§ Frame: thesis + key questions · § Style: formatting rules), authored and approved by the human. AI may *propose* changes on request but must never silently regenerate it. Everything else in `pipeline/<slug>/` (`method/`, `data/`, `meta/`) is AI-run generative material, edited only as a controller step instructs.
+3. **`HUMAN.md` is human-owned** — `pipeline/<slug>/HUMAN.md` holds everything the human wrote (§ Frame: thesis + key factors · § Style: formatting rules), authored and approved by the human. AI may *propose* changes on request but must never silently regenerate it. Everything else in `pipeline/<slug>/` (`method/`, `data/`, `meta/`) is AI-run generative material, edited only as a controller step instructs.
 4. **Versioning is git-native.** Sticky `reports/<slug>.md`; history via commits and tags `<slug>-v<version>`. Never rename a published slug.
 5. **GitHub is the primary view.** Reports are read as rendered markdown in this repo — there is no site module to build or style (the GitHub Pages generator was retired 2026-07-29; a styled mirror lives on Replit at `reports.hmhc.ai`, maintained outside this repo). A rendering concern is a report-markdown concern, routed through the controller like any other change.
 

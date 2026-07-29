@@ -2,16 +2,59 @@
   "member": "CwClFable5",
   "harness": "Claude Code",
   "model": "Claude Fable 5 (claude-fable-5)",
-  "date": "2026-07-27",
-  "report_version": "2026.07.29",
+  "date": "2026-07-29",
+  "report_version": "2026.07.29-r2",
   "blind": true,
   "answers": [
-    {"q": "Q1", "performance": 4, "criticality": "critical", "comment": "Deposits, wealth AUM and client assets compound mid-single-digit-plus at all three banks with FY24-25 growth above the 5-year trend at DBS and OCBC - the primary driver is intact and accelerating."},
-    {"q": "Q2", "performance": 4, "criticality": "high", "comment": "Singapore's cross-border wealth grew 11.8%/yr over 2020-25, fastest of the big three hubs, lifting its share of the global offshore pool from 12.9% to 13.4% - the external attraction test passes, with Hong Kong still larger in absolute terms."},
-    {"q": "Q3", "performance": 2, "criticality": "medium", "comment": "Both income engines compounded high-single-digit over five years, but the yearly columns show NII carried by the FY22-23 rate surge and Other Revenue only partially offsetting its FY25 stall at UOB."},
-    {"q": "Q4", "performance": 0, "criticality": "medium", "comment": "NIM is highly cyclical (53-74bps trough-to-peak, now compressing as SORA falls), which neither supports nor refutes the thesis but shows NII alone cannot anchor income - the deposit franchise damping is the redeeming feature."},
-    {"q": "Q5", "performance": -1, "criticality": "high", "comment": "The SG banks out-earn HSBC on NII per deposit (110-122) but lag badly on non-NII monetization (OR_vDep 56-73 vs US peers 140-181), so the monetization half of the thesis is not yet demonstrated - though closing that gap to parity is worth +13-26% of revenue, which is the upside case."},
-    {"q": "Q6", "performance": -2, "criticality": "high", "comment": "DBS and OCBC trade at 157-175 on P/CA and P/Rev versus HSBC = 100, requiring +9-12% annual outperformance for five years - much of the attraction story is already in the price, with UOB the near-parity exception."}
+    {
+      "q": "Q1",
+      "performance": 4,
+      "criticality": "critical",
+      "comment": "Deposits, wealth AUM and client assets compound mid-single-digit-plus at all three banks with FY24-25 growth above the 5-year trend at DBS and OCBC - the primary driver is intact and accelerating."
+    },
+    {
+      "q": "Q2",
+      "performance": 4,
+      "criticality": "high",
+      "comment": "Singapore's cross-border wealth grew 11.8%/yr over 2020-25, fastest of the big three hubs, lifting its share of the global offshore pool from 12.9% to 13.4% - the external attraction test passes, with Hong Kong still larger in absolute terms."
+    },
+    {
+      "q": "Q3",
+      "performance": 2,
+      "criticality": "medium",
+      "comment": "Both income engines compounded high-single-digit over five years, but the yearly columns show NII carried by the FY22-23 rate surge and Other Revenue only partially offsetting its FY25 stall at UOB."
+    },
+    {
+      "q": "Q4",
+      "performance": 0,
+      "criticality": "medium",
+      "comment": "NIM is highly cyclical (53-74bps trough-to-peak, now compressing as SORA falls), which neither supports nor refutes the thesis but shows NII alone cannot anchor income - the deposit franchise damping is the redeeming feature."
+    },
+    {
+      "q": "Q5",
+      "performance": -1,
+      "criticality": "high",
+      "comment": "The SG banks out-earn HSBC on NII per deposit (110-122) but lag badly on non-NII monetization (OR_vDep 56-73 vs US peers 140-181), so the monetization half of the thesis is not yet demonstrated - though closing that gap to parity is worth +13-26% of revenue, which is the upside case."
+    },
+    {
+      "q": "Q6",
+      "performance": -2,
+      "criticality": "high",
+      "comment": "DBS and OCBC trade at 157-175 on P/CA and P/Rev versus HSBC = 100, requiring +9-12% annual outperformance for five years - much of the attraction story is already in the price, with UOB the near-parity exception."
+    }
   ],
-  "thesis": {"performance": 2, "comment": "Capital attraction is verified internally and externally and monetization is adequate but not yet superior, so the thesis's driver holds while the entry price already assumes the non-NII acceleration the income data does not yet show."}
+  "thesis": {
+    "performance": 2,
+    "comment": "Capital attraction is verified internally and externally and monetization is adequate but not yet superior, so the thesis's driver holds while the entry price already assumes the non-NII acceleration the income data does not yet show."
+  },
+  "suggested_factors": [
+    {
+      "name": "NII quality & capital headroom",
+      "rationale": "The report scores NII levels and cyclicality but not durability - CET1 headroom, loan-book mix and credit costs determine whether the income engine can safely expand with the client-asset base."
+    },
+    {
+      "name": "Growth by geography & product",
+      "rationale": "Factor 6 shows the price demands +9-12%/yr outperformance, yet no factor tracks where incremental growth would come from - regional expansion and entry into adjacent revenue pools are unmeasured."
+    }
+  ]
 }

@@ -2,7 +2,7 @@
 
 **Module:** Write-Scores · **Inputs:** the Frame section of `HUMAN.md` (the `frame:start`/`frame:end` region — never § Style) + the report body **excluding its Conclusions section** · **Output:** one answer sheet `data/scores/<member>.json` per council member · **Depends on:** Build-Report (a current report body)
 **Run on:** each council member independently — the **latest knowledge-work / business-analysis frontier model of each major frontier lab** (author's standing roster principle, 2026-07-27: Claude · GPT · Grok · Gemini when platform access allows). The `member`/`model` fields record the model that **actually ran, printed at run time** — never an assumed or configured name. One sheet per member per report version.
-**Changelog:** 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval). · 2026-07-27b — member identity & admissibility rules added after the Model Council incident (PERPLEXITY.md Completed Job #4).
+**Changelog:** 2026-07-29 — frame v3: questions become **Key Factors** (short names, ids Q1…Q6 retained); optional `suggested_factors` added to the sheet schema (author-approved). · 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval). · 2026-07-27b — member identity & admissibility rules added after the Model Council incident (PERPLEXITY.md Completed Job #4).
 
 ## Member identity & admissibility (hard rules)
 
@@ -20,13 +20,15 @@
 
 ## Rubric (pass to the member verbatim)
 
-For each key question in the Frame, give:
+For each key factor in the Frame, give:
 
-- **`performance`** — integer **−5 … +5**: how strongly the evidence for this question aligns with the thesis. −5 = strongly contradicts · 0 = neutral/mixed/insufficient · +5 = strongly supports.
-- **`criticality`** — one of **`critical` · `high` · `medium` · `low`**: how decisive this question is for the thesis, regardless of which way its evidence points. `critical` = if this fails, the thesis fails regardless of the other answers · `high` = materially moves the thesis · `medium` = informative context · `low` = barely bears on the thesis (a `low` consensus signals the question may not belong in the frame).
+- **`performance`** — integer **−5 … +5**: how strongly the evidence for this factor aligns with the thesis. −5 = strongly contradicts · 0 = neutral/mixed/insufficient · +5 = strongly supports.
+- **`criticality`** — one of **`critical` · `high` · `medium` · `low`**: how decisive this factor is for the thesis, regardless of which way its evidence points. `critical` = if this fails, the thesis fails regardless of the other answers · `high` = materially moves the thesis · `medium` = informative context · `low` = barely bears on the thesis (a `low` consensus signals the factor may not belong in the frame).
 - **`comment`** — **one sentence**, grounded in the supplied material.
 
-Also give a **`thesis`** line: `performance` −5 … +5 and one sentence on the thesis as a whole, weighing the questions by your own criticality judgements.
+Also give a **`thesis`** line: `performance` −5 … +5 and one sentence on the thesis as a whole, weighing the factors by your own criticality judgements.
+
+Optionally, give **`suggested_factors`** — up to **3** factors you believe are missing from the frame and material to the thesis: each a `name` (short) + `rationale` (one sentence, grounded in the supplied material). Suggestions are displayed in the scorecard; adopting one is the author's decision.
 
 ## Output — `data/scores/<member>.json`
 
@@ -44,14 +46,17 @@ Also give a **`thesis`** line: `performance` −5 … +5 and one sentence on the
     {"q": "Q1", "performance": 4, "criticality": "critical", "comment": "…"},
     {"q": "Q2", "performance": 3, "criticality": "high", "comment": "…"}
   ],
-  "thesis": {"performance": 2, "comment": "…"}
+  "thesis": {"performance": 2, "comment": "…"},
+  "suggested_factors": [
+    {"name": "…", "rationale": "…"}
+  ]
 }
 ```
 
 ## Self-checks (all must pass)
 
-1. Every frame question present exactly once; ids match the frame's numbering (`Q1`…`Q6`).
-2. Every `performance` an integer in [−5, +5]; every `criticality` from the validated list; every comment ≤ 1 sentence.
+1. Every frame factor present exactly once; ids match the frame's numbering (`Q1`…`Q6` — the historical ids are kept for score-history continuity; display names live in the frame).
+2. Every `performance` an integer in [−5, +5]; every `criticality` from the validated list; every comment ≤ 1 sentence. `suggested_factors` is optional: at most 3 entries, each with a `name` and a one-sentence `rationale`.
 3. `report_version` matches the registry (`reports/index.json`) version of the body scored.
 4. The prior Conclusions were **not** in the member's context (`blind: true` asserts this).
 

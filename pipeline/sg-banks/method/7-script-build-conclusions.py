@@ -71,6 +71,13 @@ def validate(s: dict, name: str) -> list:
         errs.append("blind must be true")
     if s.get("member") != Path(name).stem:
         errs.append(f"member '{s.get('member')}' must match filename '{Path(name).stem}'")
+    sf = s.get("suggested_factors", [])
+    if not isinstance(sf, list) or len(sf) > 3:
+        errs.append("suggested_factors must be a list of at most 3 entries")
+    else:
+        for f in sf:
+            if not (isinstance(f, dict) and f.get("name") and f.get("rationale")):
+                errs.append("each suggested factor needs a name and a rationale")
     return errs
 
 
@@ -83,8 +90,8 @@ def core(sheets, qs, member_h: str) -> list:
     e = [f"Council of {len(sheets)}: " + " · ".join(f"`{s['member']}`" for s in sheets)
          + ". Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol "
          "`method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how "
-         "decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.", ""]
-    e += ["| Q | Topic | Perf (median) | Range | Criticality (consensus) |", "|---|---|---:|---:|---|"]
+         "decisive the factor is for the thesis. Disagreement ranges are shown deliberately — they are a signal.", ""]
+    e += ["| Factor | Topic | Perf (median) | Range | Criticality (consensus) |", "|---|---|---:|---:|---|"]
     for qid, topic in qs:
         vals = [next(a for a in s["answers"] if a["q"] == qid)["performance"] for s in sheets]
         crits = [next(a for a in s["answers"] if a["q"] == qid)["criticality"] for s in sheets]
@@ -105,6 +112,12 @@ def core(sheets, qs, member_h: str) -> list:
             e.append(f"- **{a['q']}** · {fmt_perf(a['performance'])} · {a['criticality']} — {a['comment']}")
         e.append(f"- **Thesis** · {fmt_perf(s['thesis']['performance'])} — {s['thesis']['comment']}")
         e.append("")
+    suggestions = [(s["member"], f) for s in sheets for f in s.get("suggested_factors", [])]
+    if suggestions:
+        e += [f"{member_h} Council-suggested factors (not yet in the frame; adoption is the author's decision)", ""]
+        for member, f in suggestions:
+            e.append(f"- **{f['name']}** (`{member}`) — {f['rationale']}")
+        e.append("")
     return e
 
 
@@ -120,7 +133,7 @@ def build() -> tuple:
         return "\n".join(art + placeholder), "\n".join(rep).rstrip()
     body = core(sheets, qs, "##")
     rep = ["## Conclusions — Council Scorecard", ""] + core(sheets, qs, "###") + [
-        "*The council scores the frame's questions; the full frame-format answers are in Supporting Data below. "
+        "*The council scores the frame's key factors; the full frame-format analysis is in Supporting Data below. "
         "Assembled deterministically by `method/7-script-build-conclusions.py`. Not investment advice.*"]
     return ("\n".join(art + body).rstrip() + "\n",
             "\n".join(rep).rstrip())

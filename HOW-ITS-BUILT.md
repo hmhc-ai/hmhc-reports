@@ -6,10 +6,10 @@ This repo is a working demonstration of **AI-run business analysis with human go
 
 | Role | Who | What they own |
 |---|---|---|
-| **Author** | human | The charter (`pipeline/<slug>/HUMAN.md`): the thesis, the key questions, the style rules — plus every approval gate (frame changes, expensive data fetches, council roster, releases). |
+| **Author** | human | The charter (`pipeline/<slug>/HUMAN.md`): the thesis, the key factors, the style rules — plus every approval gate (frame changes, expensive data fetches, council roster, releases). |
 | **Architect** | Claude (Anthropic) | The pipeline itself: scoping work, reviewing and merging every pull request, running the build/assemble/score/publish stages. |
 | **Runner** | Perplexity | Cost-gated live-web data fetches, queued one at a time in [`PERPLEXITY.md`](PERPLEXITY.md); delivers by pull request, never merges. |
-| **Council** | one frontier model per major AI lab | Blind scoring of the report's key questions — each member sees only the questions and the report body (never the existing Conclusions, never another member's answers). |
+| **Council** | one frontier model per major AI lab | Blind scoring of the report's key factors — each member sees only the frame and the report body (never the existing Conclusions, never another member's answers). |
 
 ## The 8 stages
 
@@ -26,13 +26,13 @@ flowchart LR
     C --> P["8 Publish\n(version · changelog ·\ngates)"]
 ```
 
-1. **Frame** — the author writes the thesis and key questions in `HUMAN.md`. Human-owned: the AI proposes wording only when asked, and never edits without explicit approval.
+1. **Frame** — the author writes the thesis and key factors in `HUMAN.md`. Human-owned: the AI proposes wording only when asked, and never edits without explicit approval.
 2. **Scope** — scripts measure what the pipeline has and what's missing (`health`, `gaps`); the architect turns gaps into a queued job card. A queued card *is* the author's cost authorization.
 3. **Fetch** — live-web retrieval of source data (bank filings, industry series) into plain CSV/markdown, with per-row provenance stamps. Expensive, therefore strictly opt-in.
 4. **Reconcile** — fetched values are cross-checked (two retrievers where possible), tied out arithmetically, graded by source tier, and flagged where they disagree — disagreements are documented, never averaged away.
 5. **Build** — deterministic scripts turn the reconciled data into every table, chart, and benchmark. No AI here: same input, same output, and CI re-runs every script on every pull request to prove the published numbers match the data.
 6. **Assemble** — the AI assembles the report body from the built components; machine-synced regions (marked in the markdown) are injected by script so hand-transcription errors are structurally impossible.
-7. **Score** — the blind council: one frontier model per major lab independently scores every key question (−5…+5 alignment with the thesis, plus how decisive the question is) and the thesis overall. A script aggregates the sheets into the report's Conclusions — the median is display-only; every member's row is preserved, and disagreement is shown deliberately. The council reads the report body only — the Conclusions are stripped from its packet, so no member ever sees the previous verdict or another member's answers.
+7. **Score** — the blind council: one frontier model per major lab independently scores every key factor (−5…+5 alignment with the thesis, plus how decisive the factor is) and the thesis overall, and may suggest missing factors. A script aggregates the sheets into the report's Conclusions — the median is display-only; every member's row is preserved, and disagreement is shown deliberately. The council reads the report body only — the Conclusions are stripped from its packet, so no member ever sees the previous verdict or another member's answers.
 8. **Publish** — one script does the release bookkeeping (version, changelog, score history) and re-runs every gate. Versions are `YYYY.MM.DD`; git tags and history make every prior release reproducible.
 
 **Why this never loops:** the report is a *body* plus *generated overlay regions* (the benchmark tables, the Conclusions). The body is assembled before scoring; the council reads the body only; the scores flow back only into the overlay. Data flows one way.
