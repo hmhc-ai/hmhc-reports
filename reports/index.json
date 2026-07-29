@@ -12,7 +12,7 @@
       "status": "published",
       "first_published": "2026-07-16",
       "last_updated": "2026-07-29",
-      "current_version": "2026.07.29-r2",
+      "current_version": "2026.07.29-r3",
       "tags": [
         "singapore",
         "banks",
@@ -24,8 +24,8 @@
         "deposits",
         "1Q2026"
       ],
-      "conclusions_status": "Conclusions = blind council scorecard over the frame's Key Factors (per factor: performance -5..+5, criticality, one-sentence comment per member; optional suggested_factors; aggregate matrix + per-member blocks), generated deterministically by 7-script-build-conclusions.py from data/scores/*.json between the conclusions markers. Roster (author, 2026-07-27): one seat per lab - Anthropic seat live (CwClFable5, thesis +2); GPT/Grok/Gemini seats open, to be filled by author-run sessions in each lab's own harness (Perplexity Model Council ruled inadmissible - see PERPLEXITY.md Completed Job #4). Full frame-format analysis lives in the report Supporting Data section",
-      "refresh_note": "2026.07.29-r2: Frame v3 (author-approved): thesis tightened to a value buy-and-hold call; Key Questions become Key Factors with short open-ended names; the decision-rule section removed (criticality now carries falsifiability); council schema gains suggested_factors. Full release history: pipeline/sg-banks/index.md (Changelog)."
+      "conclusions_status": "Conclusions = blind council scorecard over the frame's Key Factors (per factor: performance -5..+5, criticality, one-sentence comment per member; optional suggested_factors; aggregate matrix + per-member blocks), generated deterministically by 7-script-build-conclusions.py from data/scores/*.json between the conclusions markers. Roster: one seat per lab - Anthropic seat live (CwClFable5, thesis +2) and xAI seat live (GkGrok4, thesis +2, author-run lab-native session); GPT and Gemini seats open via author-run seat packets (Perplexity Model Council ruled inadmissible - see PERPLEXITY.md Completed Job #4). Full frame-format analysis lives in the report Supporting Data section",
+      "refresh_note": "2026.07.29-r3: Council of 2: the xAI seat (GkGrok4, Grok 4, author-run lab-native seat packet) joins the Anthropic seat; thesis +2 unanimous, per-factor disagreement now visible (Q5 range -1 to +3). Full release history: pipeline/sg-banks/index.md (Changelog)."
     }
   ]
 }
