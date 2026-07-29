@@ -2,7 +2,7 @@
 
 > **Ground rules:** this file is a shared scratchpad for improvement ideas — the author and Claude brainstorm here, refine wording, and park thoughts. **Nothing in this file is authorized for implementation.** An idea only becomes work when the author explicitly approves it, at which point it graduates into the proper channel (a frame amendment, an `UPDATE.md`-routed change, or a `PERPLEXITY.md` job) and its entry here is marked *graduated*. Agents other than Claude: read-only.
 >
-> Standing, already-agreed roadmap items are **not** duplicated here — they live in the registry (`pipeline/sg-banks/index.md` § Open questions): peers-history delta (required-vs-delivered outperformance), council scoring architecture + frame question refactor, 2Q26 refresh bundle, `meta/history.csv` version time series, reports website on GitHub Pages.
+> Standing, already-agreed roadmap items are **not** duplicated here — they live in the registry (`pipeline/sg-banks/index.md` § Open questions): peers-history delta (required-vs-delivered outperformance), council scoring architecture + frame question refactor, 2Q26 refresh bundle, `meta/history.csv` version time series.
 
 ---
 

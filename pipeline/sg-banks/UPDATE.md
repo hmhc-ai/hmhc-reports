@@ -80,7 +80,7 @@ Always finish with **Publish** (Step 5).
 ## Step 5 — Publish (one command + PR)
 - **Run `python3 method/code/publish.py --desc "<one-sentence release note>" [--changelog "<rich changelog entry>"]`.** It computes the next version (`YYYY.MM.DD`, `-rN` for same-day re-releases), updates `reports/sg-banks/meta.json` (`current_version`, `last_updated`, `refresh_note`), inserts the changelog entry at the top of the registry, appends the release row to `meta/history.csv` (version, date, thesis score, health metrics — the score/quality time series), and runs every CI gate. `--dry-run` previews.
 - **Narrative convention:** the registry changelog is the **canonical release history**; `refresh_note` carries only the current release's note plus a pointer; commit messages and PR bodies stay terse and defer to the changelog.
-- **Only a change to the published report warrants a version bump** — pipeline/meta/site-only changes ship without one (and skip publish.py).
+- **Only a change to the published report warrants a version bump** — pipeline/meta-only changes ship without one (and skip publish.py).
 - Commit (trailers per `AGENTS.md` § Commit attribution), open the PR, merge on green CI. The tag `sg-banks-v<version>` is **auto-created on `main` by the tag-version GitHub Action** when `meta.json`'s version changes — never tag manually.
 
 ## Step 6 — Report back

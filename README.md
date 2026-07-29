@@ -1,6 +1,6 @@
 # HMHC Reports
 
-Source of record for the analyst reports published at **[reports.hmhc.ai](https://reports.hmhc.ai)** (GitHub Pages preview: **[hmhc-ai.github.io/hmhc-reports](https://hmhc-ai.github.io/hmhc-reports/)** — rebuilt from this repo on every merge).
+The reports are published and read **directly in this repo** — GitHub's native markdown rendering is the primary view (use the outline menu at the top-right of any report for section navigation). A styled mirror lives at **[reports.hmhc.ai](https://reports.hmhc.ai)**.
 
 Each report is a self-contained, source-graded business analysis produced with a disciplined, AI-assisted **modular pipeline**. Reports are **sticky** (a stable URL always shows the latest version) and **versioned** (full history in git commits, tags, and releases).
 
