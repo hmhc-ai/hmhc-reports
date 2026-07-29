@@ -54,7 +54,7 @@ Council of 2 — scores shown **per member**, in column order: `CwClFable5` · `
 | Q5 | Client-asset monetization vs peers | -1 · +3 | high · high |
 | Q6 | Valuation premium vs peers | -2 · -1 | high · high |
 | — | **Thesis overall** | **+2 · +2** | — |
-| — | **Factor coverage** (0–100) | 75 · n/d | — |
+| — | **Factor coverage** (0–100) | 75 · 72 | — |
 
 ### CwClFable5 — Claude Code (Claude Fable 5 (claude-fable-5)) · 2026-07-29 · scored v2026.07.29-r2
 
@@ -76,6 +76,7 @@ Council of 2 — scores shown **per member**, in column order: `CwClFable5` · `
 - **Q5** · +3 · high — NII-to-deposit ratios sit above the HSBC benchmark while other-revenue ratios lag, leaving quantified uplift potential of 13–26 % of revenue at parity that the thesis correctly frames as optionality on an already-attracted base.
 - **Q6** · -1 · high — DBS and OCBC trade at material premiums on P/CA and P/Rev that would require high single- to double-digit annual outperformance for five-year convergence, while UOB sits nearer parity; the group is therefore not uniformly a deep-value proposition at current prices.
 - **Thesis** · +2 — Primary capital-attraction factors (client-asset growth and Singapore’s rising share of global offshore wealth) supply a durable long-term compounding base that outweighs secondary cyclical NIM pressure and the elevated valuations of DBS and OCBC.
+- **Factor coverage** · 72/100 — The six factors capture the core attraction-monetization-valuation chain that underpins the long-term thesis, yet leave material gaps on credit-risk trajectory, capital-return sustainability, and intra-group competitive positioning that can independently determine outcomes over a 10–15-year horizon.
 
 ### Council-suggested factors (not yet in the frame; adoption is the author's decision)
 

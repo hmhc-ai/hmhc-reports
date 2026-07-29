@@ -47,6 +47,10 @@
     "performance": 2,
     "comment": "Primary capital-attraction factors (client-asset growth and Singapore’s rising share of global offshore wealth) supply a durable long-term compounding base that outweighs secondary cyclical NIM pressure and the elevated valuations of DBS and OCBC."
   },
+  "factor_coverage": {
+    "score": 72,
+    "comment": "The six factors capture the core attraction-monetization-valuation chain that underpins the long-term thesis, yet leave material gaps on credit-risk trajectory, capital-return sustainability, and intra-group competitive positioning that can independently determine outcomes over a 10–15-year horizon."
+  },
   "suggested_factors": [
     {
       "name": "Asset quality & credit-cost trajectory",
