@@ -47,6 +47,10 @@
     "performance": 2,
     "comment": "Capital attraction is verified internally and externally and monetization is adequate but not yet superior, so the thesis's driver holds while the entry price already assumes the non-NII acceleration the income data does not yet show."
   },
+  "factor_coverage": {
+    "score": 75,
+    "comment": "The six factors cover attraction, monetization and price well, but nothing scores the durability of the income engine (credit quality, capital headroom) or where the next decade of growth comes from - enough to form an opinion, not enough to hold it with confidence."
+  },
   "suggested_factors": [
     {
       "name": "NII quality & capital headroom",
