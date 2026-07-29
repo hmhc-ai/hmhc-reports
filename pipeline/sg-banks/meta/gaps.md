@@ -1,6 +1,6 @@
 # SG Banks — Fetch Gaps (smart-update worklist)
 
-*Artifact: `pipeline/sg-banks/meta/gaps.md` (+ `gaps.json`) — sole output of `pipeline/sg-banks/method/code/build_gaps.py`. Each gap is a surgical fetch job: exact rows, the SOP that covers it, and a size estimate — so updates are deltas, not full refreshes. Queue jobs for the external runner via `PERPLEXITY.md`.*
+*Artifact: `pipeline/sg-banks/meta/gaps.md` (+ `gaps.json`) — sole output of `pipeline/sg-banks/method/2-script-build-gaps.py`. Each gap is a surgical fetch job: exact rows, the SOP that covers it, and a size estimate — so updates are deltas, not full refreshes. Queue jobs for the external runner via `PERPLEXITY.md`.*
 
 | # | Gap | Size | SOP | Priority |
 |---|---|---:|---|---|

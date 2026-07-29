@@ -1,7 +1,7 @@
 {
   "p1_never_retrieved": {
     "priority": 1,
-    "sop": "method/ai/fetch-ledger.md",
+    "sop": "method/3-ai-fetch-ledger.md",
     "rows": [
       "RATE_SORA_YE_2016",
       "RATE_SORA_AVG_2016",
@@ -17,7 +17,7 @@
   },
   "p2a_q1_2026_single_claude": {
     "priority": 2,
-    "sop": "method/ai/fetch-ledger.md (verification pass, non-Claude)",
+    "sop": "method/3-ai-fetch-ledger.md (verification pass, non-Claude)",
     "rows": [
       "DBS_NII_Q1-2026",
       "DBS_TotalIncome_Q1-2026",
@@ -71,7 +71,7 @@
   },
   "p2b_single_px_history": {
     "priority": 2,
-    "sop": "method/ai/fetch-ledger.md (verification pass, Claude or non-Perplexity)",
+    "sop": "method/3-ai-fetch-ledger.md (verification pass, Claude or non-Perplexity)",
     "families": {
       "CustomerDeposits": 30,
       "TotalAssets": 30,
@@ -88,7 +88,7 @@
   },
   "p2c_single_cl_other": {
     "priority": 3,
-    "sop": "method/ai/fetch-ledger.md (verification pass, non-Claude)",
+    "sop": "method/3-ai-fetch-ledger.md (verification pass, non-Claude)",
     "families": {
       "CASAratio": 27,
       "CurrentAccts": 20,

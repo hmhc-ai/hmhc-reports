@@ -3,7 +3,7 @@
 > ## ⚠ EXPENSIVE — opt-in only
 > Runs only via `UPDATE.md`'s ask-gate + Step 2b cost gate (explicit user confirmation — full rule there). Reached this file without that confirmation? **Stop and ask first.**
 
-**Module:** Fetch-Peers · **Input:** `guides/frame.md` (peer set + Q5/Q6 definitions) · **Output:** `data/peers.csv` · **Depends on:** Frame
+**Module:** Fetch-Peers · **Input:** `HUMAN.md (§ Frame)` (peer set + Q5/Q6 definitions) · **Output:** `data/peers.csv` · **Depends on:** Frame
 **Run on:** a **non-Claude, search-grounded** model (Perplexity Computer / GPT-class with live web) — by design, for independence from the Claude-built pipeline.
 
 ## Purpose
@@ -12,7 +12,7 @@ Fill the inputs for Frame **Q5** (monetization indices) and **Q6** (four valuati
 
 ## Banks
 
-The **7 approved peers** in `guides/frame.md` (HSBC — the index bank — UBS, JPMorgan Chase, Bank of America, Standard Chartered, China Merchants Bank, RBC) **and the 3 SG banks** (DBS, OCBC, UOB — fetched again here deliberately, as an external cross-check against the ledger; the reconcile step compares them). *(Commonwealth Bank was replaced by RBC on 2026-07-24 — Australia's majors all divested wealth, see the frame's peer-table note; remove any CBA rows when updating `peers.csv`.)*
+The **7 approved peers** in `HUMAN.md (§ Frame)` (HSBC — the index bank — UBS, JPMorgan Chase, Bank of America, Standard Chartered, China Merchants Bank, RBC) **and the 3 SG banks** (DBS, OCBC, UOB — fetched again here deliberately, as an external cross-check against the ledger; the reconcile step compares them). *(Commonwealth Bank was replaced by RBC on 2026-07-24 — Australia's majors all divested wealth, see the frame's peer-table note; remove any CBA rows when updating `peers.csv`.)*
 
 ## Metrics per bank (latest full FY; state the FY used)
 
@@ -49,4 +49,4 @@ Tier 1 — the bank's own annual report / FY results release / regulatory filing
 
 ## Hand-off
 
-`data/peers.csv` feeds **Build-Benchmarks** (`method/code/build_benchmarks.py`), which produces the indexed scores consumed by **Write-Conclusions** (Q5/Q6). Fetch-Peers publishes nothing to `reports/`.
+`data/peers.csv` feeds **Build-Benchmarks** (`method/5-script-build-benchmarks.py`), which produces the indexed scores consumed by **Write-Conclusions** (Q5/Q6). Fetch-Peers publishes nothing to `reports/`.

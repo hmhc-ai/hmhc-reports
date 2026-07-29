@@ -1,6 +1,6 @@
 # Build-Charts — Module SOP: deterministic chart generation (SG Banks)
 
-> **Artifact:** `pipeline/sg-banks/method/code/build-charts.md` — the specification for `build_charts.py`; keep the two in sync.
+> **Artifact:** `pipeline/sg-banks/method/5-script-build-charts.md` — the specification for `build_charts.py`; keep the two in sync.
 > **Status:** Active — executed by the script, not by a model.
 
 ## Module contract
@@ -8,8 +8,8 @@
 | | |
 |---|---|
 | **Inputs** | Reconciled `pipeline/sg-banks/data/ledger.csv` (Reconcile must be complete for every consumed row). |
-| **Sole output** | SVG chart assets in `reports/sg-banks/assets/` (currently `nim-vs-sora.svg`). |
-| **Executor** | **No model — a deterministic script:** `pipeline/sg-banks/method/code/build_charts.py`. Run `python3 pipeline/sg-banks/method/code/build_charts.py` to regenerate; `--check` verifies the committed SVGs byte-for-byte against the ledger (CI runs this on every PR). Hand-written SVG — no plotting libraries, no timestamps, no AI. |
+| **Sole output** | SVG chart assets in `reports/assets/` (currently `nim-vs-sora.svg`). |
+| **Executor** | **No model — a deterministic script:** `pipeline/sg-banks/method/5-script-build-charts.py`. Run `python3 pipeline/sg-banks/method/5-script-build-charts.py` to regenerate; `--check` verifies the committed SVGs byte-for-byte against the ledger (CI runs this on every PR). Hand-written SVG — no plotting libraries, no timestamps, no AI. |
 | **Idempotence** | Rerun regenerates the assets in place; same ledger in → same SVG out. Git retains history. |
 | **Position** | `… → Reconcile → Build-Charts → Build-Report → …` (parallel to Build-Tables). Build-Report embeds the assets by relative path. |
 

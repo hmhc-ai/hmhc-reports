@@ -2,25 +2,25 @@
 """Build-Charts — deterministic chart generation for sg-banks.
 
 Reads the reconciled ledger (data/ledger.csv) and generates hand-written
-SVG charts into reports/sg-banks/assets/. Same ledger in -> same SVG out.
+SVG charts into reports/assets/. Same ledger in -> same SVG out.
 No AI, no plotting libraries, no timestamps.
 
 Charts:
-  nim-vs-sora.svg — group NIM per bank vs 3M SORA (FY avg) and effective
+  sg-banks-nim-vs-sora.svg — group NIM per bank vs 3M SORA (FY avg) and effective
                     Fed funds (FY avg), FY2016-2025 + 2026 latest.
 
-Usage:  python3 pipeline/sg-banks/method/code/build_charts.py [--check]
+Usage:  python3 pipeline/sg-banks/method/5-script-build-charts.py [--check]
         --check: regenerate to memory and compare byte-for-byte against
                  the committed SVG; exit non-zero on any difference.
 
-Spec: pipeline/sg-banks/method/code/build-charts.md.
+Spec: pipeline/sg-banks/method/5-script-build-charts.md.
 """
 import csv, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]              # pipeline/sg-banks
+ROOT = Path(__file__).resolve().parents[1]              # pipeline/sg-banks
 LEDGER = ROOT / "data" / "ledger.csv"
-ASSETS = ROOT.parents[1] / "reports" / "sg-banks" / "assets"
+ASSETS = ROOT.parents[1] / "reports" / "assets"
 
 T = {(r["bank"], r["metric"], r["period"]): (r["reconciled_value"] or "").strip()
      for r in csv.DictReader(open(LEDGER, newline="", encoding="utf-8"))}
@@ -99,13 +99,13 @@ def build_svg():
     return "\n".join(e) + "\n"
 
 if __name__ == "__main__":
-    out = ASSETS / "nim-vs-sora.svg"
+    out = ASSETS / "sg-banks-nim-vs-sora.svg"
     content = build_svg()
     if "--check" in sys.argv:
         if out.read_text(encoding="utf-8") == content:
-            print("CHECK OK: nim-vs-sora.svg reproducible from ledger")
+            print("CHECK OK: sg-banks-nim-vs-sora.svg reproducible from ledger")
         else:
-            sys.exit("CHECK FAIL: committed nim-vs-sora.svg differs from ledger-generated output")
+            sys.exit("CHECK FAIL: committed sg-banks-nim-vs-sora.svg differs from ledger-generated output")
     else:
         ASSETS.mkdir(parents=True, exist_ok=True)
         out.write_text(content, encoding="utf-8")

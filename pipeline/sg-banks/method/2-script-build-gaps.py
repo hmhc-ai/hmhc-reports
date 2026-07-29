@@ -9,14 +9,14 @@ Purpose: enable SURGICAL fetch jobs (delta updates) instead of expensive
 full refreshes — each gap names exactly which rows need work, the SOP that
 covers it, and a job-size estimate. Deterministic: file contents only.
 
-Usage:  python3 pipeline/sg-banks/method/code/build_gaps.py [--check]
-Spec:   pipeline/sg-banks/method/code/build-gaps.md
+Usage:  python3 pipeline/sg-banks/method/2-script-build-gaps.py [--check]
+Spec:   pipeline/sg-banks/method/2-script-build-gaps.md
 """
 import csv, json, sys
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 METADIR = ROOT / "meta"
 
@@ -47,23 +47,23 @@ pending_outputs = [name for name, f in (("fetch-flows → data/flows.csv", DATA 
 
 gaps = {
     "p1_never_retrieved": {
-        "priority": 1, "sop": "method/ai/fetch-ledger.md",
+        "priority": 1, "sop": "method/3-ai-fetch-ledger.md",
         "rows": p1, "count": len(p1),
         "note": "n/r cells — retrievable from Tier-1 but never fetched; smallest possible job",
     },
     "p2a_q1_2026_single_claude": {
-        "priority": 2, "sop": "method/ai/fetch-ledger.md (verification pass, non-Claude)",
+        "priority": 2, "sop": "method/3-ai-fetch-ledger.md (verification pass, non-Claude)",
         "rows": q126, "count": len(q126),
         "note": "the whole 1Q2026 interim block is one Claude pass — a non-Claude re-fetch upgrades it to dual-verified; "
                 "consider bundling with the 2Q26 refresh (see calendar)",
     },
     "p2b_single_px_history": {
-        "priority": 2, "sop": "method/ai/fetch-ledger.md (verification pass, Claude or non-Perplexity)",
+        "priority": 2, "sop": "method/3-ai-fetch-ledger.md (verification pass, Claude or non-Perplexity)",
         "families": dict(sorted(px_fam.items(), key=lambda kv: -kv[1])), "count": sum(px_fam.values()),
         "note": "FY-history cells filled by one retriever only (px) — grouped by metric family for batch-sized jobs",
     },
     "p2c_single_cl_other": {
-        "priority": 3, "sop": "method/ai/fetch-ledger.md (verification pass, non-Claude)",
+        "priority": 3, "sop": "method/3-ai-fetch-ledger.md (verification pass, non-Claude)",
         "families": dict(sorted(other_cl.items(), key=lambda kv: -kv[1])), "count": sum(other_cl.values()),
         "note": "non-1Q26 cells filled by the Claude retriever only",
     },
@@ -81,7 +81,7 @@ gaps = {
 
 def md():
     e = ["# SG Banks — Fetch Gaps (smart-update worklist)", "",
-         "*Artifact: `pipeline/sg-banks/meta/gaps.md` (+ `gaps.json`) — sole output of `pipeline/sg-banks/method/code/build_gaps.py`. "
+         "*Artifact: `pipeline/sg-banks/meta/gaps.md` (+ `gaps.json`) — sole output of `pipeline/sg-banks/method/2-script-build-gaps.py`. "
          "Each gap is a surgical fetch job: exact rows, the SOP that covers it, and a size estimate — so updates are deltas, "
          "not full refreshes. Queue jobs for the external runner via `PERPLEXITY.md`.*", "",
          "| # | Gap | Size | SOP | Priority |", "|---|---|---:|---|---|",

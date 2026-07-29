@@ -1,11 +1,16 @@
-# sg-banks — Frame
+# HUMAN.md — the author's charter for SG Banks
 
-> This document contains the thesis and key questions the report seeks to answer. The HUMAN authors and approves the file; the AGENT proposes wording. Each key question is **scored in the report's Conclusions by a blind multi-model council** (per question: performance −5…+5 vs the thesis · criticality `critical/high/medium/low` · a one-sentence comment per member; protocol in `method/ai/write-scores.md`) — the reader draws their own conclusions from the members' answers. The questions are **answered in full in the report's Supporting Data section**, question by question, in the formats specified below.
+> **Human-owned — the single file containing everything the human wrote for this report.** The author writes and approves this file; AI may *propose* wording on request but must never edit it without the author's explicit approval, and never silently regenerate it. Everything else in `pipeline/sg-banks/` is agent-made. (Merged from `guides/frame.md` + `guides/style.md`, 2026-07-29 — content carried over verbatim; only file paths updated for the restructure.) Scripts and council packets extract the Frame section via the `frame:start`/`frame:end` markers — council members see the Frame only, never the Style section.
 
-## Thesis
+<!-- frame:start -->
+## Frame
+
+> This document contains the thesis and key questions the report seeks to answer. The HUMAN authors and approves the file; the AGENT proposes wording. Each key question is **scored in the report's Conclusions by a blind multi-model council** (per question: performance −5…+5 vs the thesis · criticality `critical/high/medium/low` · a one-sentence comment per member; protocol in `method/7-ai-write-scores.md`) — the reader draws their own conclusions from the members' answers. The questions are **answered in full in the report's Supporting Data section**, question by question, in the formats specified below.
+
+### Thesis
 Over a **10–15 year** horizon, Singapore keeps attracting and growing the wealth — deposits and AUM — that the world parks and moves through it, and DBS, OCBC and UOB monetize that growing capital base into income and are valued accordingly. The fundamental driver is **capital attraction**: as long as deposits and wealth AUM keep growing (capital continuing to move into Singapore), the banks will find a way to monetize it — rates and spreads move up and down, and new products get created — much as far larger global banks already earn on, and are valued on, multi-trillion deposit bases. The question for a **core asset allocation** is whether that capital attraction continues, and if so, to what extent it is already in the price.
 
-## Key Questions
+### Key Questions
 
 **A. Capital attraction — the primary driver**
 
@@ -21,7 +26,7 @@ Over a **10–15 year** horizon, Singapore keeps attracting and growing the weal
    *(Format: `Bank_Metric: S$bn, 5y-CAGR %, FY25 %, FY24 %, FY23 %, FY22 %` — metrics per bank: NII and OR. Each `FYxx %` = that FY's YoY growth. OR = total income − NII.)*
 
 4. How volatile and cyclical is NIM?
-   *(Format: **line chart** — group NIM per bank vs **3M SORA (FY avg)** and **effective Fed funds (FY avg)** (theoretical Fed → SORA → NIM transmission), FY2016–25 + latest, generated deterministically from the ledger (`method/code/build_charts.py` → `reports/sg-banks/assets/nim-vs-sora.svg`); plus one or two sentences on the swing — trough → peak → latest — and the group pattern.)*
+   *(Format: **line chart** — group NIM per bank vs **3M SORA (FY avg)** and **effective Fed funds (FY avg)** (theoretical Fed → SORA → NIM transmission), FY2016–25 + latest, generated deterministically from the ledger (`method/5-script-build-charts.py` → `reports/assets/sg-banks-nim-vs-sora.svg`); plus one or two sentences on the swing — trough → peak → latest — and the group pattern.)*
 
 5. What is the monetization score of the SG banks versus benchmark peers?
    *(Format: **one table**, SG banks + all peers, latest available FY:
@@ -45,7 +50,7 @@ Over a **10–15 year** horizon, Singapore keeps attracting and growing the weal
    `Bank | Price (local ccy/share, as-of date) | P/CA | req %/yr | P/Rev | req %/yr | P/E | req %/yr | P/B | req %/yr`
    The Price column is the staleness/relevance marker: each bank's local per-share price with the date it was taken (the same dated market data behind its market cap). Comment on whether the spread between DBS, OCBC and UOB is justified by fundamentals.)*
 
-## Benchmark peer set (used by Q5 & Q6)
+### Benchmark peer set (used by Q5 & Q6)
 
 **Selection criteria:** universal/commercial banks in the same category as the SG banks — large retail deposit bases **and** substantive wealth-management arms (wealth AUM ≳ US$500bn where disclosed) — drawn from distinct wealth-hub or major-banking jurisdictions. Pure investment banks and pure asset/wealth managers are excluded.
 
@@ -61,5 +66,20 @@ Over a **10–15 year** horizon, Singapore keeps attracting and growing the weal
 
 *Australia excluded (decided 2026-07-24, replacing Commonwealth Bank with RBC): all four Australian majors divested their wealth arms (CBA → Colonial First State, NAB → MLC, ANZ → IOOF/Zurich, Westpac → BT exit), so no Australian bank discloses a comparable wealth AUM — itself a finding: Australia's banks exited the wealth flywheel the SG banks are building.*
 
-## Decision rule
+### Decision rule
 The decisive signal is capital-attraction momentum: if deposit and wealth-AUM growth stalls or reverses — capital no longer moving into Singapore — the narrative and the premium die with it, and the asset is not allocated regardless of the other answers.
+
+<!-- frame:end -->
+
+---
+
+## Style
+
+> Formatting & marking rules the build must follow. **I own these rules; AI applies them.** Seeded from the report's existing conventions — refine as you like.
+
+- **Currency:** every series in its reporting currency, never FX-converted. SG-bank series are SGD (no conversion, no ADRs); cross-hub macro in USD as sourced; peer financials in each bank's local reporting currency.
+- **Number formats:** deposits & assets in billions (no decimals); revenue & profit in billions (1 decimal); margins and ratios as percentages.
+- **Marking:** table cells carry a number, `n/r` (not retrieved), or `n/d` (not disclosed) only. Derived cells (ratios, CAGRs, valuations) are unmarked; each table gets a formula footnote.
+- **Citations:** bracketed `[n]` markers (superscript substitute), keyed to a per-table or per-section source list. **No raw HTML** (`<sub>`, `<sup>`, …) in published files — the site renders pure markdown only; notes/footnotes are italic paragraphs under their table or answer.
+- **Restatements / adjustments:** flagged in a footnote, never silently baked into a figure.
+- **Tone:** neutral and descriptive — report the finding, don't sell it. Every report ends with "Not investment advice."

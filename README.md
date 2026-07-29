@@ -7,40 +7,44 @@ Each report is a self-contained, source-graded business analysis produced with a
 ## Layout
 
 ```
-reports/      Published, web-facing reports. The website reads only this.
-  <slug>/     One folder per report series; the folder name is the URL slug.
-    report.md       The current report (always the latest); its Conclusions section
-                    lives inside it, between regeneration markers.
-    meta.json       Title, summary, status, dates, version, pipeline lineage.
-    assets/         Charts and images for this report.
+reports/      The published reports — what a reader opens.
+  <slug>.md         One file per report (e.g. sg-banks.md), always the latest
+                    version; generated regions (tables, Conclusions) live
+                    between markers inside it.
+  index.json        Registry of all reports: title, status, dates, version,
+                    current release note.
+  assets/           Charts and images (<slug>-*.svg).
 
 pipeline/     How each report is made. Not published.
   <slug>/
     UPDATE.md       Controller — the single entrypoint for any change, and the
                     single source of truth for modules, method files, and costs.
-    index.md        Living registry of state: artifact statuses, standing
-                    decisions, open questions, changelog.
-    guides/         Human-owned: frame.md (thesis + key questions the report
-                    must answer) and style.md (formatting & marking rules).
-    method/         One instruction file per module, named <verb>-<artifact>.md;
-      ai/           steps performed by AI models (fetch-, reconcile-, write-, build-).
-      code/         steps performed by deterministic programs (build_tables.py) — no AI.
-    data/           Working data: ledger.csv (reconciliation master),
-                    signals.md (qualitative signals), tables.md (generated tables).
+    HUMAN.md        Human-owned — everything the human wrote: § Frame (thesis +
+                    key questions) and § Style (formatting & marking rules).
+    index.md        Registry of decisions and history: standing decisions,
+                    open questions, changelog.
+    method/         One file per pipeline step, named <stage>-<actor>-<name> so
+                    alphabetical order = pipeline order: 2-script-build-gaps.py,
+                    3-ai-fetch-peers.md, … 8-script-publish.py. "ai" steps run
+                    on AI models; "script" steps are deterministic programs
+                    (each .py pairs with a same-stem .md spec).
+    data/           Working data: ledger.csv (reconciliation master), peers.csv,
+                    flows.csv, signals.md, generated tables/benchmarks, and
+                    scores/ (the blind council answer sheets).
     meta/           Pipeline-about-itself: health.md/json (completeness &
-                    confidence metrics), gaps.md/json (smart-update worklist).
+                    confidence), gaps.md/json (worklist), history files.
 
-reports.json  Master index of all series (the site's landing-page feed).
-PERPLEXITY.md Job card for the external fetch runner (see AGENTS.md).
-IDEAS.md      Author ↔ Claude improvement brainstorm — nothing in it is
-              authorized for implementation until explicitly approved.
+HOW-ITS-BUILT.md  The outsider's tour: agents, stages, provenance, council.
+PERPLEXITY.md     Job card for the external fetch runner (see AGENTS.md).
+IDEAS.md          Author ↔ Claude improvement brainstorm — nothing in it is
+                  authorized for implementation until explicitly approved.
 ```
 
 ## Pipeline
 
-The flow is linear: **Frame (human guide) → Fetch-Ledger ‖ Fetch-Signals → Reconcile → Build-Tables → Build-Report → Write-Conclusions → Publish**, with the human-owned **Style** guide consumed by Build-Tables and Build-Report. The method **verb is the execution category**: `fetch-` = live web (expensive, opt-in) · `reconcile-` = human+AI cross-check · `build-` = assembly · `write-` = insight/synthesis; `method/ai/` steps run on AI models, `method/code/` steps are deterministic programs. Every module has one SOP in `method/`, explicit inputs, one output, and is **idempotent** (rerunning overwrites its output; git retains history).
+Eight fixed stages — **1 Frame (human) → 2 Scope → 3 Fetch → 4 Reconcile → 5 Build → 6 Assemble → 7 Score → 8 Publish** — with every module belonging to exactly one stage and the stage number leading its filename. Fetch stages are **expensive** (live web retrieval) and strictly opt-in behind a cost gate; the Score stage is a blind multi-model council. Every module has one SOP in `method/`, explicit inputs, one output, and is **idempotent** (rerunning overwrites its output; git retains history). The full narrative with a process diagram is in [`HOW-ITS-BUILT.md`](HOW-ITS-BUILT.md).
 
-The module table — method files, outputs, costs, dependencies, and the cost gates for the **expensive** `fetch-` modules (live web retrieval, opt-in only) — lives in **`pipeline/<slug>/UPDATE.md`**, the controller every change must route through. Do not duplicate it here.
+The module table — method files, outputs, costs, dependencies, and the cost gates — lives in **`pipeline/<slug>/UPDATE.md`**, the controller every change must route through. Do not duplicate it here.
 
 ## Reports
 
@@ -50,10 +54,10 @@ The module table — method files, outputs, costs, dependencies, and the cost ga
 
 ## Adding a new report
 
-1. Create `reports/<slug>/` with `report.md`, `meta.json`, and an `assets/` folder.
-2. Create `pipeline/<slug>/` with `UPDATE.md`, `index.md`, `guides/` (`frame.md`, `style.md`), `method/` (the module SOPs), and `data/`.
-3. Add the series to `reports.json`.
-4. Commit, then tag the version: `git tag <slug>-v<version>`.
+1. Create `reports/<slug>.md` (the report) and put its charts in `reports/assets/` as `<slug>-*.svg`.
+2. Create `pipeline/<slug>/` with `UPDATE.md`, `HUMAN.md`, `index.md`, `method/` (the stage-numbered module SOPs), and `data/`.
+3. Add the report's entry to `reports/index.json`.
+4. Commit and merge; the tag `<slug>-v<version>` is auto-created on `main` by the tag-version workflow.
 
 ## Versioning
 

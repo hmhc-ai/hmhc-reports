@@ -1,7 +1,7 @@
 # sg-banks — UPDATE (ENTRYPOINT controller)
 
 > **This is the single entrypoint for any change to the sg-banks report.**
-> Do not edit `reports/sg-banks/*` directly. Follow Steps 1–6 **in order**, **stop at the Step 2 gate to ask the user**, and **never auto-run an EXPENSIVE module** (see the cost rule below). Never assume which modules to run.
+> Do not edit `reports/sg-banks.md` (or anything under `reports/`) directly. Follow Steps 1–6 **in order**, **stop at the Step 2 gate to ask the user**, and **never auto-run an EXPENSIVE module** (see the cost rule below). Never assume which modules to run.
 
 ## ⚠ Cost rule (read first)
 Every **`fetch-` module is EXPENSIVE** (live web retrieval, token/time-intensive): **`fetch-ledger`**, **`fetch-signals`**, **`fetch-flows`**, **`fetch-peers`**. They are **opt-in only**:
@@ -9,51 +9,56 @@ Every **`fetch-` module is EXPENSIVE** (live web retrieval, token/time-intensive
 - They run **only** when BOTH are true: (1) the user **explicitly names** the module, and (2) the user **reconfirms at the cost gate** (Step 2b) in chat.
 - No explicit confirmation ⇒ skip that module and continue with the rest.
 
-## Guides (human-owned) vs Modules (AI-run)
+## HUMAN.md (human-owned) vs Modules (agent-run)
 
-**Guides — the human owns these; AI only advises.** Constrain the modules; never auto-generated.
+**`HUMAN.md`** is the single file containing everything the human wrote for this report — `§ Frame` (thesis + key questions, extracted by scripts/packets via the `frame:start`/`frame:end` markers) and `§ Style` (formatting & marking rules). The author writes and approves it; AI may *propose* wording on request but never edits it without explicit author approval. Everything else in `pipeline/sg-banks/` is agent-made.
 
-| Guide | File | Purpose |
-|---|---|---|
-| **Frame** | `guides/frame.md` | Your big questions the report must answer. AI may propose candidates on request; you author/approve. |
-| **Style** | `guides/style.md` | Formatting & marking rules. You own them; AI applies them. |
+**Modules — the 8-stage pipeline.** Every module belongs to exactly one stage; filenames are `<stage>-<actor>-<name>` so **alphabetical order = pipeline order** (`ai` = performed by an AI model · `script` = a deterministic program, same input → same output). Stage 1 is `HUMAN.md` itself; simple updates legitimately skip stages.
 
-**Modules.** `method/ai/` holds steps performed by AI models; `method/code/` holds steps performed by deterministic programs (no AI — same input, same output). The **verb is the execution category**: `fetch-` = live web (EXPENSIVE, opt-in) · `reconcile-` = human+AI cross-check · `build-` = assembly, low insight · `write-` = insight/synthesis.
+| # | Stage | Actor | What it does |
+|---|---|---|---|
+| 1 | Frame | human | judgment → `HUMAN.md` (thesis, questions, style) |
+| 2 | Scope | script + Claude + author gate | what we have / what's missing → the `PERPLEXITY.md` job card (a queued card = the author's cost authorization) |
+| 3 | Fetch | AI (EXPENSIVE, opt-in) | live web → `data/` files |
+| 4 | Reconcile | AI | raw data → reconciled columns + source grades |
+| 5 | Build | script | data → components (tables, charts, benchmarks) |
+| 6 | Assemble | AI body + script region-syncs | components → report body |
+| 7 | Score | blind council + script aggregation | body (Conclusions stripped) → sheets → Conclusions overlay |
+| 8 | Publish | script | version, changelog, history rows, all gates |
 
 | Module | Method file | Output artifact | Cost | Depends on |
 |---|---|---|---|---|
-| Fetch-Ledger | `method/ai/fetch-ledger.md` | `data/ledger.csv` (retriever columns) | **EXPENSIVE — opt-in** | Frame |
-| Fetch-Signals | `method/ai/fetch-signals.md` | `data/signals.md` | **EXPENSIVE — opt-in** | Frame |
-| Fetch-Flows | `method/ai/fetch-flows.md` | `data/flows.csv` | **EXPENSIVE — opt-in** | Frame |
-| Fetch-Peers | `method/ai/fetch-peers.md` | `data/peers.csv` | **EXPENSIVE — opt-in** | Frame |
-| Reconcile | `method/ai/reconcile-ledger.md` | `reconciled_*` columns of `data/ledger.csv` | cheap | Fetch-Ledger |
-| Build-Tables | `method/code/build-tables.md` (spec) + `method/code/build_tables.py` (executable) | `data/tables.md` | cheap | Reconcile |
-| Build-Charts | `method/code/build-charts.md` (spec) + `method/code/build_charts.py` (executable) | `reports/sg-banks/assets/*.svg` | cheap | Reconcile |
-| Build-Benchmarks | `method/code/build-benchmarks.md` (spec) + `method/code/build_benchmarks.py` (executable) | `data/benchmarks.md` | cheap | Reconcile (+ Fetch-Peers/Fetch-Flows when run) |
-| Build-Health | `method/code/build-health.md` (spec) + `method/code/build_health.py` (executable) | `meta/health.md` + `meta/health.json` | cheap | any data change |
-| Build-Gaps | `method/code/build-gaps.md` (spec) + `method/code/build_gaps.py` (executable) | `meta/gaps.md` + `meta/gaps.json` | cheap | any data change |
-| Build-Report | `method/ai/build-report.md` | `reports/sg-banks/report.md` | cheap | Build-Tables, Frame, Fetch-Signals, Style |
-| Build-Report-Tables | `method/code/build-report-tables.md` (spec) + `method/code/build_report_tables.py` (executable) | benchmarks-marked region of `reports/sg-banks/report.md` | cheap | Build-Benchmarks |
-| Write-Scores | `method/ai/write-scores.md` | `data/scores/<member>.json` (one per council member, blind) | cheap per member; author authorizes the roster | Build-Report (current body) |
-| Build-Conclusions | `method/code/build-conclusions.md` (spec) + `method/code/build_conclusions.py` (executable) | `data/scorecard.md` (stage 1; report wiring awaits frame approval) | cheap | Write-Scores |
-| Write-Conclusions | RETIRED 2026-07-27 — replaced by Write-Scores + Build-Conclusions (`method/ai/write-conclusions.md` kept for history) |  |  |  |
-| Publish | (this controller) | `reports/sg-banks/meta.json` | cheap | Write-Conclusions |
+| Build-Health | `method/2-script-build-health.md` (spec) + `method/2-script-build-health.py` | `meta/health.md` + `meta/health.json` | cheap | any data change |
+| Build-Gaps | `method/2-script-build-gaps.md` (spec) + `method/2-script-build-gaps.py` | `meta/gaps.md` + `meta/gaps.json` | cheap | any data change |
+| Fetch-Ledger | `method/3-ai-fetch-ledger.md` | `data/ledger.csv` (retriever columns) | **EXPENSIVE — opt-in** | Frame |
+| Fetch-Signals | `method/3-ai-fetch-signals.md` | `data/signals.md` | **EXPENSIVE — opt-in** | Frame |
+| Fetch-Flows | `method/3-ai-fetch-flows.md` | `data/flows.csv` | **EXPENSIVE — opt-in** | Frame |
+| Fetch-Peers | `method/3-ai-fetch-peers.md` | `data/peers.csv` | **EXPENSIVE — opt-in** | Frame |
+| Reconcile | `method/4-ai-reconcile-ledger.md` | `reconciled_*` columns of `data/ledger.csv` | cheap | Fetch-Ledger |
+| Build-Tables | `method/5-script-build-tables.md` (spec) + `method/5-script-build-tables.py` | `data/tables.md` | cheap | Reconcile |
+| Build-Charts | `method/5-script-build-charts.md` (spec) + `method/5-script-build-charts.py` | `reports/assets/sg-banks-*.svg` | cheap | Reconcile |
+| Build-Benchmarks | `method/5-script-build-benchmarks.md` (spec) + `method/5-script-build-benchmarks.py` | `data/benchmarks.md` | cheap | Reconcile (+ Fetch-Peers/Fetch-Flows when run) |
+| Build-Report | `method/6-ai-build-report.md` | `reports/sg-banks.md` (the body) | cheap | Build-Tables, Frame, Fetch-Signals, Style |
+| Build-Report-Tables | `method/6-script-build-report-tables.md` (spec) + `method/6-script-build-report-tables.py` | benchmarks-marked region of `reports/sg-banks.md` | cheap | Build-Benchmarks |
+| Write-Scores | `method/7-ai-write-scores.md` | `data/scores/<member>.json` (one per council member, blind) | cheap per member; author authorizes the roster | Build-Report (current body) |
+| Build-Conclusions | `method/7-script-build-conclusions.md` (spec) + `method/7-script-build-conclusions.py` | `data/scorecard.md` + the report's Conclusions markers | cheap | Write-Scores |
+| Publish | `method/8-script-publish.md` (spec) + `method/8-script-publish.py` | version/changelog/history bookkeeping in `reports/index.json` + registry + `meta/` | cheap | all gates |
 
-Model per module: all Fetch-* → non-Claude search-grounded (Perplexity Computer / GPT-class, by design for independence); Reconcile → human + Claude; Build-Tables/Build-Charts/Build-Benchmarks/Build-Health/Build-Gaps → deterministic scripts (no model); Build-Report → Claude; Write-Scores → the council roster (latest knowledge-work frontier model per major lab, blind); Build-Conclusions → deterministic script (no model).
+Model per module: all Fetch-* → non-Claude search-grounded by design for independence; Reconcile → human + Claude; every `script` module → deterministic program (no model); Build-Report → Claude; Write-Scores → the council roster (latest knowledge-work frontier model per major lab, blind, one seat per lab). The report is **body + generated overlay regions** (Table 6, Conclusions): the body is assembled in stage 6 *before* scoring, the council reads the body only, and scores flow back into the overlay — a DAG, never a cycle.
 
 ---
 
 ## Step 1 — Assess state (always print; never skip)
 
 For each **module** classify: **MISSING** (method file or output absent) · **STALE** (an upstream output committed more recently than this output — `git log -1 --format=%cI -- <path>`) · **DATA-AGE** (fetch modules only — last retrieval date vs today; new quarter closed ⇒ "possibly outdated") · **OK**.
-For **guides** (Frame, Style): report as *human-owned*; never mark STALE or auto-refresh.
+For **`HUMAN.md`** (Frame + Style): report as *human-owned*; never mark STALE or auto-refresh.
 
 Output a table: `item | type (guide/module) | cost | status | reason`. **Flagging an EXPENSIVE module as STALE/DATA-AGE does not authorize running it** — it only informs the user.
 
 ## Step 2 — GATE: ask the user (mandatory stop)
 
 Present the table, then ask:
-> "Which modules would you like to refresh? Cheap/suggested: [list]. **Expensive (needs explicit confirm): any fetch- module.** Or reply **none** to just refresh the report (lite). Also: revise your **Frame** or **Style**? I can propose, you approve."
+> "Which modules would you like to refresh? Cheap/suggested: [list]. **Expensive (needs explicit confirm): any fetch- module.** Or reply **none** to just refresh the report (lite). Also: revise your **Frame** or **Style** (`HUMAN.md`)? I can propose, you approve."
 
 **Do not proceed until the user answers.**
 
@@ -66,9 +71,9 @@ Run it **only** on an explicit "yes". On "no" or anything ambiguous, **skip that
 
 ## Step 3 — Run the selected path
 
-- **Guide revised (Frame/Style):** human edit — AI may propose wording, human approves; write to `guides/frame.md` / `guides/style.md`; then rerun downstream (Frame ⇒ Build-Report ⇒ Write-Conclusions; Style ⇒ Build-Report/Write-Conclusions presentation).
-- **Modules named (and confirmed where expensive):** run in dependency order (Fetch-Ledger ‖ Fetch-Signals → Reconcile → Build-Tables → Build-Report), honoring current Frame & Style. Refreshing any module forces rerun of everything downstream of it.
-- **"none":** run the **LITE path** only — rerun the **council** (Write-Scores per `method/ai/write-scores.md` for the authorized roster, then `method/code/build_conclusions.py` to reassemble the Conclusions scorecard) and apply **Style** (`guides/style.md`). Writes only `data/scores/` + `data/scorecard.md` + the Conclusions markers. **The lite path is the default and never invokes an expensive module.**
+- **`HUMAN.md` revised (Frame/Style):** human edit — AI may propose wording, human approves; then rerun downstream (Frame ⇒ Build-Report ⇒ council rescore; Style ⇒ Build-Report presentation).
+- **Modules named (and confirmed where expensive):** run in stage order (Fetch → Reconcile → Build → Assemble → Score), honoring the current `HUMAN.md`. Refreshing any module forces rerun of everything downstream of it.
+- **"none":** run the **LITE path** only — rerun the **council** (Write-Scores per `method/7-ai-write-scores.md` for the authorized roster, then `method/7-script-build-conclusions.py` to reassemble the Conclusions scorecard) and apply **Style** (`HUMAN.md § Style`). Writes only `data/scores/` + `data/scorecard.md` + the Conclusions markers. **The lite path is the default and never invokes an expensive module.**
 
 Always finish with **Publish** (Step 5).
 
@@ -78,13 +83,13 @@ Always finish with **Publish** (Step 5).
 - Every refreshed module's output exists and is committed.
 
 ## Step 5 — Publish (one command + PR)
-- **Run `python3 method/code/publish.py --desc "<one-sentence release note>" [--changelog "<rich changelog entry>"]`.** It computes the next version (`YYYY.MM.DD`, `-rN` for same-day re-releases), updates `reports/sg-banks/meta.json` (`current_version`, `last_updated`, `refresh_note`), inserts the changelog entry at the top of the registry, appends the release row to `meta/history.csv` (version, date, thesis score, health metrics — the score/quality time series), and runs every CI gate. `--dry-run` previews.
+- **Run `python3 method/8-script-publish.py --desc "<one-sentence release note>" [--changelog "<rich changelog entry>"]`.** It computes the next version (`YYYY.MM.DD`, `-rN` for same-day re-releases), updates this report's entry in `reports/index.json` (`current_version`, `last_updated`, `refresh_note`), inserts the changelog entry at the top of the registry, appends the release row to `meta/history.csv` (version, date, thesis score, health metrics — the score/quality time series), and runs every CI gate. `--dry-run` previews.
 - **Narrative convention:** the registry changelog is the **canonical release history**; `refresh_note` carries only the current release's note plus a pointer; commit messages and PR bodies stay terse and defer to the changelog.
 - **Only a change to the published report warrants a version bump** — pipeline/meta-only changes ship without one (and skip publish.py).
-- Commit (trailers per `AGENTS.md` § Commit attribution), open the PR, merge on green CI. The tag `sg-banks-v<version>` is **auto-created on `main` by the tag-version GitHub Action** when `meta.json`'s version changes — never tag manually.
+- Commit (trailers per `AGENTS.md` § Commit attribution), open the PR, merge on green CI. The tag `sg-banks-v<version>` is **auto-created on `main` by the tag-version GitHub Action** when the registry's version changes — never tag manually.
 
 ## Step 6 — Report back
-State: the assessment, which guides/modules changed, whether any expensive module was run (and that it was explicitly confirmed), gates passed, new version + tag.
+State: the assessment, which of HUMAN.md/modules changed, whether any expensive module was run (and that it was explicitly confirmed), gates passed, new version + tag.
 
 ---
 

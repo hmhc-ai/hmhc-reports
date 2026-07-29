@@ -1,6 +1,6 @@
 # Fetch-Ledger — Module SOP: raw data retrieval (SG Banks)
 
-> **Artifact:** `pipeline/sg-banks/method/ai/fetch-ledger.md` — version history in git (`git log --oneline pipeline/sg-banks/method/ai/fetch-ledger.md`).
+> **Artifact:** `pipeline/sg-banks/method/3-ai-fetch-ledger.md` — version history in git (`git log --oneline pipeline/sg-banks/method/3-ai-fetch-ledger.md`).
 > **Status:** Draft — not yet validated by a full two-agent run.
 > **Ledger schema:** v0.2 (adds `px_version` / `cl_version` run-stamp columns, format `YYYYMMDD-NNN <Harness><Model>`).
 > **Changelog:** v0.1 — Split retrieval from report-build (was one monolithic brief); output is now a shared reconciliation ledger, not a report; added customer-deposits, total-assets and wealth-AUM rows; checksums embedded per row.
@@ -11,7 +11,7 @@
 
 | | |
 |---|---|
-| **Inputs** | The pre-set ledger skeleton `pipeline/sg-banks/data/ledger.csv` (row keys, units, embedded checksums) and the Tier-1 / Tier-2 source hierarchy in §2. Framing context from `pipeline/sg-banks/guides/frame.md` may inform which rows matter most, but Retrieve fills every row it can regardless. |
+| **Inputs** | The pre-set ledger skeleton `pipeline/sg-banks/data/ledger.csv` (row keys, units, embedded checksums) and the Tier-1 / Tier-2 source hierarchy in §2. Framing context from `pipeline/sg-banks/HUMAN.md (§ Frame)` may inform which rows matter most, but Retrieve fills every row it can regardless. |
 | **Sole output** | `pipeline/sg-banks/data/ledger.csv` — this module fills the retriever's own value/source/comment/version columns. It writes **no** report and **no** derived quantities. |
 | **Idempotence** | A rerun overwrites the retriever's columns in place (bump the `NNN` in the run stamp for same-day re-runs). Git retains history; there are no timestamped ledger copies. |
 | **Recommended model** | A **search-grounded, non-Claude** model for maximum cross-model independence — **GPT-5.6** (or the nearest available non-Claude search-grounded model) run via a search harness (e.g. Perplexity). Running a non-Claude retriever is what breaks the same-model blind spot on un-checksummed cells (see §1 "Un-cross-checked cells" and the Index open decisions). |

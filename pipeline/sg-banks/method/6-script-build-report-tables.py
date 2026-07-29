@@ -8,20 +8,20 @@ everything between the markers
 
     <!-- benchmarks:start -->  ...  <!-- benchmarks:end -->
 
-in reports/sg-banks/report.md from the current data/benchmarks.md, applying
+in reports/sg-banks.md from the current data/benchmarks.md, applying
 the report's fixed presentation transform (section headings dropped; the
 flows heading becomes its lead-in sentence). Deterministic: same
 benchmarks.md in, same report region out. CI runs --check on every PR.
 
-Usage:  python3 pipeline/sg-banks/method/code/build_report_tables.py [--check]
-Spec:   pipeline/sg-banks/method/code/build-report-tables.md
+Usage:  python3 pipeline/sg-banks/method/6-script-build-report-tables.py [--check]
+Spec:   pipeline/sg-banks/method/6-script-build-report-tables.md
 """
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 BENCH = ROOT / "data" / "benchmarks.md"
-REPORT = ROOT.parents[1] / "reports" / "sg-banks" / "report.md"
+REPORT = ROOT.parents[1] / "reports" / "sg-banks.md"
 START, END = "<!-- benchmarks:start -->", "<!-- benchmarks:end -->"
 
 

@@ -1,7 +1,8 @@
 name: Tag report versions
 
-# When a merge to main changes a report's current_version in meta.json,
-# create the matching git tag <slug>-v<version> (UPDATE.md Step 5).
+# When a merge to main changes a report's current_version in
+# reports/index.json, create the matching git tag <slug>-v<version>
+# (UPDATE.md Step 5).
 # Existing tags are never moved or overwritten.
 
 on:
@@ -23,9 +24,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          for meta in reports/*/meta.json; do
-            slug=$(basename "$(dirname "$meta")")
-            version=$(python3 -c "import json,sys; print(json.load(open(sys.argv[1]))['current_version'])" "$meta")
+          python3 -c "import json; [print(e['slug'], e['current_version']) for e in json.load(open('reports/index.json'))['reports']]" | while read -r slug version; do
             tag="${slug}-v${version}"
             if git rev-parse -q --verify "refs/tags/$tag" >/dev/null; then
               echo "$tag already exists — skipping"

@@ -34,7 +34,7 @@
 
 **Why lab-native:** satisfies `write-scores.md` § Member identity & admissibility (verifiable identity, no routers, one seat per lab) with the author as the isolation guarantee — each app session sees only its packet, never another member's output.
 
-**Open questions to brainstorm:** packet size vs app context/paste limits (report body is long — may need the packet as an attached file where apps allow it) · how the author confirms "latest knowledge-work model" in each app's model picker at run time · timing — seats should score **after** the pending frame v3 rewording lands, so every member scores the final wording once · whether a packet generator belongs in `method/code/` (deterministic: strip markers, concatenate, emit) or stays a manual Claude step for now.
+**Open questions to brainstorm:** packet size vs app context/paste limits (report body is long — may need the packet as an attached file where apps allow it) · how the author confirms "latest knowledge-work model" in each app's model picker at run time · timing — seats should score **after** the pending frame v3 rewording lands, so every member scores the final wording once · whether a packet generator belongs in `method/` as a script module (deterministic: strip markers, concatenate, emit) or stays a manual Claude step for now.
 
 ---
 

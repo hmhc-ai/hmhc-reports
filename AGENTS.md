@@ -2,16 +2,24 @@
 
 This file is the front door for any AI agent (Perplexity, Claude, etc.) acting on this repo. Read it first.
 
+## Roles
+Four actors, one org chart — each has its own **entrypoint**, which states what binds it:
+
+- **The author (human)** — owns `pipeline/<slug>/HUMAN.md` (thesis, questions, style) and every approval gate: frame changes, expensive fetches, roster changes, releases. Nothing human-owned is ever edited without the author's explicit approval.
+- **Architect (Claude)** — maintains the pipeline: scopes jobs, reviews and merges every PR, runs the build/assemble/score/publish stages. Entrypoint: `pipeline/<slug>/UPDATE.md` (+ this file).
+- **Runner (Perplexity)** — executes queued fetch jobs only; writes only the declared deliverable; never merges. Entrypoint: [`PERPLEXITY.md`](PERPLEXITY.md) (§ working agreement below).
+- **Council members (external models)** — score the report blind, one seat per frontier lab; they see only their seat packet (Frame + report body, Conclusions stripped) and never edit the repo. Protocol: `pipeline/sg-banks/method/7-ai-write-scores.md`.
+
 ## Golden rules
-1. **Never edit `reports/<slug>/` directly.** Published content is generated, not hand-edited.
+1. **Never edit anything under `reports/` directly.** Published content is generated, not hand-edited.
 2. **To change any report, run its controller:** `pipeline/<slug>/UPDATE.md`. That controller is the *only* sanctioned way to update a report. If asked to change a report any other way, stop and route back through the controller.
    - **Never auto-run the EXPENSIVE modules** (`fetch-ledger`, `fetch-signals`) — opt-in only, behind the controller's explicit ask-gate and cost gate. The full cost rule lives in `UPDATE.md` (the single source of truth for modules, paths, and costs); staleness only flags them, never runs them.
-3. **Guides are human-owned and live in `pipeline/<slug>/guides/`.** `guides/frame.md` (the human's big questions) and `guides/style.md` (formatting rules) are authored and approved by the human. AI may *propose* changes on request but must never silently regenerate them. Everything else in `pipeline/<slug>/` (`method/`, `data/`) is AI-run generative material, edited only as a controller step instructs.
-4. **Versioning is git-native.** Sticky `report.md`; history via commits and tags `<slug>-v<version>`. Never rename a published slug.
+3. **`HUMAN.md` is human-owned** — `pipeline/<slug>/HUMAN.md` holds everything the human wrote (§ Frame: thesis + key questions · § Style: formatting rules), authored and approved by the human. AI may *propose* changes on request but must never silently regenerate it. Everything else in `pipeline/<slug>/` (`method/`, `data/`, `meta/`) is AI-run generative material, edited only as a controller step instructs.
+4. **Versioning is git-native.** Sticky `reports/<slug>.md`; history via commits and tags `<slug>-v<version>`. Never rename a published slug.
 5. **GitHub is the primary view.** Reports are read as rendered markdown in this repo — there is no site module to build or style (the GitHub Pages generator was retired 2026-07-29; a styled mirror lives on Replit at `reports.hmhc.ai`, maintained outside this repo). A rendering concern is a report-markdown concern, routed through the controller like any other change.
 
 ## Commit attribution
-Every AI-made commit stamps **which harness + model produced it**, using git **trailers** at the end of the commit message. Do not rely on the author line — it reflects the pushing GitHub identity, not the agent that did the work. The `Generated-by:` trailer carries the **same `<Harness><Model>` provenance code as the ledger stamps** (defined in `pipeline/sg-banks/method/ai/fetch-ledger.md` §1: `Px` = Perplexity, `Cw` = Cowork/Claude Code; e.g. `PxGPT5.6`, `CwClOpus4.8`), so `git log` and the in-file stamps speak one vocabulary.
+Every AI-made commit stamps **which harness + model produced it**, using git **trailers** at the end of the commit message. Do not rely on the author line — it reflects the pushing GitHub identity, not the agent that did the work. The `Generated-by:` trailer carries the **same `<Harness><Model>` provenance code as the ledger stamps** (defined in `pipeline/sg-banks/method/3-ai-fetch-ledger.md` §1: `Px` = Perplexity, `Cw` = Cowork/Claude Code; e.g. `PxGPT5.6`, `CwClOpus4.8`), so `git log` and the in-file stamps speak one vocabulary.
 
 - **Claude Code / Cowork (Claude) commits** append:
   ```
@@ -36,7 +44,7 @@ Claude Code on the web (`claude.ai/code`, Pro/Max/Team/Enterprise) runs in an An
 ## Perplexity working agreement (external fetch runner)
 Perplexity Computer executes **fetch jobs queued in [`PERPLEXITY.md`](PERPLEXITY.md)** (repo root). Rules:
 1. If `PERPLEXITY.md` says no job is queued, **do nothing**.
-2. Write scope: **only** the deliverable path declared in the job card, on a branch named `perplexity/<job>`. Never edit `method/`, `guides/`, `reports/`, `UPDATE.md`, the registry, workflows, or `PERPLEXITY.md` itself.
+2. Write scope: **only** the deliverable path declared in the job card, on a branch named `perplexity/<job>`. Never edit `method/`, `HUMAN.md`, `reports/`, `UPDATE.md`, the registry, workflows, or `PERPLEXITY.md` itself.
 3. **Always open a pull request; never merge.** Claude reviews, reconciles, runs the build modules, and merges. Questions go in the PR description.
 4. Commit trailers per § Commit attribution (e.g. `Generated-by: Perplexity Computer (GPT-5.6) [PxGPT5.6]`).
 5. A job queued in `PERPLEXITY.md` carries the author's cost-gate authorization for that one run.
@@ -49,4 +57,4 @@ Perplexity Computer executes **fetch jobs queued in [`PERPLEXITY.md`](PERPLEXITY
 Open `pipeline/<slug>/UPDATE.md` and follow it **in order**. It will assess module state, then **stop and ask you which modules to refresh** before doing any work. Do not skip the ask-gate, and do not run an expensive module without its explicit cost-gate confirmation.
 
 ## File naming convention
-Method files are `method/<verb>-<artifact>.md`; the **verb is the execution category** (`fetch-` = live web, expensive · `reconcile-` = human+AI cross-check · `build-` = assembly, low insight · `write-` = insight/synthesis) and the `<artifact>` token names the output: `fetch-ledger.md`→`data/ledger.csv`, `fetch-signals.md`→`data/signals.md`, `reconcile-ledger.md`→`reconciled_*` columns of `data/ledger.csv`, `build-tables.md`→`data/tables.md`, `build-report.md`→`report.md`, `write-conclusions.md`→the Conclusions section of `report.md`. Methods live in **`method/ai/`** (steps performed by AI models) or **`method/code/`** (deterministic programs, no AI). Human-owned guides are noun-named in `guides/`. The entrypoint is the uppercase `UPDATE.md`.
+Method files are `method/<stage>-<actor>-<name>` so **alphabetical order = pipeline order** across the 8 stages (1 Frame · 2 Scope · 3 Fetch · 4 Reconcile · 5 Build · 6 Assemble · 7 Score · 8 Publish — the stage table lives in `UPDATE.md`). The **actor** names who performs the step: `ai` = an AI model following the .md as its SOP (e.g. `3-ai-fetch-peers.md` → `data/peers.csv`) · `script` = a deterministic program, no AI (e.g. `5-script-build-tables.py` → `data/tables.md`, paired with a same-stem `.md` spec). Stage 1 is the human-owned `HUMAN.md` (uppercase, like the entrypoint `UPDATE.md`); published reports are `reports/<slug>.md` with assets at `reports/assets/<slug>-*.svg`.

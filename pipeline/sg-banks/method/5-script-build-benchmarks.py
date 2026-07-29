@@ -8,13 +8,13 @@ index bank = 100, required 5-yr outperformance, and the wealth-hub flows
 table. Until the fetch outputs exist it emits an SG-only preview and marks
 the indexed sections pending. Same inputs in -> same output out.
 
-Usage:  python3 pipeline/sg-banks/method/code/build_benchmarks.py [--check]
-Spec:   pipeline/sg-banks/method/code/build-benchmarks.md
+Usage:  python3 pipeline/sg-banks/method/5-script-build-benchmarks.py [--check]
+Spec:   pipeline/sg-banks/method/5-script-build-benchmarks.md
 """
 import csv, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "data" / "ledger.csv"
 PEERS = ROOT / "data" / "peers.csv"
 FLOWS = ROOT / "data" / "flows.csv"
@@ -142,7 +142,7 @@ def build():
     peers = {b: ratios(f) for b, f in peer_fundamentals().items()}
     have_peers = INDEX_BANK in peers
     e = ["# SG Banks — Benchmarks (generated artifact)", "",
-         "*Artifact: `pipeline/sg-banks/data/benchmarks.md` — sole output of `pipeline/sg-banks/method/code/build_benchmarks.py`. "
+         "*Artifact: `pipeline/sg-banks/data/benchmarks.md` — sole output of `pipeline/sg-banks/method/5-script-build-benchmarks.py`. "
          "Inputs: reconciled `data/ledger.csv` (SG banks)" +
          (", `data/peers.csv`" if PEERS.exists() else "") + (", `data/flows.csv`" if FLOWS.exists() else "") +
          ". Rerun the script to regenerate; same inputs in, same output out.*", ""]

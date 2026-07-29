@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build-Health — pipeline completeness & confidence metrics for sg-banks.
 
-Reads the ledger, data files, meta.json and the frame, and generates
+Reads the ledger and data files, and generates
   meta/health.md    human-readable status print (GitHub-friendly)
   meta/health.json  machine-readable mirror (feed for a future UI)
 
@@ -10,19 +10,17 @@ Confidence   = how trustworthy the filled cells are (dual-verified share,
                checksum agreement, single-retriever exposure, tier flags).
 Deterministic: derived only from file contents — no clocks, no git calls.
 
-Usage:  python3 pipeline/sg-banks/method/code/build_health.py [--check]
-Spec:   pipeline/sg-banks/method/code/build-health.md
+Usage:  python3 pipeline/sg-banks/method/2-script-build-health.py [--check]
+Spec:   pipeline/sg-banks/method/2-script-build-health.md
 """
 import csv, json, re, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 METADIR = ROOT / "meta"
-META = ROOT.parents[1] / "reports" / "sg-banks" / "meta.json"
 
 rows = list(csv.DictReader(open(DATA / "ledger.csv", newline="", encoding="utf-8")))
-meta = json.loads(META.read_text(encoding="utf-8"))
 
 # ---- completeness ----
 status_counts = {}
@@ -134,7 +132,7 @@ def md():
     c, f, g, fr = health["completeness"], health["confidence"], health["gates"], health["freshness"]
     e = ["# SG Banks — Pipeline Health (generated artifact)", "",
          f"*Artifact: `pipeline/sg-banks/meta/health.md` (+ `health.json`, the machine-readable mirror) — sole output of "
-         f"`pipeline/sg-banks/method/code/build_health.py`. Report version and dates live in `reports/sg-banks/meta.json` — deliberately not embedded here, so version bumps never invalidate this artifact.*", "",
+         f"`pipeline/sg-banks/method/2-script-build-health.py`. Report version and dates live in `reports/index.json` — deliberately not embedded here, so version bumps never invalidate this artifact.*", "",
          "## Completeness — how much of the frame is answered", "",
          f"- Key questions: **{c['questions_answered']} of {c['questions_total']} fully answered**",
          ""]

@@ -1,6 +1,6 @@
 # SG Banks — Benchmarks (generated artifact)
 
-*Artifact: `pipeline/sg-banks/data/benchmarks.md` — sole output of `pipeline/sg-banks/method/code/build_benchmarks.py`. Inputs: reconciled `data/ledger.csv` (SG banks), `data/peers.csv`, `data/flows.csv`. Rerun the script to regenerate; same inputs in, same output out.*
+*Artifact: `pipeline/sg-banks/data/benchmarks.md` — sole output of `pipeline/sg-banks/method/5-script-build-benchmarks.py`. Inputs: reconciled `data/ledger.csv` (SG banks), `data/peers.csv`, `data/flows.csv`. Rerun the script to regenerate; same inputs in, same output out.*
 
 ## Monetization (Frame Q5)
 

@@ -3,7 +3,7 @@
 > ## ⚠ EXPENSIVE — opt-in only
 > Runs only via `UPDATE.md`'s ask-gate + Step 2b cost gate (explicit user confirmation — full rule there). Reached this file without that confirmation? **Stop and ask first.**
 
-**Module:** Fetch-Flows · **Input:** `guides/frame.md` Q2 · **Output:** `data/flows.csv` · **Depends on:** Frame
+**Module:** Fetch-Flows · **Input:** `HUMAN.md (§ Frame)` Q2 · **Output:** `data/flows.csv` · **Depends on:** Frame
 **Run on:** a **non-Claude, search-grounded** model (Perplexity Computer / GPT-class with live web) — by design, for independence from the Claude-built pipeline.
 
 ## Purpose
@@ -38,4 +38,4 @@ One row per hub-year-measure: `hub, measure, year, unit, value, source, comment,
 
 ## Hand-off
 
-`data/flows.csv` feeds **Build-Benchmarks** (`method/code/build_benchmarks.py`) and **Write-Conclusions** (Q2). Fetch-Flows publishes nothing to `reports/`.
+`data/flows.csv` feeds **Build-Benchmarks** (`method/5-script-build-benchmarks.py`) and **Write-Conclusions** (Q2). Fetch-Flows publishes nothing to `reports/`.

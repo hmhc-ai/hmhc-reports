@@ -1,8 +1,8 @@
 # SG Banks — Council scorecard (generated artifact)
 
-*Artifact: `pipeline/sg-banks/data/scorecard.md` — sole output of `pipeline/sg-banks/method/code/build_conclusions.py`, aggregating the blind council sheets in `data/scores/` (see `method/ai/write-scores.md` for the protocol and rubric).*
+*Artifact: `pipeline/sg-banks/data/scorecard.md` — sole output of `pipeline/sg-banks/method/7-script-build-conclusions.py`, aggregating the blind council sheets in `data/scores/` (see `method/7-ai-write-scores.md` for the protocol and rubric).*
 
-Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/ai/write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.
+Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.
 
 | Q | Topic | Perf (median) | Range | Criticality (consensus) |
 |---|---|---:|---:|---|

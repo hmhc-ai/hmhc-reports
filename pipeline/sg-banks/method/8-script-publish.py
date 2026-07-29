@@ -5,8 +5,9 @@ Automates the mechanical parts of UPDATE.md Step 5, which were previously
 six hand-edits per release:
 
   1. computes the next version (YYYY.MM.DD of today; -rN if same-day);
-  2. updates reports/sg-banks/meta.json: current_version, last_updated,
-     and refresh_note = THIS release's note + a pointer to the registry
+  2. updates this report's entry in reports/index.json (the merged
+     registry): current_version, last_updated, and refresh_note = THIS
+     release's note + a pointer to the registry changelog
      (the registry changelog is the canonical history — see UPDATE.md);
   3. inserts a changelog entry at the top of pipeline/sg-banks/index.md;
   4. appends a row to meta/history.csv (version, date, per-member council
@@ -22,23 +23,25 @@ Not a CI artifact generator (it uses today's date), so it has no --check
 gate of its own; --dry-run previews without writing.
 
 Usage:
-  python3 pipeline/sg-banks/method/code/publish.py --desc "One-sentence release note." [--changelog "Rich changelog entry (defaults to --desc)"] [--dry-run]
+  python3 pipeline/sg-banks/method/8-script-publish.py --desc "One-sentence release note." [--changelog "Rich changelog entry (defaults to --desc)"] [--dry-run]
 """
 import argparse, csv, datetime, json, re, subprocess, sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 REPO = ROOT.parents[1]
-META = REPO / "reports" / "sg-banks" / "meta.json"
+REGISTRY_JSON = REPO / "reports" / "index.json"
 REGISTRY = ROOT / "index.md"
 HISTORY = ROOT / "meta" / "history.csv"
 HEALTH = ROOT / "meta" / "health.json"
-REPORT = REPO / "reports" / "sg-banks" / "report.md"
+REPORT = REPO / "reports" / "sg-banks.md"
 
 GATES = [
     [sys.executable, str(REPO / ".github" / "scripts" / "docs_lint.py")],
-    *[[sys.executable, str(ROOT / "method" / "code" / f"build_{m}.py"), "--check"]
-      for m in ("tables", "charts", "benchmarks", "health", "gaps", "report_tables", "conclusions")],
+    *[[sys.executable, str(ROOT / "method" / m), "--check"]
+      for m in ("2-script-build-health.py", "2-script-build-gaps.py", "5-script-build-tables.py",
+                "5-script-build-charts.py", "5-script-build-benchmarks.py",
+                "6-script-build-report-tables.py", "7-script-build-conclusions.py")],
 ]
 
 
@@ -75,7 +78,8 @@ def main() -> int:
 
     today = datetime.date.today().strftime("%Y.%m.%d")
     date_iso = datetime.date.today().isoformat()
-    meta = json.loads(META.read_text(encoding="utf-8"))
+    registry = json.loads(REGISTRY_JSON.read_text(encoding="utf-8"))
+    meta = next(e for e in registry["reports"] if e["slug"] == "sg-banks")
     ver = next_version(meta["current_version"], today)
 
     h = json.loads(HEALTH.read_text(encoding="utf-8"))
@@ -94,9 +98,9 @@ def main() -> int:
 
     meta["current_version"] = ver
     meta["last_updated"] = date_iso
-    meta["pipeline"]["refresh_note"] = (
+    meta["refresh_note"] = (
         f"{ver}: {args.desc} Full release history: pipeline/sg-banks/index.md (Changelog).")
-    META.write_text(json.dumps(meta, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    REGISTRY_JSON.write_text(json.dumps(registry, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
     entry = f"- **{date_iso} (v{ver})** — {args.changelog or args.desc}\n\n"
     reg = REGISTRY.read_text(encoding="utf-8")
