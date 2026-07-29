@@ -5,7 +5,7 @@
     "questions": [
       {
         "id": "Q1",
-        "topic": "Deposits & Wealth AUM trend",
+        "topic": "Client-asset growth",
         "status": "answered",
         "depends_on": "ledger"
       },
@@ -17,25 +17,25 @@
       },
       {
         "id": "Q3",
-        "topic": "NII & Other Revenue trend",
+        "topic": "Income engines: NII & Other Revenue",
         "status": "answered",
         "depends_on": "ledger"
       },
       {
         "id": "Q4",
-        "topic": "NIM volatility & cyclicality",
+        "topic": "NIM cyclicality & rate sensitivity",
         "status": "answered",
         "depends_on": "ledger + chart"
       },
       {
         "id": "Q5",
-        "topic": "Monetization score vs peers",
+        "topic": "Client-asset monetization vs peers",
         "status": "answered",
         "depends_on": "fetch-peers + build-benchmarks"
       },
       {
         "id": "Q6",
-        "topic": "Relative valuation vs peers",
+        "topic": "Valuation premium vs peers",
         "status": "answered",
         "depends_on": "fetch-peers + build-benchmarks"
       }

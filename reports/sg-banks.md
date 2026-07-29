@@ -2,24 +2,24 @@
 
 ## Purpose
 
-**Thesis.** Over a 10–15 year horizon, Singapore keeps attracting and growing the wealth the world parks and moves through it, and DBS, OCBC and UOB monetize that growing capital base — deposits and wealth AUM — into income and are valued accordingly. The decisive signal is **capital-attraction momentum**: if deposit and wealth-AUM growth stalls or reverses, the thesis dies with it.
+**Thesis.** The Singapore banks — DBS, OCBC and UOB, as a group or individually — are a value buy-and-hold for the next 10–15 years.
 
-**Key questions this analysis answers** *(each is scored by the council in the Conclusions below, and answered in full in Supporting Data)*:
+**Key factors this analysis scores** *(each is scored by the blind council in the Conclusions below — performance vs the thesis and criticality — and analyzed in full in Supporting Data)*:
 
-**A. Capital attraction — the primary driver**
+**A. Capital attraction — the primary factor**
 
-1. What is the trend for Deposits and Wealth AUM?
-2. What is the trend in wealth-hub capital flows over the last 5 years?
+1. **Client-asset growth** — CA = customer deposits + wealth AUM
+2. **Wealth-hub capital flows** — Singapore vs the global cross-border pool
 
 **B. Monetization — secondary (expected to follow attraction)**
 
-3. What is the trend in NII and Other Revenue?
-4. How volatile and cyclical is NIM?
-5. What is the monetization score of the SG banks versus benchmark peers?
+3. **Income engines: NII & Other Revenue**
+4. **NIM cyclicality & rate sensitivity**
+5. **Client-asset monetization vs peers** — headroom vs mean-reversion
 
-**C. Relative valuations**
+**C. Valuation**
 
-6. What is the relative valuation premium of the SG banks versus benchmark peers, and what annual growth outperformance over the next 5 years would justify it?
+6. **Valuation premium vs peers & required outperformance**
 
 **Scope.** DBS (SGX: D05) · OCBC (O39) · UOB (U11) · FY2016–FY2025 (31-Dec year-ends) + 1Q2026 interim (quarters ended 31 Mar 2026) + current (2026-07-20 intraday) valuation · **every series in its reporting currency, never FX-converted — SG-bank series in SGD** · notation and formats in Appendix D.
 
@@ -43,19 +43,19 @@ This report is produced by a documented, AI-run workflow with human governance, 
 <!-- conclusions:start -->
 ## Conclusions — Council Scorecard
 
-Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the question is for the thesis. Disagreement ranges are shown deliberately — they are a signal.
+Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body only, prior Conclusions removed; protocol `method/7-ai-write-scores.md`). Performance = alignment with the thesis, −5…+5 · criticality = how decisive the factor is for the thesis. Disagreement ranges are shown deliberately — they are a signal.
 
-| Q | Topic | Perf (median) | Range | Criticality (consensus) |
+| Factor | Topic | Perf (median) | Range | Criticality (consensus) |
 |---|---|---:|---:|---|
-| Q1 | Deposits & Wealth AUM trend | +4 | unanimous | critical |
+| Q1 | Client-asset growth | +4 | unanimous | critical |
 | Q2 | Wealth-hub capital flows | +4 | unanimous | high |
-| Q3 | NII & Other Revenue trend | +2 | unanimous | medium |
-| Q4 | NIM volatility & cyclicality | 0 | unanimous | medium |
-| Q5 | Monetization score vs peers | -1 | unanimous | high |
-| Q6 | Relative valuation vs peers | -2 | unanimous | high |
+| Q3 | Income engines: NII & Other Revenue | +2 | unanimous | medium |
+| Q4 | NIM cyclicality & rate sensitivity | 0 | unanimous | medium |
+| Q5 | Client-asset monetization vs peers | -1 | unanimous | high |
+| Q6 | Valuation premium vs peers | -2 | unanimous | high |
 | — | **Thesis overall** | **+2** | +2…+2 | — |
 
-### CwClFable5 — Claude Code (Claude Fable 5 (claude-fable-5)) · 2026-07-27 · scored v2026.07.29
+### CwClFable5 — Claude Code (Claude Fable 5 (claude-fable-5)) · 2026-07-29 · scored v2026.07.29-r2
 
 - **Q1** · +4 · critical — Deposits, wealth AUM and client assets compound mid-single-digit-plus at all three banks with FY24-25 growth above the 5-year trend at DBS and OCBC - the primary driver is intact and accelerating.
 - **Q2** · +4 · high — Singapore's cross-border wealth grew 11.8%/yr over 2020-25, fastest of the big three hubs, lifting its share of the global offshore pool from 12.9% to 13.4% - the external attraction test passes, with Hong Kong still larger in absolute terms.
@@ -65,18 +65,23 @@ Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body on
 - **Q6** · -2 · high — DBS and OCBC trade at 157-175 on P/CA and P/Rev versus HSBC = 100, requiring +9-12% annual outperformance for five years - much of the attraction story is already in the price, with UOB the near-parity exception.
 - **Thesis** · +2 — Capital attraction is verified internally and externally and monetization is adequate but not yet superior, so the thesis's driver holds while the entry price already assumes the non-NII acceleration the income data does not yet show.
 
-*The council scores the frame's questions; the full frame-format answers are in Supporting Data below. Assembled deterministically by `method/7-script-build-conclusions.py`. Not investment advice.*
+### Council-suggested factors (not yet in the frame; adoption is the author's decision)
+
+- **NII quality & capital headroom** (`CwClFable5`) — The report scores NII levels and cyclicality but not durability - CET1 headroom, loan-book mix and credit costs determine whether the income engine can safely expand with the client-asset base.
+- **Growth by geography & product** (`CwClFable5`) — Factor 6 shows the price demands +9-12%/yr outperformance, yet no factor tracks where incremental growth would come from - regional expansion and entry into adjacent revenue pools are unmeasured.
+
+*The council scores the frame's key factors; the full frame-format analysis is in Supporting Data below. Assembled deterministically by `method/7-script-build-conclusions.py`. Not investment advice.*
 <!-- conclusions:end -->
 
 ---
 
 ## Supporting Data
 
-*The frame's key questions answered in full, in their specified formats — objective data only; judgements live in the Conclusions scorecard above.*
+*The frame's key factors analyzed in full, in their specified formats — objective data only; judgements live in the Conclusions scorecard above.*
 
-### Answers by question
+### Analysis by factor
 
-**A. Capital attraction — Q1: trend for Deposits and Wealth AUM**
+**A. Capital attraction — Factor 1: Client-asset growth**
 
 | Bank_Metric | S$bn | CASA % | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -92,9 +97,9 @@ Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body on
 
 *Levels and CASA % as of FY25. 5y-CAGR = FY2020→FY2025; each FYxx % = that FY's YoY growth. **Client Assets = customer deposits + wealth AUM** (renamed from "Capital Base" to avoid collision with regulatory total capital) — included to test how consistent the AUM/deposit/client-asset definitions are: AUM definitions differ per bank (DBS "Wealth Management AUM"; OCBC group wealth incl. Bank of Singapore + Great Eastern; UOB narrower, reclassified 1-Jan-2023), so client-asset *levels* are not cross-comparable — read within-bank trends. Secondary (1Q26): DBS deposits reached S$630bn with a record S$492bn AUM (+17% YoY cc, +S$10bn net new money); UOB added +S$1bn net new money. Sources: Tables 1–2; 1Q2026 attraction table; Signals — DBS 2026-04-30, UOB 2026-05-07.*
 
-**A. Capital attraction — Q2: wealth-hub capital flows (5 years)** — answered by the flows block of Table 6 below (cross-border stock per hub, the *Global — all centres* share denominator, and the market-sizing key stats).
+**A. Capital attraction — Factor 2: Wealth-hub capital flows** — analyzed in the flows block of Table 6 below (cross-border stock per hub, the *Global — all centres* share denominator, and the market-sizing key stats).
 
-**B. Monetization — Q3: trend in NII and Other Revenue**
+**B. Monetization — Factor 3: Income engines, NII & Other Revenue**
 
 | Bank_Metric | S$bn | 5y-CAGR | FY25 % | FY24 % | FY23 % | FY22 % |
 |---|---:|---:|---:|---:|---:|---:|
@@ -107,15 +112,15 @@ Council of 1: `CwClFable5`. Each member scored **blind** (frame + report body on
 
 *Levels as of FY25. OR = total income − NII (derived from reported figures). 5y-CAGR = FY2020→FY2025; each FYxx % = that FY's YoY growth. OCBC FY22 OR reflects the SFRS(I) 17 insurance restatement. Sources: Tables 1 ×3; Appendix C.*
 
-**B. Monetization — Q4: NIM volatility and cyclicality**
+**B. Monetization — Factor 4: NIM cyclicality & rate sensitivity**
 
 ![Group NIM vs 3M SORA and Fed funds](assets/sg-banks-nim-vs-sora.svg)
 
 *Chart generated deterministically from `data/ledger.csv` by `method/5-script-build-charts.py` (CI-verified). Intra-cycle swing ≈ 53–74bps trough-to-peak — large enough that NII alone cannot anchor income, which is why the fee/wealth offset (Q3) matters. NIM's amplitude is far smaller than the policy rates' (~5pp Fed swing → ~0.7pp NIM swing): deposit franchises damp the cycle. Sources: Table 5; 1Q2026 income table.*
 
-**B. Monetization — Q5: monetization score vs benchmark peers** — answered by the monetization block of Table 6 below (NII/OR levels, the four HSBC = 100 indices, as-stated NIM context, and the implied OR-uplift line).
+**B. Monetization — Factor 5: Client-asset monetization vs peers** — analyzed in the monetization block of Table 6 below (NII/OR levels, the four HSBC = 100 indices, as-stated NIM context, and the implied OR-uplift line).
 
-**C. Relative valuations — Q6: valuation premium and required outperformance** — answered by the valuation block of Table 6 below (four indexes vs HSBC = 100 with dated local prices and req %/yr).
+**C. Valuation — Factor 6: Valuation premium vs peers & required outperformance** — analyzed in the valuation block of Table 6 below (four indexes vs HSBC = 100 with dated local prices and req %/yr).
 
 ---
 

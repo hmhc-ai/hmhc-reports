@@ -11,13 +11,13 @@ Every **`fetch-` module is EXPENSIVE** (live web retrieval, token/time-intensive
 
 ## HUMAN.md (human-owned) vs Modules (agent-run)
 
-**`HUMAN.md`** is the single file containing everything the human wrote for this report — `§ Frame` (thesis + key questions, extracted by scripts/packets via the `frame:start`/`frame:end` markers) and `§ Style` (formatting & marking rules). The author writes and approves it; AI may *propose* wording on request but never edits it without explicit author approval. Everything else in `pipeline/sg-banks/` is agent-made.
+**`HUMAN.md`** is the single file containing everything the human wrote for this report — `§ Frame` (thesis + key factors, extracted by scripts/packets via the `frame:start`/`frame:end` markers; the per-factor formats are MUST-includes — Scope may propose *additional* analysis per factor, never replace them) and `§ Style` (formatting & marking rules). The author writes and approves it; AI may *propose* wording on request but never edits it without explicit author approval. Everything else in `pipeline/sg-banks/` is agent-made.
 
 **Modules — the 8-stage pipeline.** Every module belongs to exactly one stage; filenames are `<stage>-<actor>-<name>` so **alphabetical order = pipeline order** (`ai` = performed by an AI model · `script` = a deterministic program, same input → same output). Stage 1 is `HUMAN.md` itself; simple updates legitimately skip stages.
 
 | # | Stage | Actor | What it does |
 |---|---|---|---|
-| 1 | Frame | human | judgment → `HUMAN.md` (thesis, questions, style) |
+| 1 | Frame | human | judgment → `HUMAN.md` (thesis, factors, style) |
 | 2 | Scope | script + Claude + author gate | what we have / what's missing → the `PERPLEXITY.md` job card (a queued card = the author's cost authorization) |
 | 3 | Fetch | AI (EXPENSIVE, opt-in) | live web → `data/` files |
 | 4 | Reconcile | AI | raw data → reconciled columns + source grades |
@@ -79,8 +79,8 @@ Run it **only** on an explicit "yes". On "no" or anything ambiguous, **skip that
 Always finish with **Publish** (Step 5).
 
 ## Step 4 — Gates before publishing (all must pass)
-- **Build-Report:** arithmetic tie-outs pass; every **Frame** question is addressed in the report.
-- **Council:** every authorized member's sheet present and valid (Write-Scores self-checks); `build_conclusions.py --check` green (scorecard + report Conclusions in sync); every Frame question answered in Supporting Data or explicitly marked pending.
+- **Build-Report:** arithmetic tie-outs pass; every **Frame** factor is analyzed in the report.
+- **Council:** every authorized member's sheet present and valid (Write-Scores self-checks); `build_conclusions.py --check` green (scorecard + report Conclusions in sync); every Frame factor analyzed in Supporting Data or explicitly marked pending.
 - Every refreshed module's output exists and is committed.
 
 ## Step 5 — Publish (one command + PR)

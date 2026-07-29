@@ -2,18 +2,18 @@
 
 *Artifact: `pipeline/sg-banks/meta/health.md` (+ `health.json`, the machine-readable mirror) — sole output of `pipeline/sg-banks/method/2-script-build-health.py`. Report version and dates live in `reports/index.json` — deliberately not embedded here, so version bumps never invalidate this artifact.*
 
-## Completeness — how much of the frame is answered
+## Completeness — how much of the frame is analyzed
 
-- Key questions: **6 of 6 fully answered**
+- Key factors: **6 of 6 fully analyzed**
 
-| Q | Topic | Status | Depends on |
+| Factor | Topic | Status | Depends on |
 |---|---|---|---|
-| Q1 | Deposits & Wealth AUM trend | answered | ledger |
+| Q1 | Client-asset growth | answered | ledger |
 | Q2 | Wealth-hub capital flows | answered | fetch-flows |
-| Q3 | NII & Other Revenue trend | answered | ledger |
-| Q4 | NIM volatility & cyclicality | answered | ledger + chart |
-| Q5 | Monetization score vs peers | answered | fetch-peers + build-benchmarks |
-| Q6 | Relative valuation vs peers | answered | fetch-peers + build-benchmarks |
+| Q3 | Income engines: NII & Other Revenue | answered | ledger |
+| Q4 | NIM cyclicality & rate sensitivity | answered | ledger + chart |
+| Q5 | Client-asset monetization vs peers | answered | fetch-peers + build-benchmarks |
+| Q6 | Valuation premium vs peers | answered | fetch-peers + build-benchmarks |
 
 - Ledger: **557 of 582 rows filled (95.7%)** · 17 not disclosed by the banks (`n/d`) · 8 not yet retrieved (`n/r`)
 

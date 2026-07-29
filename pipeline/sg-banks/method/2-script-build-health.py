@@ -33,12 +33,12 @@ unavailable = status_counts.get("n/d", 0)          # bank does not disclose
 unretrieved = status_counts.get("n/r", 0)          # retrievable but not retrieved
 
 QUESTIONS = [
-    ("Q1", "Deposits & Wealth AUM trend", "answered", "ledger"),
+    ("Q1", "Client-asset growth", "answered", "ledger"),
     ("Q2", "Wealth-hub capital flows", "answered" if (DATA / "flows.csv").exists() else "pending", "fetch-flows"),
-    ("Q3", "NII & Other Revenue trend", "answered", "ledger"),
-    ("Q4", "NIM volatility & cyclicality", "answered", "ledger + chart"),
-    ("Q5", "Monetization score vs peers", "answered" if (DATA / "peers.csv").exists() else "partial (SG-only)", "fetch-peers + build-benchmarks"),
-    ("Q6", "Relative valuation vs peers", "answered" if (DATA / "peers.csv").exists() else "pending", "fetch-peers + build-benchmarks"),
+    ("Q3", "Income engines: NII & Other Revenue", "answered", "ledger"),
+    ("Q4", "NIM cyclicality & rate sensitivity", "answered", "ledger + chart"),
+    ("Q5", "Client-asset monetization vs peers", "answered" if (DATA / "peers.csv").exists() else "partial (SG-only)", "fetch-peers + build-benchmarks"),
+    ("Q6", "Valuation premium vs peers", "answered" if (DATA / "peers.csv").exists() else "pending", "fetch-peers + build-benchmarks"),
 ]
 answered = sum(1 for q in QUESTIONS if q[2] == "answered")
 
@@ -133,10 +133,10 @@ def md():
     e = ["# SG Banks — Pipeline Health (generated artifact)", "",
          f"*Artifact: `pipeline/sg-banks/meta/health.md` (+ `health.json`, the machine-readable mirror) — sole output of "
          f"`pipeline/sg-banks/method/2-script-build-health.py`. Report version and dates live in `reports/index.json` — deliberately not embedded here, so version bumps never invalidate this artifact.*", "",
-         "## Completeness — how much of the frame is answered", "",
-         f"- Key questions: **{c['questions_answered']} of {c['questions_total']} fully answered**",
+         "## Completeness — how much of the frame is analyzed", "",
+         f"- Key factors: **{c['questions_answered']} of {c['questions_total']} fully analyzed**",
          ""]
-    e += ["| Q | Topic | Status | Depends on |", "|---|---|---|---|"]
+    e += ["| Factor | Topic | Status | Depends on |", "|---|---|---|---|"]
     for q in c["questions"]:
         e.append(f"| {q['id']} | {q['topic']} | {q['status']} | {q['depends_on']} |")
     e += ["",

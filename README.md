@@ -20,7 +20,7 @@ pipeline/     How each report is made. Not published.
     UPDATE.md       Controller — the single entrypoint for any change, and the
                     single source of truth for modules, method files, and costs.
     HUMAN.md        Human-owned — everything the human wrote: § Frame (thesis +
-                    key questions) and § Style (formatting & marking rules).
+                    key factors) and § Style (formatting & marking rules).
     index.md        Registry of decisions and history: standing decisions,
                     open questions, changelog.
     method/         One file per pipeline step, named <stage>-<actor>-<name> so
