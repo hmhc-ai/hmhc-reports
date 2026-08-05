@@ -1,7 +1,7 @@
 name: Docs consistency lint
 
 # Fails the PR when the pipeline docs drift from reality:
-#  1. every repo path referenced by meta.json lineage, UPDATE.md, or a
+#  1. every repo path referenced by the registry, CLAUDE.md, or a
 #     relative markdown link must exist on disk;
 #  2. data/tables.md must be exactly reproducible from the reconciled
 #     ledger by the deterministic Build-Tables script.

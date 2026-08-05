@@ -1,9 +1,9 @@
-# HUMAN.md — the author's charter for SG Banks
+# HUMAN.md — the author's charter
 
-> **Human-owned — the single file containing everything the human wrote for this report.** The author writes and approves this file; AI may *propose* wording on request but must never edit it without the author's explicit approval, and never silently regenerate it. Everything else in `pipeline/sg-banks/` is agent-made. (Merged from `guides/frame.md` + `guides/style.md`, 2026-07-29 — content carried over verbatim; only file paths updated for the restructure.) Scripts and council packets extract the Frame section via the `frame:start`/`frame:end` markers — council members see the Frame only, never the Style section.
+> **Human-owned — the single file containing everything the human wrote, for every report in this repo.** One section pair per report (`<slug> · Frame` + `<slug> · Style`). The author writes and approves this file; AI may *propose* wording on request but must never edit it without the author's explicit approval, and never silently regenerate it. Everything under `pipeline/` and `reports/` is agent-made. Scripts and council packets extract a report's Frame via its slug-scoped markers (`frame:<slug>:start` / `frame:<slug>:end`) — council members see the Frame only, never the Style section.
 
-<!-- frame:start -->
-## Frame
+<!-- frame:sg-banks:start -->
+## sg-banks · Frame
 
 > This document contains the thesis and the key factors the report analyzes. The HUMAN authors and approves the file; the AGENT proposes wording. Each key factor is **scored in the report's Conclusions by a blind multi-model council** (per factor: performance −5…+5 vs the thesis · criticality `critical/high/medium/low` · a one-sentence comment per member; members may also **suggest missing factors**; protocol in `method/7-ai-write-scores.md`) — the reader draws their own conclusions from the members' answers. Each factor is **analyzed in full in the report's Supporting Data section** in the format specified below — the formats are MUST-includes; the Scope stage may propose and append *additional* analysis per factor, never replace these.
 
@@ -66,11 +66,11 @@ The Singapore banks — DBS, OCBC and UOB, as a group or individually — are a 
 
 *Australia excluded (decided 2026-07-24, replacing Commonwealth Bank with RBC): all four Australian majors divested their wealth arms (CBA → Colonial First State, NAB → MLC, ANZ → IOOF/Zurich, Westpac → BT exit), so no Australian bank discloses a comparable wealth AUM — itself a finding: Australia's banks exited the wealth flywheel the SG banks are building.*
 
-<!-- frame:end -->
+<!-- frame:sg-banks:end -->
 
 ---
 
-## Style
+## sg-banks · Style
 
 > Formatting & marking rules the build must follow. **I own these rules; AI applies them.** Seeded from the report's existing conventions — refine as you like.
 

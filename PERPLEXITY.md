@@ -1,7 +1,16 @@
-# PERPLEXITY.md — job card for Perplexity Computer
+# PERPLEXITY.md — the Contributor's job card (currently Perplexity)
 
-> **How to use this file (for the human):** tell Perplexity — *"Read `PERPLEXITY.md` in `hmhc-ai/hmhc-reports` and execute it."* Nothing else needed. Claude maintains this file: it queues one job at a time from the gap list (`pipeline/sg-banks/meta/gaps.md`) and rotates it when done.
-> **Authorization note:** a job being queued here **is** the author's cost-gate confirmation (UPDATE.md Step 2b) for that one run — the author queues jobs by asking Claude to update this card.
+> **How to use this file (for the human):** tell the Contributor — *"Read `PERPLEXITY.md` in `hmhc-ai/hmhc-reports` and execute it."* Nothing else needed. The Maintainer (Claude) maintains this file: it queues one job at a time from the gap list (`pipeline/sg-banks/meta/gaps.md`) and rotates it when done.
+> **Authorization note:** a job being queued here **is** the author's cost-gate confirmation (`CLAUDE.md` Step 2b) for that one run — the author queues jobs by asking Claude to update this card.
+> **Succession note (author, 2026-07-29):** the Contributor seat may move from Perplexity to lab-native harnesses (ChatGPT / Grok / Gemini apps) run directly by the author — the working agreement below binds whoever holds the seat.
+
+## Working agreement (binds the Contributor)
+
+1. If this file says no job is queued, **do nothing**.
+2. Write scope: **only** the deliverable path declared in the job card, on a branch named `perplexity/<job>`. Never edit `pipeline/<slug>/method/`, `HUMAN.md`, `reports/`, `CLAUDE.md`, the registry, workflows, or `PERPLEXITY.md` itself.
+3. **Always open a pull request; never merge.** The Maintainer reviews, reconciles, runs the build modules, and merges. Questions go in the PR description.
+4. Commit trailers per `AGENTS.md` § Commit attribution — name the model that actually ran, printed at run time.
+5. A job queued here carries the author's cost-gate authorization for that one run.
 
 ## Status: **NO JOB QUEUED** — do not execute anything below the Completed list.
 

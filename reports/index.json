@@ -4,7 +4,7 @@
     {
       "slug": "sg-banks",
       "report": "reports/sg-banks.md",
-      "pipeline": "pipeline/sg-banks/UPDATE.md",
+      "pipeline": "pipeline/sg-banks",
       "featured": true,
       "title": "Analysis of Singapore Banks",
       "subtitle": "DBS · OCBC · UOB — income engines, deposits, NIM, valuation (FY2016–2026)",
