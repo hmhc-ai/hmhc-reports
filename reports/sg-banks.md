@@ -32,8 +32,8 @@
 This report is produced by a documented, AI-run workflow with human governance, fully version-controlled in a public GitHub repository — the repo itself is the demonstration:
 
 - [**The repository**](https://github.com/hmhc-ai/hmhc-reports) — every instruction file, data file, and revision, in the open
-- [**How it's built**](https://github.com/hmhc-ai/hmhc-reports/blob/main/HOW-ITS-BUILT.md) — the agents, the 8-stage pipeline, and the provenance discipline, for non-technical readers
-- [**The author's charter**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/HUMAN.md) — the human-owned thesis, key questions, and style rules this report must answer to
+- [**How it's built**](https://github.com/hmhc-ai/hmhc-reports/blob/main/README.md#architecture) — the agents, the 8-stage pipeline, and the provenance discipline, for non-technical readers
+- [**The author's charter**](https://github.com/hmhc-ai/hmhc-reports/blob/main/HUMAN.md) — the human-owned thesis, key questions, and style rules this report must answer to
 - [**The council protocol**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/method/7-ai-write-scores.md) — how the blind multi-model council scores the questions in the Conclusions below
 - [**Pipeline health**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/meta/health.md) — live completeness & data-confidence dashboard (CI-verified)
 - [**Decisions & release history**](https://github.com/hmhc-ai/hmhc-reports/blob/main/pipeline/sg-banks/index.md) — standing analytical decisions and the full changelog

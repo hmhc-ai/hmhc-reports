@@ -4,8 +4,8 @@
 Checks three reference classes that have historically drifted:
   1. reports/index.json (the merged registry) — every pipeline/... or
      reports/... path mentioned in a string value must exist.
-  2. pipeline/<slug>/UPDATE.md — every method/*, data/*, meta/* token
-     must exist relative to pipeline/<slug>/.
+  2. CLAUDE.md (the controller) — every backticked pipeline/... or
+     reports/... file token must exist.
   3. All *.md files — relative markdown link targets [text](path) must
      exist (http(s), mailto and #anchors are skipped).
 
@@ -43,15 +43,13 @@ def walk(x):
             check(m.rstrip("./"), "reports/index.json")
 walk(json.loads(reg.read_text()))
 
-# 2. UPDATE.md module/guide/data tokens
-for upd in ROOT.glob("pipeline/*/UPDATE.md"):
-    base = upd.parent
-    text = upd.read_text()
-    for m in re.findall(r"`((?:method|data|meta)/[A-Za-z0-9_.-]+\.(?:md|py|csv))`", text):
-        if f"{base.relative_to(ROOT)}/{m}" in PENDING_OUTPUTS:
-            continue
-        if not (base / m).exists():
-            errors.append(f"{upd.relative_to(ROOT)}: missing path '{m}'")
+# 2. CLAUDE.md controller tokens (full repo-root-relative paths)
+for m in re.findall(r"`((?:pipeline|reports)/[A-Za-z0-9_./-]+\.(?:md|py|csv|json|svg))`",
+                    (ROOT / "CLAUDE.md").read_text()):
+    if m in PENDING_OUTPUTS:
+        continue
+    if not (ROOT / m).exists():
+        errors.append(f"CLAUDE.md: missing path '{m}'")
 
 # 3. relative markdown links in all .md files
 for md in ROOT.rglob("*.md"):

@@ -1,7 +1,7 @@
 # Fetch-Peers — Module SOP: benchmark peer financials (SG Banks · Frame Q5/Q6)
 
 > ## ⚠ EXPENSIVE — opt-in only
-> Runs only via `UPDATE.md`'s ask-gate + Step 2b cost gate (explicit user confirmation — full rule there). Reached this file without that confirmation? **Stop and ask first.**
+> Runs only via `CLAUDE.md`'s ask-gate + Step 2b cost gate (explicit user confirmation — full rule there). Reached this file without that confirmation? **Stop and ask first.**
 
 **Module:** Fetch-Peers · **Input:** `HUMAN.md (§ Frame)` (peer set + Q5/Q6 definitions) · **Output:** `data/peers.csv` · **Depends on:** Frame
 **Run on:** a **non-Claude, search-grounded** model (Perplexity Computer / GPT-class with live web) — by design, for independence from the Claude-built pipeline.

@@ -1,6 +1,6 @@
 # Write-Scores — Module SOP: blind council scoring (SG Banks · Conclusions)
 
-**Module:** Write-Scores · **Inputs:** the Frame section of `HUMAN.md` (the `frame:start`/`frame:end` region — never § Style) + the report body **excluding its Conclusions section** · **Output:** one answer sheet `data/scores/<member>.json` per council member · **Depends on:** Build-Report (a current report body)
+**Module:** Write-Scores · **Inputs:** the Frame section of root `HUMAN.md` (the `frame:sg-banks:start`/`frame:sg-banks:end` region — never § Style) + the report body **excluding its Conclusions section** · **Output:** one answer sheet `data/scores/<member>.json` per council member · **Depends on:** Build-Report (a current report body)
 **Run on:** each council member independently — the **latest knowledge-work / business-analysis frontier model of each major frontier lab** (author's standing roster principle, 2026-07-27: Claude · GPT · Grok · Gemini when platform access allows). The `member`/`model` fields record the model that **actually ran, printed at run time** — never an assumed or configured name. One sheet per member per report version.
 **Changelog:** 2026-07-29b — scorecard drops median/range for per-member score arrays (2-4 member councils don't need aggregates); new required `factor_coverage` 0-100 line (are these factors enough to judge the thesis). · 2026-07-29 — frame v3: questions become **Key Factors** (short names, ids Q1…Q6 retained); optional `suggested_factors` added to the sheet schema (author-approved). · 2026-07-27 — first version (council architecture stage 1; sheets pilot to `data/scores/`, report wiring follows the author's frame approval). · 2026-07-27b — member identity & admissibility rules added after the Model Council incident (PERPLEXITY.md Completed Job #4).
 
@@ -13,9 +13,9 @@
 
 ## Blind protocol (hard rules)
 
-1. A member sees **only**: the Frame section of `HUMAN.md` (extracted via the `frame:start`/`frame:end` markers — never the Style section) and `reports/sg-banks.md` **with everything between `<!-- conclusions:start -->` and `<!-- conclusions:end -->` removed** (never the prior Conclusions, never another member's sheet, never `meta/history.csv`).
+1. A member sees **only**: the Frame section of root `HUMAN.md` (extracted via the `frame:sg-banks:start`/`frame:sg-banks:end` markers — never the Style section) and `reports/sg-banks.md` **with everything between `<!-- conclusions:start -->` and `<!-- conclusions:end -->` removed** (never the prior Conclusions, never another member's sheet, never `meta/history.csv`).
 2. **No web search, no outside facts.** Closed-book judgement over the supplied evidence only.
-3. Nobody steers the scores: the runner (human or Claude) passes the rubric below verbatim and must not add commentary, hints, examples of "good" scores, or other members' outputs.
+3. Nobody steers the scores: whoever administers the packet (the Author or the Maintainer) passes the rubric below verbatim and must not add commentary, hints, examples of "good" scores, or other members' outputs.
 4. A member scores every frame question — none skipped, none added.
 
 ## Rubric (pass to the member verbatim)

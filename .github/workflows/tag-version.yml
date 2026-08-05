@@ -2,7 +2,7 @@ name: Tag report versions
 
 # When a merge to main changes a report's current_version in
 # reports/index.json, create the matching git tag <slug>-v<version>
-# (UPDATE.md Step 5).
+# (CLAUDE.md Step 5).
 # Existing tags are never moved or overwritten.
 
 on:

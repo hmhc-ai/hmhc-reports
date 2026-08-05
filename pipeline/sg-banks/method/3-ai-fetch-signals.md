@@ -1,7 +1,7 @@
 # sg-banks — Fetch-Signals SOP (earnings + media, recency-biased)
 
 > ## ⚠ EXPENSIVE — opt-in only
-> Runs only via `UPDATE.md`'s ask-gate + Step 2b cost gate (explicit user confirmation — full rule there). Reached this file without that confirmation? **Stop and ask first.**
+> Runs only via `CLAUDE.md`'s ask-gate + Step 2b cost gate (explicit user confirmation — full rule there). Reached this file without that confirmation? **Stop and ask first.**
 
 **Module:** Fetch-Signals · **Input:** `HUMAN.md (§ Frame)` · **Output:** `data/signals.md` · **Depends on:** Frame
 **Run on:** Orchestrator or **GPT-5.6** (search-heavy — **must** use live web/search; the opposite of the closed-book Exec Summary). Non-Claude keeps it independent of the Claude-built numeric work.

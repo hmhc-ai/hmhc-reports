@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 """Publish — one-command release bookkeeping for sg-banks.
 
-Automates the mechanical parts of UPDATE.md Step 5, which were previously
+Automates the mechanical parts of CLAUDE.md Step 5, which were previously
 six hand-edits per release:
 
   1. computes the next version (YYYY.MM.DD of today; -rN if same-day);
   2. updates this report's entry in reports/index.json (the merged
      registry): current_version, last_updated, and refresh_note = THIS
      release's note + a pointer to the registry changelog
-     (the registry changelog is the canonical history — see UPDATE.md);
+     (the registry changelog is the canonical history — see CLAUDE.md);
   3. inserts a changelog entry at the top of pipeline/sg-banks/index.md;
   4. appends a row to meta/history.csv (version, date, per-member council
      thesis scores, questions answered, fill/confidence metrics) AND the
