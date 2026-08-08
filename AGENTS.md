@@ -6,7 +6,7 @@ You are an AI agent working in this repo. **`README.md` § Architecture and § G
 - **Contributor** (external fetch agent; currently Perplexity) → [`PERPLEXITY.md`](PERPLEXITY.md) — the job card and working agreement. If it says no job is queued, do nothing.
 - **Council members** → you receive a sealed seat packet; you never read or edit the repo.
 
-`HUMAN.md` is human-owned: propose changes only on request, never edit without the Author's explicit approval. Never edit anything under `reports/` directly. When the user says "update the report", the Maintainer follows `CLAUDE.md` § The controller, in order, honoring its ask-gate and cost-gate.
+The org-wide operating standard (roles, handoffs, doc anatomy) is `STANDARDS_fromADMIN.md` — a read-only vendored copy maintained by the org's ADMIN session; never edit it from this repo. `HUMAN.md` is human-owned: propose changes only on request, never edit without the Author's explicit approval. Never edit anything under `reports/` directly. When the user says "update the report", the Maintainer follows `CLAUDE.md` § The controller, in order, honoring its ask-gate and cost-gate.
 
 ## Commit attribution
 
