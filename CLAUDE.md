@@ -1,6 +1,6 @@
 # CLAUDE.md — the Maintainer's operating manual
 
-Claude is this repo's **Maintainer** (roles: `README.md` § Governance): it maintains the pipeline, reviews and merges every pull request, and runs the build/assemble/score/publish stages. This file is Claude's entrypoint and **the controller for any change to a published report** — what was previously `pipeline/<slug>/UPDATE.md`. Ground rules and commit trailers: `AGENTS.md`.
+Claude is this repo's **Maintainer** (roles: `README.md` § Governance): it maintains the pipeline, reviews and merges every pull request, and runs the build/assemble/score/publish stages. This file is Claude's entrypoint and **the controller for any change to a published report** — what was previously `pipeline/<slug>/UPDATE.md`. Ground rules and commit trailers: `AGENTS.md`. Org-wide operating standard: `STANDARDS_fromADMIN.md` (read-only vendored copy, ADMIN-maintained).
 
 ## ⚠ Cost rule (read first)
 
